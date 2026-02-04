@@ -1,0 +1,586 @@
+# TFG_musicallyx
+
+###
+# group: Usuario
+# @name get-usuarios
+GET http://localhost:8080/v1/api/usuarios
+
+###
+# group: Usuario
+# @name get_usuario_by_id
+GET http://localhost:8080/v1/api/usuarios/1
+
+###
+# group: Usuario
+# @name get_usuarios_paginacion
+GET http://localhost:8080/v1/api/usuarios?
+    page=0&
+    size=5
+
+###
+# group: Usuario
+# @name get_by_email
+GET http://localhost:8080/v1/api/usuarios/email/a@admin.com
+
+###
+# group: Usuario
+# @name get_by_name
+GET http://localhost:8080/v1/api/usuarios/buscar?
+    nombre=Kenneth
+
+###
+# group: Usuario
+# @name post_usuario
+POST http://localhost:8080/v1/api/usuarios
+Content-Type: application/json
+
+{
+  "id": 30,
+  "nombre": "Abel Fernández",
+  "email": "abelfernandez@test.com",
+  "telefono": "123456789",
+  "nivel": "Básico",
+  "gustos": "Piano"
+}
+
+
+###
+# group: Usuario
+# @name delete_usuario
+DELETE http://localhost:8080/v1/api/usuarios/28
+
+###
+# group: Usuario
+# @name put_usuario
+PUT http://localhost:8080/v1/api/usuarios/29
+Content-Type: application/json
+
+{
+  "id": 29,
+  "nombre": "Laura Gómez Actualizada",
+  "email": "laura@test.com",
+  "telefono": "600000000",
+  "nivel": "Avanzado",
+  "gustos": "Piano"
+}
+
+
+###
+# group: Usuario
+# @name patch_usuario
+PATCH http://localhost:8080/v1/api/usuarios/29
+Content-Type: application/json
+
+{
+  "nivel": "Intermedio"
+}
+
+###
+# group: Clase
+# @name get_clases
+GET http://localhost:8080/v1/api/clases
+
+###
+# group: Clase
+# @name get_clases_paginacion
+GET http://localhost:8080/v1/api/clases?
+    page=0&
+    size=10
+
+###
+# group: Clase
+# @name get_clase_by_id
+GET http://localhost:8080/v1/api/clases/1
+
+###
+# group: Clase
+# @name post_clase
+POST http://localhost:8080/v1/api/clases
+Content-Type: application/json
+
+{
+  "nombreClase": "Guitarra Avanzada",
+  "descripcion": "Clase para aprender técnicas avanzadas",
+  "precio": 14.0,
+  "modalidad": "Presencial",
+  "dificultad": "Avanzado",
+  "profesor": {
+    "idProfesor": 1
+  }
+}
+
+###
+# group: Clase
+# @name put_clase
+PUT http://localhost:8080/v1/api/clases/8
+Content-Type: application/json
+
+{
+  "nombreClase": "Guitarra Intermedia",
+  "descripcion": "Clase para nivel intermedio",
+  "fecha": "2025-12-12",
+  "horaInicio": "17:00",
+  "horaFin": "18:00",
+  "precio": 25.0,
+  "modalidad": "Online",
+  "dificultad": "Intermedio",
+  "profesor": {
+    "idProfesor": 1
+  }
+}
+
+
+###
+# group: Clase
+# @name patch_clase
+PATCH http://localhost:8080/v1/api/clases/9
+Content-Type: application/json
+
+{
+  "precio": 14.0
+}
+
+###
+# group: Clase
+# @name delete_clase_by_id
+DELETE http://localhost:8080/v1/api/clases/8
+
+###
+# group: Profesor
+# @name get_profesores
+GET http://localhost:8080/v1/api/profesores
+
+###
+# group: Profesor
+# @name get_profesores_paginacion
+GET http://localhost:8080/v1/api/profesores?
+    page=0&
+    size=10
+
+###
+# group: Profesor
+# @name get_profesor_by_id
+GET http://localhost:8080/v1/api/profesores/1
+
+###
+# group: Profesor
+# @name post_profesor
+POST http://localhost:8080/v1/api/profesores
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellidos": "Bermúdez",
+  "especialidad": "Guitarra",
+  "telefono": "123456789",
+  "biografia": "Profesor con 10 años de experiencia"
+}
+
+
+###
+# group: Profesor
+# @name put_profesor
+PUT http://localhost:8080/v1/api/profesores/9
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos",
+  "apellidos": "Bermúdez",
+  "especialidad": "Guitarra",
+  "telefono": "123456789",
+  "biografia": "Profesor con 10 años de experiencia"
+}
+
+
+###
+# group: Profesor
+# @name delete_profesor_by_id
+DELETE http://localhost:8080/v1/api/profesores/9
+
+###
+# group: Profesor
+# @name patch_profesor
+GET http://localhost:8080/v1/api/profesores/11
+Content-Type: application/json
+
+{
+  "telefono": "987654321"
+}
+
+###
+# group: Alumno
+# @name get_alumnos
+GET http://localhost:8080/v1/api/alumnos
+
+
+###
+# group: Alumno
+# @name get_alumno_by_id
+GET http://localhost:8080/v1/api/alumnos/1
+
+###
+# group: Alumno
+# @name post_alumno
+POST http://localhost:8080/v1/api/alumnos
+Content-Type: application/json
+
+{
+  "nombre": "Abel Fernández",
+  "email": "abelillo@example.com"
+}
+
+
+
+###
+# group: Alumno
+# @name put_alumno_by_id
+PUT http://localhost:8080/v1/api/alumnos/16
+Content-Type: application/json
+
+{
+  "nombre": "Abel",
+  "email": "abelfernandez@example.com",
+  "claseId": 2,
+  "horarioId": 3
+}
+
+###
+# group: Alumno
+# @name patch_alumno_by_id
+PATCH http://localhost:8080/v1/api/alumnos/16
+Content-Type: application/json
+
+{
+  "email": "abelfdez@gmail.com"
+}
+
+###
+# group: Alumno
+# @name delete_alumno_by_id
+DELETE http://localhost:8080/v1/api/alumnos/17
+
+###
+# group: Reserva
+# @name get_reservas_paginacion
+GET http://localhost:8080/v1/api/reservas?
+    page=0&
+    size=5
+
+###
+# group: Reserva
+# @name get_reservas
+GET http://localhost:8080/v1/api/reservas
+
+###
+# group: Reserva
+# @name get_reservas_by_id
+GET http://localhost:8080/v1/api/reservas/1
+
+###
+# group: Reserva
+# @name post_reserva
+POST http://localhost:8080/v1/api/reservas
+Content-Type: application/json
+
+{
+  "asignatura": "Lenguaje Musical",
+  "hora": "10:00",
+  "modalidad": "Online",
+  "nivel": "Básico",
+  "fechaReserva": "2025-12-10T09:00:00Z"
+}
+
+###
+# group: Reserva
+# @name put_reserva
+PUT http://localhost:8080/v1/api/reservas/11
+Content-Type: application/json
+
+{
+  "asignatura": "Piano",
+  "estado": "Pendiente"
+}
+
+###
+# group: Reserva
+# @name delete_reserva
+DELETE http://localhost:8080/v1/api/reservas/11
+
+###
+# group: Chat
+# @name get_mensaje_by_email
+GET http://localhost:8080/api/mensajes/recibidos?
+    usuario=a@admin.com
+
+###
+# group: Chat
+# @name post_mensaje
+POST http://localhost:8080/api/mensajes/enviar
+Content-Type: application/json
+
+{
+  "texto": "Hola, ¿cómo estás?",
+  "asunto": "Saludo",
+  "emisor": "kennethjensenquero@gmail.com",
+  "receptor": "a@admin.com"
+}
+
+
+###
+# group: Chat
+# @name get_mensaje_entre_2_users
+GET http://localhost:8080/api/mensajes/chat?
+    usuario1Email=a@admin.com&
+    usuario2Email=kennethjensenquero@gmail.com
+
+###
+# group: Chat
+# @name get_mensaje_enviados
+GET http://localhost:8080/api/mensajes/enviados?
+    usuario=kennethjensenquero@gmail.com
+
+###
+# group: Chat
+# @name put_mensaje_leido
+PUT http://localhost:8080/api/mensajes/leido/30
+
+###
+# group: Chat
+# @name put_varios_mensajes_leidos
+PUT http://localhost:8080/api/mensajes/marcar-leidos
+Content-Type: application/json
+
+[
+  1,
+  30
+]
+
+
+###
+# group: Chat
+# @name put_mensaje_actualizado
+PUT http://localhost:8080/api/mensajes/30
+Content-Type: application/json
+
+{
+  "texto": "Este mensaje ha sido cambiado",
+  "asunto": "IMPORTANTE"
+}
+
+
+###
+# group: Chat
+# @name New Request
+PATCH http://localhost:8080/api/mensajes/30
+Content-Type: application/json
+
+{
+  "asunto": "Cambios en el correo"
+}
+
+
+###
+# group: Chat
+# @name New Request
+DELETE http://localhost:8080/api/mensajes/30
+
+###
+# group: Email
+# @name correo_cambio_contraseña
+POST http://localhost:8080/api/email/reset-password
+Content-Type: application/json
+
+{
+  "email": "kennethjensenquero@gmail.com"
+}
+
+
+###
+# group: Email
+# @name correo_suscripcion
+POST http://localhost:8080/api/email/suscripcion
+Content-Type: application/json
+
+{
+  "email": "kennethjensenquero@gmail.com"
+}
+
+
+###
+# group: Email
+# @name enviar_correo
+POST http://localhost:8080/api/email/enviar
+Content-Type: application/json
+
+{
+  "emisor": "a@admin.com",
+  "receptor": "kennethjensenquero@gmail.com",
+  "asunto": "Prueba de correo",
+  "texto": "Hola! Este es un correo de prueba"
+}
+
+###
+# group: MétodoPago
+# @name get_metodo_pago
+GET http://localhost:8080/v1/api/metodos-pago
+
+###
+# group: MétodoPago
+# @name get_metodo_pago_paginacion
+GET http://localhost:8080/v1/api/metodos-pago?
+    page=0&
+    size=5&
+    sort=idMetodo,desc
+
+###
+# group: MétodoPago
+# @name get_metodo_by_id
+GET http://localhost:8080/v1/api/metodos-pago/1
+
+###
+# group: MétodoPago
+# @name post_metodo_pago
+POST http://localhost:8080/v1/api/metodos-pago
+Content-Type: application/json
+
+{
+  "tipo": "Transferencia",
+  "descripcion": "Pago mediante transferencia bancaria"
+}
+
+###
+# group: MétodoPago
+# @name put_metodo_by_id
+PUT http://localhost:8080/v1/api/metodos-pago/5
+Content-Type: application/json
+
+{
+  "tipo": "Tarjeta Actualizada",
+  "descripcion": "Pago con tarjeta actualizado"
+}
+
+
+###
+# group: MétodoPago
+# @name patch_metodo_by_id
+PATCH http://localhost:8080/v1/api/metodos-pago/5
+Content-Type: application/json
+
+{
+  "descripcion": "Descripción actualizada solo"
+}
+
+
+###
+# group: MétodoPago
+# @name delete_metodo_by_id
+DELETE http://localhost:8080/v1/api/metodos-pago/5
+
+###
+# group: Pago
+# @name get_pagos
+GET http://localhost:8080/v1/api/pagos
+
+###
+# group: Pago
+# @name get_pagos_paginacion
+GET http://localhost:8080/v1/api/pagos?
+    page=0&
+    size=5
+
+###
+# group: Pago
+# @name get_pago_by_id
+GET http://localhost:8080/v1/api/pagos/2
+
+###
+# group: Pago
+# @name post_pago
+POST http://localhost:8080/v1/api/pagos
+Content-Type: application/json
+
+{
+  "idTransaccionProveedor": "TX12345",
+  "monto": 120.50,
+  "fechaPago": "2025-12-04T22:30:00",
+  "estado": "CREATED",
+  "reserva": {
+    "idReserva": 1
+  },
+  "metodoPago": {
+    "idMetodo": 1
+  }
+}
+
+
+###
+# group: Pago
+# @name put_pago_by_id
+PUT http://localhost:8080/v1/api/pagos/11
+Content-Type: application/json
+
+{
+  "estado": "COMPLETED"
+}
+
+###
+# group: Pago
+# @name patch_pago
+PATCH http://localhost:8080/v1/api/pagos/11
+Content-Type: application/json
+
+{
+  "monto": 28.0
+}
+
+###
+# group: Pago
+# @name delete_pago
+DELETE http://localhost:8080/v1/api/pagos/11
+
+###
+# group: Horario
+# @name get_horario
+GET http://localhost:8080/v1/api/horarios
+
+###
+# group: Horario
+# @name get_horario_by_id
+GET http://localhost:8080/v1/api/horarios/1
+
+###
+# group: Horario
+# @name post_horario
+POST http://localhost:8080/v1/api/horarios
+Content-Type: application/json
+
+{
+  "horaInicio": "2025-12-05T10:00:00",
+  "horaFin": "2025-12-05T11:00:00"
+}
+
+###
+# group: Horario
+# @name put_horario
+PUT http://localhost:8080/v1/api/horarios/29
+Content-Type: application/json
+
+{
+  "horaInicio": "2025-12-05T12:00:00",
+  "horaFin": "2025-12-05T13:00:00"
+}
+
+###
+# group: Horario
+# @name patch_horario
+PATCH http://localhost:8080/v1/api/horarios/26
+Content-Type: application/json
+
+{
+  "horaFin": "2025-12-05T14:00:00"
+}
+
+###
+# group: Horario
+# @name delete_horario_by_id
+DELETE http://localhost:8080/v1/api/horarios/26
