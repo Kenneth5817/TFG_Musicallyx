@@ -1,0 +1,179 @@
+.games-section {
+  padding: 80px 10%;
+  background: linear-gradient(to bottom, #0d0d0d, #c32c2c);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+.games-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.games-header h2 {
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 0 0 5px #ff4444, 0 0 10px #ff0000;
+  margin-bottom: 10px;
+}
+
+.games-header p {
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.game-card {
+  background-color: black;
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.game-video-wrapper {
+  height: 220px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.game-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.game-card:hover .game-video {
+  transform: scale(1.05);
+}
+
+.game-content {
+  padding: 20px 25px;
+  background-color: black;
+  text-align: center;
+}
+
+.game-content h3 {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 0 5px #ff4444;
+}
+
+.game-content p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.play-btn {
+  position: relative;
+  display: inline-block;
+  background-color: #ff4444;      /* fondo rojo */
+  color: #fff;                     /* texto blanco */
+  font-weight: bold;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;  
+  max-width: 90%;                   /* sin borde por defecto */
+}
+
+/* Efecto de borde y brillo al hover o active */
+.play-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(-25deg);
+  transition: all 0.5s ease;
+}
+
+.play-btn:hover, .play-btn:active {
+  border: 2px solid #fff;          /* borde blanco al hover/click */
+}
+
+.play-btn:hover::before, .play-btn:active::before {
+  left: 125%;                       /* animación de barrido */
+  transition: all 0.5s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+@media (max-width: 768px) {
+  .games-header h2 {
+    font-size: 2rem;
+  }
+
+  .game-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .game-video-wrapper {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Por defecto → solo video */
+.video-desktop {
+  display: block;
+  width: 100%;
+  height: 220px;  /* mismo alto que antes */
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  pointer-events: auto;
+
+}
+
+.image-mobile {
+  display: none;  /* oculta imagen */
+  width: 100%;
+  height: 220px;  /* ocupa mismo espacio */
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  pointer-events: none;
+}
+
+/* A partir de tablet ↓ (≤ 991px) */
+@media (max-width: 991px) {
+  .video-desktop {
+    display: none;   /* oculta video */
+    pointer-events: none;
+  }
+  .image-mobile {
+    display: block;  /* muestra imagen */
+    pointer-events: auto;
+  }
+}

@@ -1,0 +1,85 @@
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 1rem;
+}
+
+.neon-title {
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow:
+     0 0 5px #e60000,
+     0 0 10px #e60000,
+     0 0 20px #e60000,
+     0 0 40px #ff4d4d,
+     0 0 80px #ff4d4d;
+  margin-bottom: 2rem;
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.score {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #e60000;
+}
+
+.game-board {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-btn {
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-btn.red { background-color: #e60000; color: #fff; }
+.game-btn.black { background-color: #222; color: #fff; }
+.game-btn.white { background-color: #fff; color: #000; }
+.game-btn.grey { background-color: #999; color: #000; }
+
+.game-btn.active { transform: scale(1.2); box-shadow: 0 0 20px #fff; }
+
+.btn-iniciar, .btn-reiniciar, .btn-todos-juegos {
+  background-color: #e60000;
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-iniciar:hover, .btn-reiniciar:hover, .btn-todos-juegos:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff4d4d;
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}

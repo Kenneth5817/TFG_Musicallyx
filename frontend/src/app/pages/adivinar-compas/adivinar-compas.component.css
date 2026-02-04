@@ -1,0 +1,166 @@
+ body {
+      background: #000000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    #videoBackground {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.3);
+    }
+
+    .game-card {
+      background: #121212;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      padding: 40px 35px;
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 0.7s ease forwards;
+      text-align: center;
+      border: 2px solid #e10600;
+      margin:70px auto;
+      min-height:550px;
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: white;
+      letter-spacing: 1.2px;
+      text-shadow: 0 0 8px #e10600aa;
+    }
+
+    audio {
+      width: 100%;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      outline: none;
+      filter: drop-shadow(0 0 3px #e10600cc);
+    }
+
+    .btn-compas {
+      border-radius: 40px;
+      padding: 12px 28px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 8px 12px;
+      border: 2px solid #e10600;
+      background: transparent;
+      color: #fff;
+      transition: all 0.3s ease;
+      min-width: 90px;
+      user-select: none;
+      box-shadow: 0 0 6px #e1060055;
+    }
+
+    .btn-compas:hover:not(:disabled) {
+      background: #e10600;
+      color: #fff;
+      box-shadow: 0 0 15px #e10600;
+      transform: scale(1.08);
+      border-color: #ff2a2a;
+    }
+
+    .btn-compas:disabled {
+      cursor: default;
+      opacity: 0.7;
+      box-shadow: none;
+    }
+
+    .btn-success {
+      background-color: #28a745 !important;
+      border-color: #28a745 !important;
+      color: white !important;
+      box-shadow: 0 0 12px #28a745cc !important;
+      transform: scale(1.05);
+    }
+
+    .btn-danger {
+      background-color: #dc3545 !important;
+      border-color: #dc3545 !important;
+      color: white !important;
+      box-shadow: 0 0 12px #dc3545cc !important;
+      transform: scale(1.05);
+    }
+
+    #feedback {
+      font-size: 1.3rem;
+      margin-top: 25px;
+      font-weight: 600;
+      min-height: 40px;
+      letter-spacing: 0.03em;
+      text-shadow: 0 0 4px #fff4;
+    }
+
+    #nextBtn {
+      border-radius: 40px;
+      padding: 12px 30px;
+      margin-top: 30px;
+      background: #e10600;
+      border: 2px solid #e10600;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 0 15px #e10600cc;
+      transition: all 0.3s ease;
+      user-select: none;
+      min-width: 150px;
+    }
+
+    #nextBtn:hover {
+      background: #ff2a2a;
+      border-color: #ff2a2a;
+      box-shadow: 0 0 25px #ff2a2a;
+      transform: scale(1.07);
+    }
+
+    #nextBtn:disabled {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    #finalResult {
+      font-size: 1.3rem;
+      margin-top: 35px;
+      font-weight: 700;
+      color: #e10600;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 6px #e10600bb;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a.btn-outline-primary {
+      color: #e10600;
+      border-color: #e10600;
+      font-weight: 700;
+      box-shadow: 0 0 6px #e10600aa;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    a.btn-outline-primary:hover {
+      background: #e10600;
+      color: white;
+      box-shadow: 0 0 20px #ff2a2a;
+      text-decoration: none;
+    }

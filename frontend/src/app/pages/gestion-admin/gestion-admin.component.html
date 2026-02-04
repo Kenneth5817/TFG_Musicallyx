@@ -1,0 +1,95 @@
+<div class="gestion-admin-layout">
+
+  <!-- 🟦 RESERVAS PENDIENTES -->
+  <header class="gestion-header">
+    <h1>📚 Gestión de Clases</h1>
+  </header>
+
+  <section class="reservas-pendientes">
+    <h2>Reservas Pendientes</h2>
+
+    <div class="filters">
+      <label>
+        Ordenar por:
+        <select [(ngModel)]="ordenarPor">
+          <option value="alumno">Alumno</option>
+          <option value="fecha">Fecha</option>
+          <option value="asignatura">Asignatura</option>
+        </select>
+      </label>
+    </div>
+
+    <div *ngIf="reservasPendientes.length === 0" class="no-reservas">
+      <p>No tienes nada pendiente por confirmar actualmente.</p>
+    </div>
+
+    <div class="cards">
+      <div *ngFor="let reserva of reservasPendientes | ordenar:ordenarPor" class="card">
+        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-email">{{ reserva.alumno }}</span></div>
+
+        <div class="card-body">
+          <p>Fecha: {{ reserva.fecha | date:'dd/MM/yyyy - HH:mm' }}</p>
+          <p>Hora: {{ reserva.horario }}</p>
+          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <p *ngIf="reserva.nivel">Nivel: {{ reserva.nivel }}</p>
+          <span class="badge">Pendiente</span>
+        </div>
+
+        <div class="card-actions">
+          <button (click)="confirmarReserva(reserva)">✅ Confirmar</button>
+          <button (click)="rechazarReserva(reserva)">❌ Rechazar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 🟩 RESERVAS CONFIRMADAS -->
+  <section class="reservas-confirmadas">
+    <h2>Reservas Confirmadas</h2>
+
+    <div class="filters filters-below-title">
+      <label>
+        Buscar por:
+        <select [(ngModel)]="buscarPor" (ngModelChange)="filtrarConfirmadas()">
+          <option value="alumno">Alumno</option>
+          <option value="asignatura">Asignatura</option>
+        </select>
+      </label>
+
+      <input type="text" placeholder="Escribe para buscar..." [(ngModel)]="filtro" (ngModelChange)="filtrarConfirmadas()" />
+
+      <label>
+        Ordenar por:
+        <select [(ngModel)]="ordenarPor">
+          <option value="alumno">Alumno</option>
+          <option value="fecha">Fecha</option>
+          <option value="asignatura">Asignatura</option>
+        </select>
+      </label>
+    </div>
+
+    <div *ngIf="reservasFiltradas.length === 0" class="no-reservas">
+      <p>No hay reservas confirmadas con ese filtro.</p>
+    </div>
+
+    <div class="cards">
+      <div *ngFor="let reserva of reservasFiltradas | ordenar:ordenarPor" class="card confirmed">
+        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-email">{{ reserva.alumno }}</span></div>
+
+        <div class="card-body">
+          <p>Fecha: {{ reserva.fecha | date:'dd/MM/yyyy - HH:mm' }}</p>
+          <p>Hora: {{ reserva.horario }}</p>
+          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <p *ngIf="reserva.nivel">Nivel: {{ reserva.nivel }}</p>
+          <span class="badge confirmed">Confirmada</span>
+          <span *ngIf="!reserva.pagado" class="badge pendiente-pago">Pendiente de pagar</span>
+          <span *ngIf="reserva.pagado" class="badge pagado">Pagado</span>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn-secondary" (click)="devolverAPendientes(reserva)">↩ Volver a Pendientes</button>
+          <button class="btn-danger" (click)="eliminarConfirmada(reserva)">🗑 Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,440 @@
+/* Fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;     /* ✅ 100% en lugar de 100vw */
+  background-color: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar fijo en desktop */
+.sidebar {
+  width: 280px;
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Foto de perfil en círculo */
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #dc3545;
+  cursor: pointer;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.sidebar-header p {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Sidebar links */
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar-nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li a.active {
+  background-color: #dc3545;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+a.logout {
+  margin-top: 20px;
+  color: #ff4b5c;
+}
+a.logout:hover {
+  background-color: #ff1f3a;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+/* Contenido principal */
+.content {
+  flex: 1;
+  min-height: 100vh;
+  margin-left: 280px;             /* espacio para sidebar en desktop */
+  width: calc(100% - 280px);
+  background: linear-gradient(135deg, #fdf6f0, #f5f5f5);
+  transition: all 0.3s ease;
+}
+
+/* Modal logout */
+.logout-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.85);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+
+.logout-modal h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.logout-modal h2::after {
+  content: '';
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+}
+@keyframes dots {
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+}
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #dc3545;
+  border-radius: 50%;
+  width: 60px; height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ✅ Responsive: tablet y móvil */
+@media (max-width: 1024px) {
+  /* Oculta el sidebar */
+  .sidebar {
+    transform: translateX(-100%);  /* desaparece hacia la izquierda */
+    position: fixed;
+  }
+
+  /* El contenido ocupa todo el ancho */
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* Muestra el botón hamburguesa solo en responsive */
+  .private-header .hamburger {
+    display: block;
+  }
+}
+
+/* Sidebar abierto */
+.sidebar.open {
+  transform: translateX(0);   /* vuelve a entrar */
+}
+
+/* ✅ HEADER PRIVADO: visible solo en móvil/tablet */
+.private-header {
+  display: none; /* oculto en desktop */
+}
+@media (max-width: 1024px) {
+  .private-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    width: 100%;
+    background: #ffffff;
+    color: #dc3545;
+    padding: 0 15px;
+    z-index: 1200;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Nombre de usuario a la izquierda */
+  .private-header .user-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+    order: 1; /* Asegura que esté a la izquierda */
+  }
+
+  /* Logo centrado */
+  .private-header .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    order: 2;
+  }
+
+  .private-header .logo img {
+    height: 70px;
+    object-fit: contain;
+  }
+
+  /* Botón hamburguesa a la derecha */
+  .private-header .navbar-toggler {
+    order: 3;
+    border: none;
+    background: none;
+  }
+
+  .private-header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+}
+
+
+
+/* Botón hamburguesa de Bootstrap */
+.private-header .navbar-toggler {
+  border: none;
+  background: none;
+}
+.private-header .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+/* Offcanvas FULLSCREEN tipo telón */
+/* Offcanvas fullscreen tipo telón */
+.offcanvas-fullscreen {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1050;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+}
+
+.offcanvas-fullscreen.show {
+  transform: scaleY(1);
+}
+
+/* Botón de cierre */
+.offcanvas-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #000;
+  z-index: 2000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.offcanvas-close:hover {
+  color: #dc3545;
+}
+
+/* Links en cascada animados */
+.offcanvas-fullscreen .nav-link {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.2s ease;
+  text-align: center;
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: 8px;
+}
+
+.offcanvas-fullscreen.show .nav-item:nth-child(1) .nav-link { transition-delay: 0.2s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(2) .nav-link { transition-delay: 0.3s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(3) .nav-link { transition-delay: 0.4s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(4) .nav-link { transition-delay: 0.5s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(5) .nav-link { transition-delay: 0.6s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(6) .nav-link { transition-delay: 0.7s; opacity:1; transform:translateY(0) scale(1);}
+.offcanvas-fullscreen.show .nav-item:nth-child(7) .nav-link { transition-delay: 0.8s; opacity:1; transform:translateY(0) scale(1);}
+
+/* Hover rojo con texto blanco */
+.offcanvas-fullscreen .nav-link:hover {
+  background-color: #dc3545;
+  color: #fff !important;
+}
+
+.user-info-row {
+  margin-left:10px;
+  display: flex;
+  align-items: center;  /* centra verticalmente avatar y texto */
+  gap: 12px;            /* poco espacio entre avatar y texto */
+}
+
+.profile-pic {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff4d4f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.avatar-initials {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centra verticalmente respecto al avatar */
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.user-role {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* Ajustes para desktop */
+@media (min-width: 1024px) {
+  .user-info-row {
+    gap: 16px; /* un pelín más de espacio en escritorio */
+  }
+}
+
+
+
+/* Ajustes para escritorio */
+@media (min-width: 1024px) {
+  .user-info-row {
+    gap: 16px; /* un pelín más de espacio */
+  }
+}
+
+/* Ajustes para móvil / header responsive */
+@media (max-width: 1023px) {
+  .user-name {
+    display: none; /* Oculta el nombre completo en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+.profile-pic {
+  position: relative;      /* importante para que la card se posicione respecto al avatar */
+
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  align-items: center;
+
+  /* Sticky */
+  position: sticky;
+  top: 0;               /* se queda en la parte superior */
+  z-index: 999;         /* encima de otros elementos */
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* mantener fondo */
+  padding: 20px 30px;   /* opcional: más padding para separarlo del contenido */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra sutil */
+}
+
+.profile-card {
+  position: absolute;
+  top: 90px;              /* justo debajo del avatar */
+  right: 0;               /* alineada a la derecha del avatar */
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  z-index: 9999;          /* aseguramos que esté encima de todo */
+  min-width: 220px;       /* tamaño decente */
+}
+
+

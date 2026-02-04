@@ -1,0 +1,38 @@
+<div class="clases-container">
+  <h3 class="titulo">🎵 Clases Disponibles 🎵</h3>
+
+  <div class="clases-grid">
+    <div
+      class="clase-card"
+      *ngFor="let clase of clases"
+      [style.background]="clase.color"
+      (click)="openClase(clase)"
+    >
+      <div class="card-line"></div>
+      <div class="clase-icon">{{ clase.icono }}</div>
+      <h4>{{ clase.nombre }}</h4>
+      <p>{{ clase.descCorta }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="selectedClase" (click)="closeClase()"></div>
+
+<div class="modal-card animate" *ngIf="selectedClase" [style.background]="selectedClase.color">
+  <button class="close-btn" (click)="closeClase()">✖</button>
+
+  <div class="modal-content">
+    <div class="modal-icon">{{ selectedClase.icono }}</div>
+    <h2>{{ selectedClase.nombre }}</h2>
+    <p>{{ selectedClase.descripcion }}</p>
+
+    <button class="reservar-btn" [routerLink]="['/admin/reservar-clase']">
+      Reservar Clase
+    </button>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,334 @@
+:root {
+  --primary-color: #e63946;
+  --dark-color: #0d0d0d;
+  --light-color: #f8f9fa;
+  --valid-color: #2a9d8f;
+  --invalid-color: #e63946;
+}
+
+/* ------------------- BODY Y BACKGROUND ------------------- */
+.login-main {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* ------------------- CONTENEDOR ------------------- */
+.login-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 2.5rem;
+  background: rgba(13, 13, 13, 0.92);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ------------------- HEADER ------------------- */
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #e63946);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Anton", sans-serif;
+}
+
+p{
+  color:white;
+}
+/* ------------------- INPUT GROUP ------------------- */
+.input-group-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-group i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff !important;
+  font-size: 1.3rem;
+}
+
+.input-group i.toggle-eye {
+  right: 1rem;
+  left: auto !important;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+
+/* Valid */
+.input-group.valid {
+  border-color: var(--valid-color);
+  box-shadow: 0 0 10px rgba(42,157,143,0.6);
+  background: rgba(42,157,143,0.15);
+}
+
+/* Invalid */
+.input-group.invalid {
+  border-color: var(--invalid-color);
+  box-shadow: 0 0 10px rgba(230,57,70,0.6);
+  background: rgba(230,57,70,0.15);
+}
+
+/* ------------------- CHECKLIST VALIDATION ------------------- */
+.validation-checklist {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.validation-checklist li.valid {
+  color: var(--valid-color);
+  font-weight: 600;
+}
+
+/* ------------------- BOTÓN ------------------- */
+.login-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #e63946; /* rojo real por defecto */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #c5303d; /* rojo más oscuro */
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+}
+
+
+/* ------------------- LINK ------------------- */
+.register-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.register-link a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ------------------ NOTIFICACIÓN ÉXITO ------------------ */
+.success-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(42, 157, 143, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  /* 🔥 ESTO OCULTA LA NOTIFICACIÓN AL INICIAR */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: all 0.35s ease;
+}
+
+/* Cuando se activa */
+.success-notification.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.success-icon {
+  font-size: 5rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.success-message {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success-submessage {
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.validation-checklist li.valid {
+  color: var(--valid-color);
+  font-weight: 600;
+  text-decoration: line-through;
+  opacity: 0.8; /* opcional, para que se vea menos dominante */
+}
+
+.row-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas por fila */
+  gap: 1rem; /* espacio entre inputs */
+}
+
+@media (max-width: 600px) {
+  .row-inputs {
+    grid-template-columns: 1fr; /* 1 columna en móviles */
+  }
+}
+
+.input-group-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.validation-checklist li.valid {
+  color: var(--valid-color);
+  font-weight: 600;
+  text-decoration: line-through; /* tacha el texto */
+  opacity: 0.8; /* opcional */
+}
+
+.full-screen-error {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(230, 57, 70, 0.95); /* rojo semi-transparente */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.full-screen-error.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.full-screen-error .error-content {
+  text-align: center;
+  padding: 2rem;
+  max-width: 400px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.full-screen-error button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  color: #e63946;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.full-screen-error .close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.full-screen-error .close-btn:hover {
+  transform: rotate(90deg);
+}
+
+.full-screen-error {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.full-screen-error.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+}
+.volver-inicio {
+   color: #fff; /* texto blanco */
+   text-decoration: none; /* quita subrayado */
+   float: right; /* alinea a la derecha */
+   position: relative;
+   top: -5px; /* sube un poco, ajusta según necesites */
+   padding-left: 20px; /* mantiene el espacio si quieres */
+   padding-bottom:15px;
+ }
+
+.volver-inicio:hover {
+  text-decoration: underline; /* efecto al pasar el ratón */
+}

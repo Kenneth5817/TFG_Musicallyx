@@ -1,0 +1,311 @@
+.gestion-admin-layout {
+  padding: 30px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  min-height: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+
+.gestion-header h1 {
+  font-size: 2rem;
+  color: #dc3545;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.filters select {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+
+.filters select:hover {
+  border-color: #dc3545;
+  transform: scale(1.05);
+}
+
+section h2 {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #343a40;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: #dc3545;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  font-size:0.95rem;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, #dc3545, #ff6b6b);
+}
+
+.card-header {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #495057;
+}
+
+.card-body p {
+  margin: 4px 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: #17a2b8;
+  margin-top: 5px;
+  transition: all 0.3s;
+}
+
+.badge.confirmed {
+  background: #28a745;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.card-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-actions button:first-child {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: #fff;
+}
+
+.card-actions button:first-child:hover {
+  background: linear-gradient(135deg, #218838, #19692c);
+  transform: translateY(-2px);
+}
+
+.card-actions button:last-child {
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+  color: #fff;
+}
+
+.card-actions button:last-child:hover {
+  background: linear-gradient(135deg, #c82333, #87141f);
+  transform: translateY(-2px);
+}
+
+.card.confirmed {
+  border-left: 6px solid #28a745;
+  background: #e9f7ef;
+}
+
+.card.confirmed .card-header {
+  color: #1e7e34;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .gestion-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .filters {
+    width: 100%;
+  }
+}
+
+
+.no-reservas {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  background-color: #f0f8ff;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top:20px;
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #17a2b8, #117a8b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #138496, #0f6674);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #c82333, #87141f);
+  transform: translateY(-2px);
+}
+
+.reservas-confirmadas {
+  margin-top: 40px;
+}
+.celda.confirmado,
+.hora-bloque.confirmado {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+/* Título igual que Reservas Pendientes */
+.reservas-confirmadas h2 {
+  font-size: 1.6rem;
+  color: #343a40;
+  position: relative;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+
+}
+
+.reservas-confirmadas h2::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: #dc3545;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
+
+/* Separar filtros de título */
+.filters-below-title {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* 1️⃣ Más espacio entre filtros y cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 25px; /* <- agrega espacio extra desde los filtros */
+}
+
+/* 2️⃣ Quitar línea roja de arriba de todos los cards */
+.card::before {
+  display: none; /* Oculta la línea roja */
+}
+
+/* 3️⃣ Mantener solo la línea verde lateral para confirmadas */
+.card.confirmed {
+  border-left: 6px solid #28a745; /* verde */
+  background: #e9f7ef;
+}
+
+
+.alumno-email {
+  display: block;       /* hace que empiece en nueva línea */
+  font-size: 0.85rem;   /* más pequeño */
+  color: #6c757d;       /* gris suave */
+  word-break: break-all; /* evita que el correo largo se salga */
+  margin-top: 2px;       /* un poco de espacio sobre la línea */
+}
+
+.badge.pendiente-pago {
+  background: #ffc107; /* amarillo mostaza, para diferenciar */
+  color: #212529;      /* texto oscuro para contraste */
+  margin-left: 5px;    /* separación de la etiqueta Confirmada */
+}
+
+.badge.pagado {
+  background: #17a2b8; /* azul, mismo estilo que los badges pendientes actuales */
+  color: #fff;
+  margin-left: 5px;
+}

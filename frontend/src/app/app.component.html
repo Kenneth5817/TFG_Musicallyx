@@ -1,0 +1,14 @@
+<app-header *ngIf="showHeaderFooter"></app-header>
+
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="showHeaderFooter"></app-footer>
+
+<!-- Modal de logout -->
+<div *ngIf="loggingOut" class="logout-modal">
+  <div class="modal-content">
+    <h2>Cerrando sesión...</h2>
+    <div class="loader"></div>
+  </div>
+</div>
+

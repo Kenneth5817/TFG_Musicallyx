@@ -1,0 +1,144 @@
+<div class="chat-layout">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <h2 class="logo">Mail</h2>
+    <img src="/assets/img/logo.png" alt="logo" class="logo-img" />
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <button class="compose-btn" (click)="nuevoMensaje()">✚ Redactar</button>
+
+    <ul>
+      <li (click)="cargarRecibidos()" [class.active]="!mostrandoEnviados">
+         Recibidos
+      </li>
+      <li (click)="cargarEnviados()" [class.active]="mostrandoEnviados">
+         Enviados
+      </li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- BANDEJA -->
+    <div *ngIf="vistaActual === 'bandeja'" class="bandeja">
+
+      <!-- Buscador -->
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Buscar mensajes..."
+          [(ngModel)]="filtroTexto"
+          (input)="filtrarMensajes()"
+        />
+      </div>
+
+      <!-- Acciones -->
+      <div class="actions">
+        <button (click)="marcarSeleccionadosLeidos()">Marcar seleccionados como leídos</button>
+        <button (click)="marcarTodosLeidos()">Marcar como leídos</button>
+        <button class="delete" (click)="borrarSeleccionados()">Eliminar</button>
+      </div>
+
+      <!-- LISTA -->
+      <ul class="mail-list">
+        <li
+          *ngFor="let msg of (mostrandoEnviados ? mensajesEnviadosFiltrados : mensajesRecibidosFiltrados)"
+          (click)="seleccionarMensaje(msg)"
+          [class.leido]="msg.leido"
+          class="mail-item"
+        >
+
+          <input
+            type="checkbox"
+            [(ngModel)]="msg.seleccionado"
+            (click)="$event.stopPropagation()"
+          />
+
+          <div class="mail-info">
+            <div class="mail-top">
+              <strong>{{ msg.asunto || '(Sin asunto)' }}</strong>
+              <small>{{ msg.fechaEnvio | date:'short' }}</small>
+            </div>
+            <div class="mail-bottom">
+              {{ msg.emisor }} → {{ msg.receptor }}
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- DETALLE -->
+    <div *ngIf="vistaActual === 'detalle'" class="detalle">
+      <button class="back" (click)="volver()">← Volver</button>
+
+      <h2>{{ mensajeSeleccionado?.asunto || '(Sin asunto)' }}</h2>
+
+      <p><strong>De:</strong> {{ mensajeSeleccionado?.emisor }}</p>
+      <p><strong>Para:</strong> {{ mensajeSeleccionado?.receptor }}</p>
+      <p class="fecha">{{ mensajeSeleccionado?.fechaEnvio | date:'medium' }}</p>
+
+      <hr />
+
+      <p class="contenido">{{ mensajeSeleccionado?.texto }}</p>
+    </div>
+
+    <!-- NUEVO -->
+    <div *ngIf="vistaActual === 'nuevo'" class="nuevo">
+      <button class="back" (click)="volver()">← Volver</button>
+
+      <h2>Nuevo mensaje</h2>
+
+      <label for="receptor">Para:</label>
+      <select id="receptor" [(ngModel)]="receptor">
+        <option *ngFor="let u of usuarios" [value]="u.email">{{ u.nombre }} {{ u.apellido }} - ({{ u.email }})</option>
+      </select>
+
+      <label>Asunto:</label>
+      <input [(ngModel)]="asunto" />
+
+      <label>Mensaje:</label>
+      <textarea [(ngModel)]="texto"></textarea>
+
+      <button class="send" (click)="enviarMensaje()">Enviar</button>
+    </div>
+
+  </main>
+  <!-- MODAL DE ÉXITO / ERROR -->
+  <div class="modal-overlay" *ngIf="mostrarModal">
+    <div class="modal-card" [ngClass]="modalTipo">
+      <div class="modal-icon">
+        <i *ngIf="modalTipo==='exito'" class="fas fa-check-circle"></i>
+        <i *ngIf="modalTipo==='error'" class="fas fa-times-circle"></i>
+      </div>
+      <h2>{{ modalTipo === 'exito' ? '¡Éxito!' : '¡Error!' }}</h2>
+      <p>{{ modalMensaje }}</p>
+      <button (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div class="modal-overlay" *ngIf="mostrarModalConfirmacion">
+    <div class="modal-card confirmacion">
+      <div class="modal-icon">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <h2>¿Estás seguro?</h2>
+      <p>Esta acción eliminará los mensajes seleccionados.</p>
+      <div class="modal-buttons">
+        <button (click)="confirmarBorrado()">Sí, eliminar</button>
+        <button (click)="cancelarBorrado()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+

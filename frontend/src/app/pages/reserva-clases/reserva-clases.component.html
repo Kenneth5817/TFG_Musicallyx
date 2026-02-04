@@ -1,0 +1,110 @@
+<div class="reserva-container">
+  <h1>{{ isAdmin ? 'Mi disponibilidad' : 'Reserva tu clase' }}</h1>
+
+  <!-- Selector de semana y campos (admin vs usuario) -->
+  <div class="selector-row">
+    <div class="selector">
+      <label>Asignatura</label>
+      <select [(ngModel)]="asignaturaSeleccionada" [disabled]="isAdmin">
+        <option value="">-- Elige una asignatura --</option>
+        <option value="Piano">Piano</option>
+        <option value="Composición">Composición</option>
+        <option value="Lenguaje Musical">Lenguaje Musical</option>
+        <option value="Producción Musical">Producción Musical</option>
+        <option value="Improvisación">Improvisación</option>
+        <option value="Canto">Canto</option>
+      </select>
+    </div>
+
+    <div class="selector">
+      <label>Semana</label>
+      <select [(ngModel)]="semanaSeleccionada" (change)="cambiarSemana()">
+        <option *ngFor="let semana of semanas" [value]="semana.key">{{ semana.label }}</option>
+      </select>
+    </div>
+
+    <div class="selector">
+      <label>Modalidad</label>
+      <select [(ngModel)]="modalidadSeleccionada" [disabled]="isAdmin">
+        <option value="">-- Elige modalidad --</option>
+        <option value="Presencial">Presencial</option>
+        <option value="Online">Online</option>
+      </select>
+    </div>
+
+    <div class="selector">
+      <label>Nivel</label>
+      <select [(ngModel)]="nivelSeleccionado" [disabled]="isAdmin">
+        <option value="">-- Elige tu nivel --</option>
+        <option value="Principiante">Principiante</option>
+        <option value="Normal">Con conocimientos previos</option>
+        <option value="Avanzado">Avanzado</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Paginador de semanas -->
+  <div class="paginador-semana">
+    <button (click)="anteriorSemana()">← Semana anterior</button>
+    <button (click)="siguienteSemana()">Semana siguiente →</button>
+  </div>
+
+  <!-- Calendario escritorio -->
+  <div class="calendario desktop">
+    <div class="fila header">
+      <div class="celda hora-label">Hora</div>
+      <div class="celda dia-label" *ngFor="let dia of dias">{{ dia }}</div>
+    </div>
+
+    <div class="fila" *ngFor="let fila of calendario; let i = index">
+      <div class="celda hora-label">{{ horas[i] }}</div>
+      <div class="celda"
+           *ngFor="let celda of fila"
+           [ngClass]="celda.estado"
+           [style.background-color]="celda.color"
+           (click)="toggleCeldaSafe(celda)">
+        {{ celda.texto }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendario móvil / tablet -->
+  <div class="calendario accordion" *ngIf="dias.length">
+    <div class="dia-accordion" *ngFor="let dia of dias; let d = index">
+      <div class="dia-header" (click)="toggleDia(d)">
+        <h3>{{ dia }}</h3>
+        <span class="arrow" [class.open]="diaAbierto === d">▼</span>
+      </div>
+      <div class="dia-content" [class.show]="diaAbierto === d">
+        <div class="hora-bloque"
+             *ngFor="let hora of horas; let h = index"
+             [ngClass]="calendario[h]?.[d]?.estado"
+             (click)="calendario[h]?.[d] && toggleCelda(calendario[h][d])">
+          <span class="hora">{{ hora }}</span>
+          <span class="estado">
+            {{ calendario[h]?.[d]?.estado === 'reservado' ? 'Ocupado' :
+            calendario[h]?.[d]?.estado === 'seleccionado' ? '✔ Seleccionado' :
+              calendario[h]?.[d]?.estado === 'no-disponible' ? 'No disponible' : '' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón reservar / bloquear -->
+  <div class="boton-reservar">
+    <button (click)="reservar()">
+      {{ isAdmin ? 'Guardar cambios' : 'Reservar selección' }}
+    </button>
+  </div>
+
+  <!-- Modales -->
+  <div class="modal-overlay" *ngIf="showGenericModal" (click)="showGenericModal = false">
+    <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="modalClass">
+      <h2>{{ modalTitle }}</h2>
+      <p>{{ genericModalMessage }}</p>
+      <button *ngIf="showLoginButton" (click)="goToLogin()">Iniciar sesión</button>
+      <button class="btn-cerrar" (click)="showGenericModal = false">Cerrar</button>
+    </div>
+  </div>
+</div>

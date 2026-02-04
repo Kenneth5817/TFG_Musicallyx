@@ -1,0 +1,34 @@
+<div class="game-container">
+
+  <h2>¿Qué instrumento suena?</h2>
+
+  <!-- Pantalla de juego -->
+  <div *ngIf="!mostrarResultadoFinal">
+    <button id="playSoundBtn" [disabled]="!instrumentoCorrecto" (click)="reproducirAudio()">🔊 Escuchar sonido</button>
+
+    <div class="instruments-grid">
+      <div *ngFor="let inst of imagenesMezcladas" 
+           class="instrument-card" 
+           [attr.data-nombre]="inst.nombre"
+           (click)="seleccionarInstrumento(inst, $event)">
+        <img [src]="inst.img" [alt]="inst.nombre" />
+      </div>
+    </div>
+
+    <div id="feedback">{{ feedback }}</div>
+
+    <button id="nextBtn" *ngIf="mostrarNext" (click)="siguienteRonda()">Siguiente ➡</button>
+  </div>
+
+  <!-- Pantalla final -->
+  <div *ngIf="mostrarResultadoFinal" class="final-screen">
+    <p>🎮 Juego terminado.</p>
+    <p>✅ Has acertado <strong>{{ aciertos }}</strong> de <strong>{{ totalRondas }}</strong> instrumentos.</p>
+    <p>📊 Porcentaje de aciertos: <strong>{{ (aciertos/totalRondas*100) | number:'1.0-0' }}%</strong></p>
+    <div class="final-buttons">
+      <button class="btn" (click)="iniciarJuego()">🔄 Reiniciar</button>
+      <button routerLink="/juegos-musicales" class="btn">🔙 Todos los juegos</button>
+    </div>
+  </div>
+
+</div>

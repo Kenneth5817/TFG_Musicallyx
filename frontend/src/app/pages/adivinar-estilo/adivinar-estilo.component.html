@@ -1,0 +1,36 @@
+<div class="game-wrapper">
+  <div class="game-card" *ngIf="!mostrarFinal; else resultadoFinal">
+    <h2 class="game-title">Adivina el <span>estilo musical</span></h2>
+
+    <audio #audioPlayer controls autoplay>
+      <source [src]="preguntaActual.audio" type="audio/mp3" />
+      Tu navegador no soporta el audio.
+    </audio>
+
+
+    <div class="btn-grid">
+      <button *ngFor="let estilo of estilosDisponibles"
+              class="btn-estilo"
+              (click)="responder(estilo)">
+        {{ estilo }}
+      </button>
+    </div>
+
+    <div id="feedback" [ngClass]="feedbackClass">{{ feedback }}</div>
+
+    <button id="nextBtn" *ngIf="feedback" (click)="cargarNuevaPregunta()">Siguiente ➡</button>
+  </div>
+
+  <ng-template #resultadoFinal>
+    <div class="game-card final">
+      <h2>🎉 ¡Juego terminado!</h2>
+      <p>✅ Aciertos: <strong>{{ aciertos }}</strong></p>
+      <p>❌ Errores: <strong>{{ errores }}</strong></p>
+      <p>📊 Porcentaje de éxito: <strong>{{ porcentajeExito() }}%</strong></p>
+      <div class="final-buttons">
+         <button class="btn" (click)="cargarNuevaPregunta()">Jugar de nuevo</button>
+         <button class="btn" (click)="irAJuegos()">🔙 Todos los juegos</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,129 @@
+.gestion-admin-layout {
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background: #f8f9fa;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: #343a40;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: #dc3545;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card-header {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.card-body p {
+  margin: 4px 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: #17a2b8;
+  margin-top: 5px;
+}
+
+.card.confirmed {
+  border-left: 6px solid #28a745;
+  background: #e9f7ef;
+}
+
+.badge.confirmed {
+  background: #28a745;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  padding: 6px 14px;
+  background: #17a2b8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: #138496;
+}
+
+.no-reservas {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  background-color: #f0f8ff;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.alumno-email {
+  display: block;
+  font-size: 0.85rem;  /* más pequeño */
+  color: #6c757d;      /* opcional: un gris más suave */
+  word-break: break-all; /* evita que el correo largo se salga */
+}
+
+.reservas-confirmadas {
+  margin-top: 40px; /* ajusta el valor a lo que se vea bien */
+}
+.badge.pendiente-pago {
+  background: #ffc107; /* amarillo mostaza */
+  color: #212529;      /* texto oscuro */
+  margin-left: 5px;
+}
+
+.badge.pagado {
+  background: #17a2b8; /* azul */
+  color: #fff;
+  margin-left: 5px;
+}

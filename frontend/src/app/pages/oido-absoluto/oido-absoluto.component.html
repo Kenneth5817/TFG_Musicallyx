@@ -1,0 +1,28 @@
+<div class="game-container">
+  <h2>Oído Absoluto</h2>
+
+<div class="ronda-contador">
+  Ronda {{ rondaActual }} de {{ totalRondas }}
+</div>
+  <button *ngIf="!juegoTerminado" (click)="reproducirNota()" class="btn">🔊 Escuchar nota</button>
+
+  <div class="notes-grid" *ngIf="!juegoTerminado">
+  <button *ngFor="let nota of notasFijas"
+          class="note-button"
+          (click)="seleccionarNota(nota)">
+    {{ nota.nombre }}
+  </button>
+</div>
+
+
+  <div class="feedback">{{ feedback }}</div>
+
+  <!-- Botón siguiente solo mientras el juego sigue -->
+  <button *ngIf="mostrarNext && !juegoTerminado" (click)="siguienteRonda()" class="btn next">Siguiente ➡</button>
+
+  <!-- Botones al finalizar -->
+  <div *ngIf="juegoTerminado" class="final-buttons">
+    <button class="btn restart" (click)="iniciarJuego()">Reiniciar 🔄</button>
+    <button routerLink="/juegos-musicales" class="btn">🔙 Todos los juegos</button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="juego-container">
+  <h1 class="neon-title">JUEGO SIMON PRO</h1>
+
+  <p class="message">{{ message }}</p>
+  <p class="score" *ngIf="gameStarted">Aciertos: {{ score }}</p>
+
+  <div *ngIf="gameStarted" class="game-board">
+    <button
+      *ngFor="let color of colors"
+      class="game-btn {{color}}"
+      (click)="pulsar(color)">
+      {{ color.toUpperCase() }}
+    </button>
+  </div>
+
+  <div *ngIf="!gameStarted && sequence.length > 0" class="game-over-buttons">
+    <button class="btn-reiniciar" (click)="reiniciarJuego()">Reiniciar Juego</button>
+    <button class="btn-todos-juegos" (click)="irATodosLosJuegos()">Todos los Juegos</button>
+  </div>
+
+  <div *ngIf="!gameStarted && sequence.length === 0">
+    <button class="btn-iniciar" (click)="iniciarJuego()">Iniciar Juego</button>
+  </div>
+</div>

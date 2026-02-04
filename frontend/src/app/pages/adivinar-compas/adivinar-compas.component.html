@@ -1,0 +1,24 @@
+<div class="game-container">
+
+  <div class="game-card shadow-lg">
+    <h2>Adivina el compás</h2>
+
+    <audio id="audioCompas" controls>
+      <source src="" type="audio/mp3" />
+      Tu navegador no soporta el audio.
+    </audio>
+
+    <div class="d-flex flex-wrap justify-content-center">
+      <button class="btn btn-compas" data-answer="2/4">2/4</button>
+      <button class="btn btn-compas" data-answer="3/4">3/4</button>
+      <button class="btn btn-compas" data-answer="4/4">4/4</button>
+      <button class="btn btn-compas" data-answer="6/8">6/8</button>
+    </div>
+
+    <div id="feedback" class="mt-3"></div>
+    <button id="nextBtn" class="d-none">Siguiente ➡</button>
+
+    <div id="finalResult" class="text-center mt-4"></div>
+  </div>
+
+</div>

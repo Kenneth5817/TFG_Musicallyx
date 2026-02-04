@@ -1,0 +1,94 @@
+<footer class="footer-modern bg-dark text-white pt-5">
+  <div class="container">
+    <div class="row gy-4 align-items-start">
+
+      <!-- Columna 1: Musicallyx -->
+      <div class="col-md-4">
+        <div class="text-center text-md-start">
+          <h4 class="fw-bold mb-3">Musicallyx</h4>
+          <p class="small text-light">
+            Transforma tu experiencia musical. Explora, aprende y juega con nosotros. Calidad, innovación y pasión en cada nota.
+          </p>
+          <h4 class="fw-bold">Síguenos en:</h4>
+        </div>
+
+        <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-3">
+          <a href="https://www.instagram.com/musicallyx_official/" target="_blank">
+            <img src="assets/img/instagram.png" alt="Instagram" style="width: 32px; height: 32px; object-fit: cover; border-radius: 5px;">
+          </a>
+          <a href="https://www.youtube.com/@Musicallyx_official" target="_blank">
+            <img src="assets/img/yt.jpg" alt="YouTube" style="width: 32px; height: 32px; object-fit: cover; border-radius: 5px;">
+          </a>
+          <a href="mailto:musicallyxofficial5817@gmail.com">
+            <img src="assets/img/email.png" alt="Email" style="width: 32px; height: 32px; object-fit: cover; border-radius: 5px;">
+          </a>
+          <a href="https://www.linkedin.com/in/kenneth-jensen-quero-642997303/" target="_blank">
+            <img src="assets/img/linkedin.png" alt="LinkedIn" style="width: 32px; height: 32px; object-fit: cover; border-radius: 5px;">
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Clases disponibles -->
+      <div class="col-md-4 text-center text-md-center">
+        <h5 class="mb-3 fw-bold">Clases disponibles</h5>
+        <ul class="list-unstyled small">
+          <li>Piano</li>
+          <li>Producción Musical</li>
+          <li>Lenguaje Musical</li>
+          <li>Composición</li>
+          <li>Improvisación al piano</li>
+          <li>Canto</li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Suscripción -->
+      <div class="col-md-4 text-center text-md-start">
+        <h5 class="mb-3 fw-bold">Suscríbete</h5>
+
+        <form (submit)="suscribirse(); $event.preventDefault();"
+              class="d-flex mb-4 flex-column flex-sm-row">
+
+          <input type="email"
+                 [(ngModel)]="email"
+                 name="email"
+                 class="form-control me-sm-2 mb-2 mb-sm-0 bg-white text-dark border-0"
+                 placeholder="Tu correo electrónico"
+                 required>
+
+          <button class="btn btn-danger" type="submit">
+            Suscribirse
+          </button>
+        </form>
+
+
+        <div class="text-center text-md-start mt-3">
+          <h5 class="fst-italic fw-semibold text-light">"Donde el aprendizaje musical se convierte en inspiración real"</h5>
+        </div>
+      </div>
+  </div>
+
+  <hr class="border-top border-light opacity-50 my-3">
+
+
+    <!-- Derechos -->
+    <div class="row pb-4">
+      <div class="col-12 text-center small text-light">
+        © 2025 Musicallyx. Todos los derechos reservados.
+      </div>
+    </div>
+  </div>
+
+  <div class="full-screen-notification"
+       [class.show]="showFullScreenNotification"
+       [ngClass]="notificationType">
+
+    <div class="notification-content">
+      <h2>{{notificationTitle}}</h2>
+      <p>{{notificationMessage}}</p>
+      <button (click)="closeNotification()">Ok</button>
+    </div>
+
+  </div>
+
+</footer>
+

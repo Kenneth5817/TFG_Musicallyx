@@ -1,0 +1,153 @@
+/* Íconos animados de SweetAlert2 */
+.swal-icon {
+  position: relative;
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+.swal-icon.swal-success {
+  border-color: #2ecc71;
+}
+
+.swal-icon.swal-success .swal-line {
+  position: absolute;
+  height: 5px;
+  background-color: #2ecc71;
+  display: block;
+  border-radius: 2px;
+  transform-origin: left top;
+}
+
+.swal-icon.swal-success .swal-tip {
+  width: 25px;
+  top: 46px;
+  left: 14px;
+  transform: rotate(45deg);
+  animation: animate-success-tip 0.75s;
+}
+
+.swal-icon.swal-success .swal-long {
+  width: 47px;
+  top: 38px;
+  right: 8px;
+  transform: rotate(-45deg);
+  animation: animate-success-long 0.75s;
+}
+
+@keyframes animate-success-tip {
+  0% { width: 0; }
+  100% { width: 25px; }
+}
+
+@keyframes animate-success-long {
+  0% { width: 0; }
+  100% { width: 47px; }
+}
+
+/* Error icon */
+.swal-icon.swal-error .swal-x-mark {
+  position: relative;
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+
+.swal-icon.swal-error .swal-line {
+  position: absolute;
+  height: 5px;
+  width: 47px;
+  top: 38px;
+  left: 17px;
+  background-color: #e74c3c;
+  border-radius: 2px;
+}
+
+.swal-icon.swal-error .swal-line.swal-left {
+  transform: rotate(45deg);
+  animation: animate-error-left 0.75s;
+}
+
+.swal-icon.swal-error .swal-line.swal-right {
+  transform: rotate(-45deg);
+  animation: animate-error-right 0.75s;
+}
+
+@keyframes animate-error-left {
+  0% { width: 0; }
+  100% { width: 47px; }
+}
+
+@keyframes animate-error-right {
+  0% { width: 0; }
+  100% { width: 47px; }
+}
+
+
+.full-screen-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(230, 57, 70, 0.95);
+  color: #fff;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.full-screen-notification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.full-screen-notification.success {
+  background-color: rgba(42, 157, 143, 0.95);
+}
+
+.full-screen-notification.error {
+  background-color: rgba(230, 57, 70, 0.95);
+}
+
+.notification-content {
+  text-align: center;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.notification-content h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.notification-content p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.notification-content button {
+  background-color: #fff;
+  color: #e63946;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-content button:hover {
+  background-color: #e63946;
+  color: #fff;
+}

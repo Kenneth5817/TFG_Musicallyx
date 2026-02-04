@@ -1,0 +1,33 @@
+<div class="container">
+  <h1 class="title">Memoria de <span>Instrumentos</span></h1>
+
+  <div class="status">
+    <div class="stat">Tiempo: {{ formatTime(gameTime) }}</div>
+    <div class="stat">Intentos: {{ attempts }}</div>
+    <div class="stat">Pares: {{ matchedPairs }}/{{ instrumentos.length }}</div>
+  </div>
+
+  <div class="board">
+    <div *ngFor="let card of cards" class="card" [ngClass]="{'flipped': card.flipped || card.matched}" (click)="flipCard(card)">
+      <div class="inner">
+        <div class="front">🎵</div>
+        <div class="back">{{ card.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" (click)="startGame()">Reiniciar</button>
+
+  <!-- OVERLAY FIN DE JUEGO -->
+  <div class="overlay" *ngIf="!gameActive && matchedPairs === instrumentos.length || !gameActive">
+    <div class="overlay-content">
+      <h2>{{ matchedPairs === instrumentos.length ? '¡Ganaste!' : '¡Tiempo terminado!' }}</h2>
+      <p>Pares encontrados: {{ matchedPairs }}/{{ instrumentos.length }}</p>
+      <p>Intentos: {{ attempts }}</p>
+      <div class="overlay-buttons">
+        <button class="btn" (click)="startGame()">Jugar de nuevo</button>
+        <button class="btn" (click)="goToAllGames()">Todos los juegos</button>
+      </div>
+    </div>
+  </div>
+</div>

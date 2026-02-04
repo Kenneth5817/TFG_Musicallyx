@@ -1,0 +1,302 @@
+:root {
+  --primary-color: #e63946;
+  --dark-color: #0d0d0d;
+  --light-color: #f8f9fa;
+  --valid-color: #2a9d8f;
+  --invalid-color: #e63946;
+}
+
+/* ------------------- BODY Y BACKGROUND ------------------- */
+.login-main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ------------------- CONTENEDOR ------------------- */
+.login-container {
+  width: 90%;
+  max-width: 500px;
+  background: rgba(13, 13, 13, 0.92);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ------------------- HEADER ------------------- */
+.login-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #fff, #e63946);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+}
+
+.login-header p {
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+/* BOTÓN LOGIN ANIMADO */
+.login-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(90deg, #e63946, #e63946);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+}
+
+/* Hover con transición suave y fondo más oscuro */
+.login-btn:hover {
+  background: linear-gradient(90deg, #c5303d, #c5303d);
+  box-shadow: 0 6px 16px rgba(230, 57, 70, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Active al presionar el botón */
+.login-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+}
+
+
+/* ------------------- INPUTS ------------------- */
+.input-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0 9rem 0 3rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  height: 100%;
+}
+
+.input-group i.fa-lock,
+.input-group i.fa-envelope {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+/* ------------------- VALID / INVALID ------------------- */
+.input-group.valid {
+  border-color: var(--valid-color);
+  box-shadow: 0 0 10px 3px rgba(42,157,143,0.6);
+  background: rgba(42,157,143,0.15);
+}
+
+.input-group.invalid {
+  border-color: var(--invalid-color);
+  box-shadow: 0 0 10px 3px rgba(230,57,70,0.6);
+  background: rgba(230,57,70,0.15);
+}
+
+/* ------------------- CHECKLIST ------------------- */
+.validation-checklist {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.validation-checklist li.valid {
+  color: var(--valid-color);
+  text-decoration: line-through;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* ------------------- BOTÓN ------------------- */
+.login-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #c5303d; /* rojo más oscuro */
+  box-shadow: 0 4px 12px rgba(230,57,70,0.4);
+}
+
+/* ------------------- LINKS ------------------- */
+.register-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.register-link a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ------------------- OPCIONES ------------------- */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.options .remember-me label,
+.options .forgot-password a {
+  color: #ffffff !important;
+}
+
+.options .forgot-password a:hover {
+  color: #ff5765;
+  text-decoration: underline;
+}
+
+.options .remember-me input {
+  margin-right: 0.5rem;
+  accent-color: var(--primary-color);
+}
+
+/* ------------------- SWEETALERT CONFIRM BUTTON ROJO ------------------- */
+.swal2-confirm-red {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 0.5em 1.5em !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease;
+}
+
+.swal2-confirm-red:hover {
+  background-color: #c5303d !important;
+}
+
+.full-screen-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(230, 57, 70, 0.95); /* rojo por defecto */
+  color: #fff;
+  font-family: Arial, sans-serif;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.full-screen-notification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.full-screen-notification.success {
+  background-color: rgba(42, 157, 143, 0.95); /* verde */
+}
+
+.notification-content {
+  text-align: center;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.notification-content h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.notification-content p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.notification-content button {
+  background-color: #fff;
+  color: #e63946;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-content button:hover {
+  background-color: #e63946;
+  color: #fff;
+}
+
+
+
+.toggle-eye {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.toggle-eye:hover {
+  opacity: 0.7;
+}
+.volver-inicio {
+  color: #fff; /* texto blanco */
+  text-decoration: none; /* opcional, quita subrayado */
+  padding-left:20px;
+}
+
+.volver-inicio:hover {
+  text-decoration: underline; /* opcional, efecto al pasar el ratón */
+}

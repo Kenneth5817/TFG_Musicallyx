@@ -1,0 +1,101 @@
+
+
+/**pARA el de 3**/
+/* Colores de fondo personalizados para cada tarjeta */
+.azul-claro {
+    background-color: #5ac6ea; /* Azul clarito */
+}
+
+.amarillo {
+    background-color: #fff389; /* Amarillo */
+}
+
+.verde-claro {
+    background-color: #9ef99e; /* Verde clarito */
+}
+
+/* Establecer texto negro en el título */
+.card-title {
+    color: #000000; /* Texto negro para los títulos */
+}
+
+/* Aumentar la altura de la caja de texto (el fondo de color) */
+.card-body {
+    display: flex; /* Usamos Flexbox para centrar el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding-top: 0;  /* Elimina cualquier espacio adicional de padding */
+    padding-bottom: 0;
+    height: 100px;  /* Ajusta la altura de la caja de texto */
+}
+/* Igualar altura de las imágenes */
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+
+#tituloClaseDestacada{
+    text-align:center;
+}
+
+/* Añade esto al archivo CSS de tu proyecto o en la etiqueta <style> en tu HTML */
+.center-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /*Espacio entre las tarjetas*/
+    margin-top: 30px; /*Ajusta el espacio arriba*/
+}
+
+.card-container {
+    width: 18rem;
+    background-color: black;
+    border-radius: 0;
+    color: white;
+}
+
+.card-img-top {
+    border-radius: none;
+}
+
+#clasesDispo{
+    margin-top:20px;
+    text-align: center;
+    text-decoration-line: underline;
+}
+
+.custom-hover-bg-green:hover {
+    background-color: rgb(44, 172, 6) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.custom-hover-bg-orange:hover {
+    background-color: rgb(255, 140, 0) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.custom-hover-bg-yellow:hover {
+    background-color: rgb(255, 191, 0) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.custom-hover-bg-blue:hover {
+    background-color: rgb(0, 229, 255) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.custom-hover-bg-red:hover {
+    background-color: rgb(255, 13, 0) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.custom-hover-bg-pink:hover {
+    background-color: rgb(236, 139, 155) !important;
+    color: white; /* Cambia el color del texto a blanco para que se vea bien */
+}
+
+.offcanvas-body .navbar-nav .nav-link {
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}

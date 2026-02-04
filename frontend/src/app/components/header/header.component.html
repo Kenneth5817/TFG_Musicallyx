@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-white position-sticky top-0 z-index-fixed">
+<a class="navbar-brand" href="./index.html">
+    <img src="assets/img/logo.png" alt="Logo" width="200" />
+  </a>
+
+  <!-- Botón hamburguesa siempre visible en móvil -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Menú Offcanvas Fullscreen SOLO en móvil -->
+<div class="offcanvas offcanvas-start offcanvas-fullscreen" id="offcanvasNavbar" #offcanvas tabindex="-1">
+
+<!-- Botón de cierre arriba a la derecha -->
+<button type="button" class="offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+  <i class="fas fa-times"></i>
+</button>
+  <div class="offcanvas-body d-flex flex-column justify-content-center align-items-center">
+    <ul class="navbar-nav text-center">
+      <!-- Inicio -->
+      <li class="nav-item">
+        <!-- Escritorio -->
+        <a class="nav-link d-none d-xl-block"
+           [routerLink]="['/']"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{ exact: true }">
+          Inicio
+        </a>
+        <!-- Móvil -->
+        <a class="nav-link d-xl-none"
+           (click)="closeOffcanvasAndNavigate(offcanvas, '/')"
+           [ngClass]="{'active-link': isActive('/')}">
+          Inicio
+        </a>
+      </li>
+
+      <!-- Juegos Musicales -->
+      <li class="nav-item">
+        <!-- Escritorio -->
+        <a class="nav-link d-none d-xl-block"
+           [routerLink]="['/juegos-musicales']"
+           routerLinkActive="active-link">
+          Juegos Musicales
+        </a>
+        <!-- Móvil -->
+        <a class="nav-link d-xl-none"
+           (click)="closeOffcanvasAndNavigate(offcanvas, '/juegos-musicales')"
+           [ngClass]="{'active-link': isActive('/juegos-musicales')}">
+          Juegos Musicales
+        </a>
+      </li>
+
+      <!-- Clases -->
+      <li class="nav-item">
+        <!-- Escritorio: dropdown permanece igual -->
+        <div class="d-none d-xl-block dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Clases</a>
+          <ul class="dropdown-menu text-center">
+            <li><a class="dropdown-item" [routerLink]="['/clases']">Ver todas</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/reserva-clases']">Reservar</a></li>
+          </ul>
+        </div>
+        <!-- Móvil: enlace directo -->
+        <a class="nav-link d-xl-none"
+           (click)="closeOffcanvasAndNavigate(offcanvas, '/clases')"
+           [ngClass]="{'active-link': isActive('/clases')}">
+          Clases
+        </a>
+      </li>
+
+      <!-- Sobre mi -->
+      <li class="nav-item">
+        <!-- Escritorio -->
+        <a class="nav-link d-none d-xl-block"
+           [routerLink]="['/info']"
+           routerLinkActive="active-link">
+          Sobre mi
+        </a>
+        <!-- Móvil -->
+        <a class="nav-link d-xl-none"
+           (click)="closeOffcanvasAndNavigate(offcanvas, '/info')"
+           [ngClass]="{'active-link': isActive('/info')}">
+          Sobre mi
+        </a>
+      </li>
+
+      <!-- Iniciar sesión -->
+      <li class="nav-item">
+        <!-- Escritorio -->
+        <a class="nav-link d-none d-xl-block"
+           [routerLink]="['/iniciar-sesion']"
+           routerLinkActive="active-link">
+          Iniciar sesión
+        </a>
+        <!-- Móvil -->
+        <a class="nav-link d-xl-none"
+           (click)="closeOffcanvasAndNavigate(offcanvas, '/iniciar-sesion')"
+           [ngClass]="{'active-link': isActive('/iniciar-sesion')}">
+          Iniciar sesión
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  <div class="d-none d-xl-flex navbar-search-icons buscador">
+    <div class="w-100 position-relative d-flex align-items-center">
+      <!-- Input -->
+      <input class="form-control flex-grow-1 me-2" type="search"
+             placeholder="Buscar" aria-label="Search"
+             [(ngModel)]="termino"
+             (ngModelChange)="buscarEnTiempoReal($event)">
+
+      <!-- Botón -->
+      <button class="btn btn-outline-dark" type="button" (click)="buscar()">
+        Buscar
+      </button>
+
+      <!-- Resultados debajo del input -->
+      <ul *ngIf="resultados.length"
+          class="list-group position-absolute w-100 mt-1">
+        <li *ngFor="let res of resultados"
+            class="list-group-item list-group-item-action"
+            (click)="seleccionarResultado(res)">
+          {{ res.titulo }} <small class="text-muted">({{ res.tipo }})</small>
+        </li>
+      </ul>
+    </div>
+    <a [routerLink]="['/iniciar-sesion']"><i class="fas fa-user"></i></a>
+    <a [routerLink]="['/clases']"><i class="fa-solid fa-cart-shopping"></i></a>
+  </div>
+</nav>

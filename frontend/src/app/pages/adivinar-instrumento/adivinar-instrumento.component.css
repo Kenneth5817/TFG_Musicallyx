@@ -1,0 +1,154 @@
+.game-container {
+  background: rgba(0,0,0,0.85);
+  border-radius: 20px;
+  padding: 20px 15px;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(255,0,0,0.4);
+  color: white;
+  animation: fadeIn 0.7s ease;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;        /* tamaño más contenido */
+  font-weight: 700;
+  color: #fff;
+  text-transform: none;    /* no todo en mayúsculas */
+  text-shadow: 
+      0 0 4px #ff4444,
+      0 0 8px #ff4444,
+      0 0 12px #ff0000;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+
+.instruments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 imágenes por fila */
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.instrument-card {
+  cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid #fff; /* borde por defecto blanco */
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.25);
+  height: 150px; /* altura fija */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instrument-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* se recorta si es necesario */
+  pointer-events: none;
+  user-select: none;
+}
+
+.instrument-card:hover {
+  transform: scale(1.05); /* efecto hover */
+}
+
+.instrument-card.correct {
+  border-color: #28a745 !important; /* verde */
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.8);
+}
+
+.instrument-card.wrong {
+  border-color: #dc3545 !important; /* rojo */
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.8);
+}
+
+
+.instrument-card img {
+  width: 100%;
+  height: 130px; /* altura fija para todas las tarjetas */
+  object-fit: cover; /* recorta la imagen para llenar el espacio sin deformar */
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+#feedback {
+  font-size: 1.2rem;
+  min-height: 30px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#playSoundBtn, #nextBtn {
+  border-radius: 50px;
+  padding: 10px 25px;
+  margin: 5px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+#playSoundBtn {
+  background: #fff;
+  color: #000;
+  border: 2px solid #ff4444;
+}
+
+#playSoundBtn:hover:not(:disabled) {
+  background-color: #ff4444;
+  color: #fff;
+}
+
+#nextBtn {
+  background: #ff4444;
+  color: #fff;
+  border: none;
+}
+
+#nextBtn:hover {
+  background: #cc0000;
+}
+
+.final-screen {
+  margin-top: 20px;
+}
+
+.final-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.final-buttons .btn {
+  border-radius: 50px;
+  padding: 12px 25px;
+  background: #ff4444;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.final-buttons .btn:hover {
+  background: #cc0000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@media (max-width: 768px) {
+  .instruments-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .instruments-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,177 @@
+<header class="private-header">
+  <div class="user-name">{{ userName }}</div>
+
+  <!-- Avatar clicable -->
+  <div class="profile-pic" (click)="toggleProfileCard()">
+    <div class="avatar-initials" [style.background-color]="bgColor">{{ userInitials }}</div>
+  </div>
+
+  <!-- Card de perfil -->
+  <div *ngIf="showProfileCard" class="profile-card">
+    <h3>Actualizar perfil</h3>
+
+    <label>
+      Imagen de perfil:
+      <input type="file" (change)="onFileSelected($event)">
+    </label>
+
+    <label>
+      Color de fondo:
+      <input type="color" [(ngModel)]="bgColor">
+    </label>
+
+    <button (click)="saveProfile()">Guardar</button>
+  </div>
+
+
+
+  <!-- Botón hamburguesa -->
+  <button class="navbar-toggler ms-auto" type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasAdminMenu"
+          aria-controls="offcanvasAdminMenu"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
+
+<!-- Offcanvas solo si hay usuario logueado -->
+<div *ngIf="authService.user" class="offcanvas offcanvas-end offcanvas-fullscreen" tabindex="-1" id="offcanvasAdminMenu">
+  <button type="button" class="offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close">
+    <i class="fas fa-times"></i>
+  </button>
+  <div class="offcanvas-body d-flex flex-column justify-content-center align-items-center">
+    <ul class="navbar-nav text-center">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="mi-perfil" (click)="closeOffcanvas()">Mi Datos</a>
+      </li>
+      <li class="nav-item" *ngIf="isSpecialAdmin">
+        <a class="nav-link" routerLink="gestion-admin" (click)="closeOffcanvas()">Gestión Clases</a>
+      </li>
+      <li class="nav-item" *ngIf="isSpecialAdmin">
+        <a class="nav-link" routerLink="reservar-clase" (click)="closeOffcanvas()">Mi Calendario</a>
+      </li>
+
+      <li class="nav-item" *ngIf="isSpecialAdmin">
+        <a class="nav-link" routerLink="panel-administracion" (click)="closeOffcanvas()">Panel de administración</a>
+      </li>
+      <li class="nav-item" *ngIf="!isSpecialAdmin">
+        <a class="nav-link" routerLink="clases-usuario" (click)="closeOffcanvas()">Clases</a>
+      </li>
+      <!-- Reservar Clase para usuario normal -->
+      <li class="nav-item" *ngIf="!isSpecialAdmin">
+        <a class="nav-link" routerLink="reservar-clase" (click)="closeOffcanvas()">Reservar Clase</a>
+      </li>
+      <li class="nav-item" *ngIf="!isSpecialAdmin">
+        <a class="nav-link" routerLink="mis-reservas" (click)="closeOffcanvas()">Mis Reservas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="correo" (click)="closeOffcanvas()">Correo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="juegos-musicales" (click)="closeOffcanvas()">Juegos Musicales</a>
+      </li>
+
+
+      <!-- Logout -->
+      <li class="nav-item">
+        <a class="nav-link logout" (click)="logout(); closeOffcanvas()">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="user-info-row">
+        <!-- Avatar / Logo -->
+        <div class="profile-pic">
+          <div class="avatar-initials">{{ userInitials }}</div>
+        </div>
+
+        <!-- Nombre y rol -->
+        <div class="user-details">
+          <div class="user-role">{{ isSpecialAdmin ? 'Admin' : 'Usuario' }}</div>
+          <div class="user-name">{{ userName }}</div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="mi-perfil" routerLinkActive="active">⚙️ Mis Datos</a>
+        </li>
+        <li *ngIf="!isSpecialAdmin">
+          <a routerLink="clases-usuario" routerLinkActive="active">🎼 Clases</a>
+        </li>
+
+
+
+        <!-- Enlaces admin -->
+        <li *ngIf="isSpecialAdmin">
+          <a routerLink="gestion-admin" routerLinkActive="active">📚 Gestión Clases</a>
+        </li>
+        <li *ngIf="isSpecialAdmin">
+          <a routerLink="reservar-clase" routerLinkActive="active">📅 Mi Calendario</a>
+        </li>
+        <li *ngIf="isSpecialAdmin">
+          <a routerLink="panel-administracion" routerLinkActive="active">⚙️ Panel Administración</a>
+        </li>
+
+        <!-- Enlaces usuario normal -->
+        <li *ngIf="!isSpecialAdmin">
+          <a routerLink="reservar-clase" routerLinkActive="active">📝 Reservar Clase</a>
+        </li>
+        <li *ngIf="!isSpecialAdmin">
+          <a routerLink="mis-reservas" routerLinkActive="active">📅 Mis Reservas</a>
+        </li>
+
+        <li><a routerLink="correo" routerLinkActive="active">💬 Correo</a></li>
+
+        <li><a routerLink="juegos-musicales" routerLinkActive="active">🎹 Juegos Musicales</a></li>
+
+        <li><a (click)="logout()" class="logout">🚪Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="content">
+    <!-- Tarjeta de bienvenida -->
+    <div *ngIf="!hasSelectedRoute && !router.url.includes('reservar-clase') &&
+                   !router.url.includes('mis-reservas') &&
+                   !router.url.includes('chat') &&
+                   !router.url.includes('juegos-musicales') &&
+                   !router.url.includes('info')"
+         class="welcome-card">
+      <h1>👋 Hola, {{ userName }}</h1>
+      <p>Bienvenido a tu espacio personal.</p>
+      <p>¿Qué te gustaría hacer hoy?</p>
+      <div class="icons">
+        <span>🎵</span>
+        <span>🎹</span>
+        <span>🎸</span>
+      </div>
+    </div>
+
+    <!-- Aquí se cargarán los hijos -->
+    <router-outlet (activate)="onRouteSelected()"></router-outlet>
+
+    <!-- Modal de logout -->
+    <div *ngIf="loggingOut" class="logout-modal">
+      <div class="modal-content">
+        <h2>Cerrando sesión...</h2>
+        <div class="loader"></div>
+      </div>
+    </div>
+  </main>
+
+</div>

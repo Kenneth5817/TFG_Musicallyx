@@ -1,0 +1,104 @@
+<section class="games-section">
+  <div class="games-header">
+    <h2>Juegos Musicales</h2>
+    <p>Explora y mejora tu oído musical con estos juegos interactivos.</p>
+  </div>
+
+  <div class="games-grid">
+    <!-- Juego 1 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+  <!-- Video visible en escritorio -->
+  <video class="game-video video-desktop" autoplay muted loop playsinline poster="/assets/img/video-preview1.jpg">
+    <source src="/assets/video/chicoMusica.mp4" type="video/mp4">
+  </video>
+  <!-- Imagen fallback para tablet/móvil -->
+  <img src="/assets/img/juego12.jpg" alt="Preview juego 1" class="image-mobile">
+</div>
+      <div class="game-content">
+        <h3>Adivina el compás</h3>
+        <p>Escucha un fragmento de una canción y elige el compás correcto.</p>
+        <a [routerLink]="['/adivinar-compas']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 2 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="/assets/img/video-preview2.jpg">
+          <source src="/assets/video/notasMusic.mp4" type="video/mp4">
+        </video>
+
+        <img src="/assets/img/juego2.jpg" alt="Preview juego 2" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Oído Absoluto</h3>
+        <p>Escucha una nota musical y di cuál piensas que es.</p>
+        <a [routerLink]="['/oido-absoluto']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 3 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview3.jpg">
+          <source src="/assets/video/instruments.mp4" type="video/mp4">
+        </video>
+
+        <img src="/assets/img/juego3.avif" alt="Preview juego 3" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Adivina el instrumento</h3>
+        <p>Escucha un sonido e identifica el instrumento correcto.</p>
+        <a [routerLink]="['/adivinar-instrumento']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 4 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview4.jpg">
+        <source src="/assets/video/cantarCoche.mp4" type="video/mp4">
+      </video>
+
+        <img src="/assets/img/juego4.jpg" alt="Preview juego 4" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Adivina el estilo</h3>
+        <p>Identifica a qué estilo pertenecen las canciones.</p>
+        <a [routerLink]="['/adivinar-estilo']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 5 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview5.jpg">
+        <source src="/assets/video/memory.mp4" type="video/mp4">
+      </video>
+        <img src="/assets/img/juego5.jpg" alt="Preview juego 5" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Memoriza los instrumentos</h3>
+        <p>Encuentra todas las parejas de instrumentos en tiempo récord.</p>
+        <a [routerLink]="['/memorizar-instrumento']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 6 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview6.jpg">
+        <source src="/assets/video/simon.mp4" type="video/mp4">
+      </video>
+        <img src="/assets/img/juego6.jpg" alt="Preview juego 6" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Simón dice...</h3>
+        <p>Trabaja la memoria con este juego interactivo.</p>
+        <a [routerLink]="['/juego-simon']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+  </div>
+</section>

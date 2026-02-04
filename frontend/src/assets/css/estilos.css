@@ -1,0 +1,11 @@
+.offcanvas-body .navbar-nav .nav-link::after {
+  display: none !important;
+  content: none !important;
+}
+
+.offcanvas-body .navbar-nav .nav-link {
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+

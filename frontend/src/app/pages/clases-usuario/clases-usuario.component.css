@@ -1,0 +1,155 @@
+/* Contenedor */
+.clases-container {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Título */
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* GRID responsive automático */
+.clases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.clase-card {
+  position: relative;
+  border-radius: 15px;
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s;
+
+  border-top: 12px solid black; /* ← LÍNEA NEGRA PERFECTA */
+}
+
+
+
+.clase-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.clase-icon {
+  font-size: 2.5rem;
+  margin-top: 15px;
+}
+
+.clase-card h4 {
+  font-size: 1.3rem;
+  margin: 10px 0 0 0;
+}
+
+.clase-card p {
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+}
+
+.modal-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  padding: 25px;
+  border-radius: 20px;
+  color: white;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.animate {
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.25);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-icon {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.reservar-btn {
+  margin-top: 25px;
+  width: 100%;
+  background: white;
+  color: black;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.reservar-btn:hover {
+  background: #f1f1f1;
+  transform: scale(1.03);
+}
+
+/* Ajustes móviles */
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 1.7rem;
+  }
+  .modal-icon {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .clases-container {
+    padding: 30px 15px;
+  }
+  .modal-card {
+    padding: 18px;
+  }
+}
+

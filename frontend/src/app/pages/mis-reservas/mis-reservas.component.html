@@ -1,0 +1,56 @@
+<div class="gestion-admin-layout">
+
+  <!-- RESERVAS PENDIENTES -->
+  <section class="reservas-pendientes">
+    <h2>Mis Reservas Pendientes</h2>
+
+    <div *ngIf="reservasPendientes.length === 0" class="no-reservas">
+      <p>No tienes reservas pendientes.</p>
+    </div>
+
+    <div class="cards">
+      <div *ngFor="let r of reservasPendientes" class="card">
+        <div class="card-header">{{ r.asignatura }} - <span class="alumno-email">{{ r.alumno }}</span></div>
+        <div class="card-body">
+          <p>Horario: {{ r.horario }}</p>
+          <p>Nivel: {{ r.nivel }}</p>
+          <p>Modalidad: {{ r.modalidad }}</p>
+          <span class="badge">Pendiente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVAS CONFIRMADAS -->
+  <section class="reservas-confirmadas">
+    <h2>Mis Reservas Confirmadas</h2>
+
+    <div *ngIf="reservasConfirmadas.length === 0" class="no-reservas">
+      <p>No tienes reservas confirmadas.</p>
+    </div>
+
+    <div class="cards">
+      <div *ngFor="let r of reservasConfirmadas" class="card confirmed">
+        <div class="card-header">{{ r.asignatura }} - <span class="alumno-email">{{ r.alumno }}</span></div>
+        <div class="card-body">
+          <p>Horario: {{ r.horario }}</p>
+          <p>Nivel: {{ r.nivel }}</p>
+          <p>Modalidad: {{ r.modalidad }}</p>
+          <span class="badge confirmed">Confirmada</span>
+          <span *ngIf="!r.pagado" class="badge pendiente-pago">Pendiente de pagar</span>
+          <span *ngIf="r.pagado" class="badge pagado">Pagado</span>
+        </div>
+        <div class="card-actions">
+          <button class="btn-secondary" (click)="mostrarOpcionesPago(r)">💳 Pago</button>
+        </div>
+        <div *ngIf="r.mensajePago" class="card" style="background:#fff; border-left:6px solid #17a2b8;">
+          <div class="card-body">
+            {{ r.mensajePago }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+

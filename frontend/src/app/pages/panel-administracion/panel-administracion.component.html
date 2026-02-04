@@ -1,0 +1,68 @@
+<div class="dashboard-layout">
+
+  <!-- Cabecera -->
+  <header class="dashboard-header">
+    <h1>📊 Panel de Administración</h1>
+
+    <div class="filters">
+      <label>
+        Ver:
+        <select [(ngModel)]="categoriaSeleccionada" (ngModelChange)="cambiarCategoria($event)">
+          <option value="usuarios">Usuarios</option>
+          <option value="reservas">Reservas</option>
+          <option value="profesores">Profesores</option>
+          <!--<option value="clases">Clases</option>-->
+        </select>
+
+      </label>
+    </div>
+  </header>
+
+  <!-- Buscador -->
+  <div class="search-box">
+    <input type="text" placeholder="🔍 Buscar..." [(ngModel)]="busqueda" (input)="buscar()">
+  </div>
+
+  <!-- Tabla dinámica -->
+  <section class="tabla-container">
+    <table *ngIf="datos.length > 0">
+      <thead>
+      <tr>
+        <th *ngFor="let col of columnasVisibles">{{ col }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of datos" (click)="abrirModal(item)" class="clickable-row">
+        <td *ngFor="let col of columnasVisibles">{{ item[col] }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="datos.length === 0" class="no-data">No hay datos.</p>
+  </section>
+
+
+  <!-- Cards que aparecen solo en pantallas pequeñas -->
+  <div *ngFor="let item of datos" (click)="abrirModal(item)" class="card-row">
+    <div *ngFor="let col of columnasVisibles" class="card-field">
+      <span class="card-field-label">{{ col }}:</span>
+      <span class="card-field-value">{{ item[col] }}</span>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <button (click)="paginaAnterior()" [disabled]="paginaActual === 0">◀︎</button>
+    <span>Página {{ paginaActual + 1 }} de {{ totalPaginas }}</span>
+    <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas - 1">▶︎</button>
+  </div>
+
+</div>
+
+
+
+
