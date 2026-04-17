@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <!-- ABOUT ME SECCIÓN PRO -->
 <section class="bg-dark about-pro-section position-relative overflow-hidden">
@@ -22,7 +22,7 @@
 
 <!-- Roles debajo del nombre -->
 <p class="lead roles fade-slide delay-2">
-  <span>PIANISTA</span> · <span>LETRISTA</span> · <span>COMPOSITOR</span> · <span>PROFESOR</span>
+  <span>PIANISTA</span> · <span>PROFESOR</span> · <span>COMPOSITOR</span> ·  <span>LETRISTA</span>
 </p>
 
 <p class="lead text-light fade-slide delay-2 mb-5">
@@ -41,7 +41,7 @@
     <div class="info-card">
       <i class="fas fa-users"></i>
       <h5>Enseñanza</h5>
-      <p>Clases personalizadas para todos los niveles. Mi objetivo: que disfrutes y vivas la música a tu manera.</p>
+      <p>Clases personalizadas para todos los niveles. Mi objetivo: que disfrutes y sientas como la música te ayuda.</p>
     </div>
   </div>
 
@@ -55,8 +55,21 @@
   <div class="section-diagonal"></div>
 </section>
 
+<div class="banner">
+  <div class="banner-track">
+     <span>· APRENDE · CREA · TOCA · COMPONE ·
+      ENTRENA · MEJORA · EVOLUCIONA ·
+      IMPROVISA · EXPRESA · INTERPRETA ·
+      GRABA · PRODUCE · CONECTA
+    </span>
 
-
+    <span>· APRENDE · CREA · TOCA · COMPONE ·
+      ENTRENA · MEJORA · EVOLUCIONA ·
+      IMPROVISA · EXPRESA · INTERPRETA ·
+      GRABA · PRODUCE · CONECTA
+    </span>
+  </div>
+</div>
 
     <div class="container mt-5">
       <div class="row no-gutters moving-lines">
@@ -69,67 +82,129 @@
 </div>
 
 
-  <div class="mt-5">
-    <h2 class="text-danger from-left text-center">La música no tiene fronteras,</h2>
-    <h1 class="from-right text-center">y tú ¿a qué esperas?</h1>
+<div class="content-inner">
+  <div class="container my-5">
+ <div class="row justify-content-center g-4 mb-5">
+
+  <!-- Clase 30 min -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card">
+      <div class="card-header rounded-top-4 py-3 header-verde">
+        Clase 30 min
+      </div>
+      <div class="card-body">
+        <p class="text-dark fs-2 fw-bold mb-2">12€</p>
+        <p class= "text-dark mb-3">30 minutos</p>
+        <a [routerLink]="['/reserva-clases']"href="#" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
+    </div>
   </div>
 
-
-
-  <!-- Sección moderna de 3 tarjetas -->
-<div class="container my-5">
-    <div class="row g-4">
-        <!-- Tarjeta 1 - TOCA -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
-                <div class="card-img-container">
-                    <img src="assets/img/guitarrista.jpg" class="card-img-top img-fluid" alt="Toca" loading="lazy">
-                    <div class="card-img-overlay d-flex align-items-end p-0">
-                        <div class="bg-success-gradient w-100 py-3 text-center">
-                            <h3 class="text-white mb-0 fw-bold text-uppercase letter-spacing-2">TOCA</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tarjeta 2 - COMPONE -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
-                <div class="card-img-container">
-                    <img src="assets/img/pensandochica.jpg" class="card-img-top img-fluid" alt="Compone" loading="lazy">
-                    <div class="card-img-overlay d-flex align-items-end p-0">
-                        <div class="bg-warning-gradient w-100 py-3 text-center">
-                            <h3 class="text-dark mb-0 fw-bold text-uppercase letter-spacing-2">COMPONE</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tarjeta 3 - DISFRUTA -->
-        <div class="col-md-6 col-lg-4 mx-auto">
-            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
-                <div class="card-img-container">
-                    <img src="assets/img/disfrute1.jpg" class="card-img-top img-fluid" alt="Disfruta" loading="lazy">
-                    <div class="card-img-overlay d-flex align-items-end p-0">
-                        <div class="bg-danger-gradient w-100 py-3 text-center">
-                            <h3 class="text-white mb-0 fw-bold text-uppercase letter-spacing-2">DISFRUTA</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Plan mensual central -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card featured-card">
+      <div class="card-header rounded-top-4 py-3 header-rojo">
+       ⭐ Plan mensual ⭐
+      </div>
+      <div class="card-body">
+        <p class="text-dark fs-2 fw-bold mb-2">80€</p>
+        <p class="text-dark mb-3">4 clases al mes <br>(1h por clase)</p>
+        <a [routerLink]="['/reserva-clases']" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
     </div>
+  </div>
+
+  <!-- Clase 1h -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card">
+      <div class="card-header rounded-top-4 py-3 header-azul">
+        Clase 1h
+      </div>
+      <div class="card-body">
+        <p class="text-dark fs-2 fw-bold mb-2">22€</p>
+        <p class="text-dark mb-3">1 hora</p>
+        <a [routerLink]="['/reserva-clases']" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<style>
+/* Card moderno */
+.modern-card {
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: none;
+}
 
-<div class="content-inner nueva-clase ">
-  <h3 class="fw-bold text-center mb-4">🎹🎵 CLASES DISPONIBLES 🎵🎹</h3>
+.modern-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Headers con colores de tus áreas */
+.header-rojo {
+  background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%); /* rojo similar a Composición */
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.header-verde {
+ background: yellowgreen; /* verde similar a Producción Musical */
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.header-azul {
+  background: lightseagreen;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Botones modernos */
+.btn-modern {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #343a40, #495057);
+  color: white;
+  border: none;
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+}
+
+
+/* Featured card efecto extra */
+.featured-card {
+  transform: scale(1.05);
+}
+
+.featured-card:hover {
+  transform: translateY(-15px) scale(1.08);
+}
+</style>
+
+<div class="content-inner nueva-clase">
+    <div class="clases-header">
+      <h2 style="color:#242427">Clases disponibles</h2>
+    </div>
 
   <div class="row g-3">
     <!-- PIANO -->
-    <div class="col-md-12 col-lg-5">
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
              style="background: linear-gradient(135deg, #0d6efd 0%, #084298 100%);">
@@ -137,17 +212,34 @@
                style="width: 140px;" alt="Piano">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">PIANO</h5>
+              <h5 class="fw-bold mb-0 pe-2">PIANO</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
+    <!-- IMPROVISACIÓN AL PIANO -->
+    <div class="col-12 col-lg-6">
+      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
+        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
+             style="background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);">
+          <img src="assets/img/improv.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Producción Musical">
+          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <h5 class="fw-bold mb-0 pe-2">IMPROVISACIÓN AL PIANO</h5>
+              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
     <!-- LENGUAJE MUSICAL -->
-    <div class="col-12 col-lg-7">
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
              style="background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);">
@@ -155,28 +247,26 @@
                style="width: 140px;" alt="Lenguaje Musical">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">LENGUAJE MUSICAL</h5>
+              <h5 class="fw-bold mb-0 pe-2">LENGUAJE MUSICAL</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- COMPOSICIÓN -->
+    <!-- CANTO -->
     <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #0dcaf0 0%, #087990 100%);">
-          <img src="assets/img/composicion..jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Composición">
+             style="background: linear-gradient(135deg, #6f42c1 0%, #4a1d96 100%);">
+          <img src="assets/img/canto.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Canto">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">COMPOSICIÓN</h5>
+              <h5 class="fw-bold mb-0 pe-2">CANTO</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
@@ -191,69 +281,68 @@
                style="width: 140px;" alt="Análisis">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">ANÁLISIS</h5>
+              <h5 class="fw-bold mb-0 pe-2">ANÁLISIS</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- PRODUCCIÓN -->
-    <div class="col-12 col-lg-7">
+    <!-- COMPOSICIÓN -->
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);">
-          <img src="assets/img/produccionMusical.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Producción Musical">
+             style="background: #2596be">
+          <img src="assets/img/composicion..jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Composición">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">PRODUCCIÓN MUSICAL</h5>
+              <h5 class="fw-bold mb-0 pe-2">COMPOSICIÓN</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- CANTO -->
-    <div class="col-12 col-lg-5">
+
+    <!-- INFORMÁTICA MUSICAL -->
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #6f42c1 0%, #4a1d96 100%);">
-          <img src="assets/img/canto.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Canto">
+             style="background: #212529">
+          <img src="assets/img/informatica-musical.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Informática Musical">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">CANTO</h5>
+              <h5 class="fw-bold mb-0 pe-2">INFORMÁTICA MUSICAL</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- LETRISTA -->
-    <div class="col-12 col-lg-6 ">
+    <!-- ARMONÍA -->
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
              style="background: linear-gradient(135deg, #198754 0%, #0f5132 100%);">
-          <img src="assets/img/letrista.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Letrista">
+
+          <img src="assets/img/armonia.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Armonía">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">LETRISTA</h5>
+              <h5 class="fw-bold mb-0 pe-2">ARMONÍA</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold text-white">14€ <small class="fs-5 opacity-75 text-white">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -264,51 +353,249 @@
 </h5>
 
 
-<div class="contenedor-principal">
-  <div class="tarjeta tarjeta-blanca">
+  <div class="music-pro show">
 
-    <!-- DOS LÍNEAS NUEVAS -->
-    <div class="linea-negra"></div>
-    <div class="linea-roja"></div>
+    <div class="visual-left">
+      <div class="img-glow"></div>
+      <img src="assets/img/notas_intro.png" class="float-img">
+    </div>
 
-    <!-- Contenido del formulario o mensaje -->
-    <ng-container *ngIf="!enviado; else gracias">
-      <h1 class="titulo-negro">📝 ¿En qué podemos mejorar?</h1>
-      <p class="texto-negro">Tu opinión es valiosa para que podamos seguir mejorando.</p>
+    <div class="music-center">
 
-      <form (ngSubmit)="manejarEnvio()" class="formulario">
-        <textarea
-          [(ngModel)]="opinion"
-          name="opinion"
-          class="textarea-blanca"
-          placeholder="Escribe tu sugerencia..."
-          required
-        ></textarea>
+      <h2>
+        <span class="highlight">No necesitas saber música.</span><br>
+        Solo empezar.
+      </h2>
 
-        <button type="submit" class="boton-rojo">Enviar</button>
-      </form>
-    </ng-container>
+      <p>
+        Te guiamos desde cero hasta que realmente crees música.
+      </p>
 
-    <ng-template #gracias>
-      <h1 class="titulo-negro">🎉 ¡Muchas gracias por tu aportación!</h1>
-      <p class="texto-negro">Valoramos tu tiempo y tus sugerencias.<br/>¡Nos ayudan a mejorar!</p>
-    </ng-template>
+      <a href="#clases" class="music-btn">Empieza tu primera clase</a>
+
+    </div>
 
   </div>
+
+
+
+  <div class="faq-pro-section">
+    <div class="container">
+
+      <div class="faq-header">
+        <h2>Preguntas frecuentes</h2>
+        <p>Resolvemos las dudas más comunes para que empieces sin problemas.</p>
+      </div>
+
+      <div class="faq-pro">
+
+        <details>
+          <summary>¿Cuánto tardas en responder?</summary>
+          <p>Normalmente en menos de 24 horas (muchas veces antes). 😏</p>
+        </details>
+
+        <details>
+          <summary>¿Necesito experiencia previa?</summary>
+          <p>Para nada.
+            Trabajo desde cero y me adapto completamente a tu nivel. </p>
+        </details>
+
+        <details>
+          <summary>¿Qué tipo de clases ofreces?</summary>
+          <p>Piano, composición, lenguaje musical o armonía entre otras.
+            Siempre adaptado a ti, ya sea por hobby o con objetivos más serios.</p>
+        </details>
+
+        <details>
+          <summary>¿Las clases son individuales o en grupo?</summary>
+          <p>Principalmente individuales, para avanzar más rápido.
+            Si sois dos, escríbeme y vemos opciones. 💪🏻</p>
+        </details>
+
+        <details>
+          <summary>¿Cuánto dura cada clase?</summary>
+          <p>Puedes elegir entre 30 mins. o 1 hora</p>
+        </details>
+
+        <details>
+          <summary>¿Das clases online o presenciales?</summary>
+          <p>Ambas opciones 😊</p>
+        </details>
+
+        <details>
+          <summary>¿Cuando se incluye un suplemento en el precio base de la clase?</summary>
+          <p>*El precio indicado del bono corresponde a clase online 💻 o en domicilio del profesor. (Las Lagunas de Mijas, Málaga, 29651, España)
+          <br>
+            <br> 🚗 En caso de clases en domicilio del alumno, se aplicará suplemento por desplazamiento:
+
+            <br>  - Hasta 5 km: +5€
+            <br>  - Hasta 10 km: +8€
+            <br>  - Hasta 15 km: +12€
+            <br>(Distancias superiores bajo consulta)</p>
+        </details>
+
+        <details>
+          <summary>¿Cómo reservo una clase?</summary>
+          <p>Muy sencillo 😎
+            Desde el botón Clases > Reservar Clase o escribiéndome directamente.
+            Te explico todo sin compromiso. 😜</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si un día no puedo asistir?</summary>
+          <p>No pasa nada 👍
+            Avisando con tiempo, buscamos otra fecha.</p>
+        </details>
+
+        <details>
+          <summary>¿Cómo se realizan los pagos?</summary>
+          <p>
+            De forma sencilla y flexible. Puede ser a través de bizum, tarjeta o efectivo el mismo día de la clase.
+            Te explico todo al contactarme.</p>
+        </details>
+
+      </div>
+
+    </div>
+  </div>
+  <section class="contacto-pro">
+
+    <div class="container">
+      <div class="contacto-wrapper">
+
+        <!-- TEXTO -->
+        <div class="contacto-info">
+
+          <span class="badge">Contacto</span>
+
+          <h1>¿Tienes alguna duda?</h1>
+
+          <p>
+            Escríbeme sin compromiso. Te responderé lo antes posible
+            para ayudarte con lo que necesites.
+          </p>
+
+          <div class="contacto-botones">
+
+            <a href="https://www.instagram.com/musicallyx_official/"
+               target="_blank"
+               class="btn-pro">
+              Instagram
+            </a>
+
+            <a href="mailto:musicallyxofficial5817@gmail.com"
+               class="btn-pro outline">
+              Enviar email
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="contacto-img">
+          <img src="assets/img/duda.jpg" alt="Duda">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Imagen por defecto para tablet/móvil -->
+  <img src="assets/img/fondoIntro.jpg"
+       alt="Imagen móvil/tablet"
+       class="hero-img img-fluid w-100">
+
+  <!-- Imagen para escritorio -->
+  <img src="assets/img/laNueva.jpg"
+       alt="Imagen escritorio"
+       class="hero-img-desktop img-fluid w-100">
+
 </div>
 
 
+  <!-- TARJETA 2 -->
+    <!--<div class="tarjeta-neon">
+
+      <div class="linea-negra"></div>
+      <div class="linea-roja"></div>
+
+      <ng-container *ngIf="!enviado; else gracias">
+
+        <h1 class="titulo-neon">📝 ¿En qué podemos mejorar?</h1>
+
+        <p class="texto-neon">
+          Tu opinión es muy importante para nosotros.
+        </p>
+
+        <form (ngSubmit)="manejarEnvio()" class="formulario-neon">
+
+        <textarea
+          [(ngModel)]="opinion"
+          name="opinion"
+          placeholder="Escribe tu mensaje..."
+          required>
+        </textarea>
+
+          <button type="submit">Enviar</button>
+
+        </form>
+
+      </ng-container>
+
+      <ng-template #gracias>
+        <h1 class="titulo-neon">✨ ¡Gracias!</h1>
+        <p class="texto-neon">Hemos recibido tu mensaje.</p>
+      </ng-template>
+
+    </div>-->
+
+<!--<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
+                <div class="card-img-container">
+                    <img src="assets/img/guitarrista.jpg" class="card-img-top img-fluid" alt="Toca" loading="lazy">
+                    <div class="card-img-overlay d-flex align-items-end p-0">
+                        <div class="bg-success-gradient w-100 py-3 text-center">
+                            <h3 class="text-white mb-0 fw-bold text-uppercase letter-spacing-2">TOCA</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
+                <div class="card-img-container">
+                    <img src="assets/img/pensandochica.jpg" class="card-img-top img-fluid" alt="Compone" loading="lazy">
+                    <div class="card-img-overlay d-flex align-items-end p-0">
+                        <div class="bg-warning-gradient w-100 py-3 text-center">
+                            <h3 class="text-dark mb-0 fw-bold text-uppercase letter-spacing-2">COMPONE</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mx-auto">
+            <div class="card border-0 rounded-4 overflow-hidden shadow-lg h-100 hover-scale">
+                <div class="card-img-container">
+                    <img src="assets/img/disfrute1.jpg" class="card-img-top img-fluid" alt="Disfruta" loading="lazy">
+                    <div class="card-img-overlay d-flex align-items-end p-0">
+                        <div class="bg-danger-gradient w-100 py-3 text-center">
+                            <h3 class="text-white mb-0 fw-bold text-uppercase letter-spacing-2">DISFRUTA</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
 
 
-<!-- Imagen por defecto para tablet/móvil -->
-<img src="assets/img/fondoIntro.jpg"
-     alt="Imagen móvil/tablet"
-     class="hero-img img-fluid w-100">
 
-<!-- Imagen para escritorio -->
-<img src="assets/img/laNueva.jpg"
-     alt="Imagen escritorio"
-     class="hero-img-desktop img-fluid w-100">
+
 
 
     <!-- Testimonios -->

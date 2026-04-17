@@ -1,4 +1,5 @@
 package org.iesvdm.musicallyx.controller;
+import org.iesvdm.musicallyx.dto.UsuarioPerfilDTO;
 import org.iesvdm.musicallyx.repository.UsuarioRepository;
 import org.iesvdm.musicallyx.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.iesvdm.musicallyx.exception.UsuarioNotFoundException;
 import org.iesvdm.musicallyx.domain.Usuario;
@@ -42,13 +44,24 @@ public class UsuarioController {
         usuario.setNombre(datosActualizados.getNombre());
         usuario.setEmail(datosActualizados.getEmail());
         usuario.setTelefono(datosActualizados.getTelefono());
-        usuario.setNivel(datosActualizados.getNivel());
-        usuario.setGustos(datosActualizados.getGustos());
+        usuario.setNivelMusical(datosActualizados.getNivelMusical());
+        usuario.setGustosMusicales(datosActualizados.getGustosMusicales());
 
         usuarioRepository.save(usuario);
 
         return ResponseEntity.ok(usuario);
     }
+
+    @PutMapping("/{id}/perfil")
+    public ResponseEntity<Usuario> actualizarPerfil(
+            @PathVariable Long id,
+            @RequestBody UsuarioPerfilDTO dto) {
+
+        Usuario actualizado = usuarioService.actualizarPerfil(id, dto);
+
+        return ResponseEntity.ok(actualizado);
+    }
+
 
     @GetMapping({"/",""})
     public Page<Usuario> getAllUsuarios(Pageable pageable) {
@@ -89,7 +102,7 @@ public class UsuarioController {
         return usuarioRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/parcial")
     public ResponseEntity<Usuario> actualizarUsuarioParcial(
             @PathVariable Long id,
             @RequestBody Map<String, Object> campos) {
@@ -114,10 +127,10 @@ public class UsuarioController {
                     usuario.setTelefono((String) valor);
                     break;
                 case "nivel":
-                    usuario.setNivel((String) valor);
+                    usuario.setNivelMusical((String) valor);
                     break;
                 case "gustos":
-                    usuario.setGustos((String) valor);
+                    usuario.setGustosMusicales((String) valor);
                     break;
                 // agregar más campos según sea necesario
             }
@@ -126,7 +139,5 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(usuario);
     }
-
-
 
 }

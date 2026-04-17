@@ -2,18 +2,19 @@
   <div class="user-name">{{ userName }}</div>
 
   <!-- Avatar clicable -->
-  <div class="profile-pic" (click)="toggleProfileCard()">
-    <div class="avatar-initials" [style.background-color]="bgColor">{{ userInitials }}</div>
+  <div class="profile-pic"
+       (click)="toggleProfileCard()"
+       [style.background-color]="bgColor">
+
+    <div class="avatar-initials">
+      {{ userInitials }}
+    </div>
+
   </div>
 
   <!-- Card de perfil -->
   <div *ngIf="showProfileCard" class="profile-card">
     <h3>Actualizar perfil</h3>
-
-    <label>
-      Imagen de perfil:
-      <input type="file" (change)="onFileSelected($event)">
-    </label>
 
     <label>
       Color de fondo:
@@ -44,33 +45,33 @@
     <ul class="navbar-nav text-center">
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="mi-perfil" (click)="closeOffcanvas()">Mi Datos</a>
+        <a class="nav-link" (click)="navigate('/admin/mi-perfil')">Mi Datos</a>
       </li>
       <li class="nav-item" *ngIf="isSpecialAdmin">
-        <a class="nav-link" routerLink="gestion-admin" (click)="closeOffcanvas()">Gestión Clases</a>
+        <a class="nav-link" (click)="navigate('/admin/gestion-admin')">Gestión Clases</a>
       </li>
       <li class="nav-item" *ngIf="isSpecialAdmin">
-        <a class="nav-link" routerLink="reservar-clase" (click)="closeOffcanvas()">Mi Calendario</a>
+        <a class="nav-link" (click)="navigate('/admin/bloqueo-horario')">Mi Calendario</a>
       </li>
 
       <li class="nav-item" *ngIf="isSpecialAdmin">
-        <a class="nav-link" routerLink="panel-administracion" (click)="closeOffcanvas()">Panel de administración</a>
+        <a class="nav-link" (click)="navigate('/admin/panel-administracion')">Panel de administración</a>
       </li>
       <li class="nav-item" *ngIf="!isSpecialAdmin">
-        <a class="nav-link" routerLink="clases-usuario" (click)="closeOffcanvas()">Clases</a>
+        <a class="nav-link" (click)="navigate('/admin/clases-usuario')">Clases</a>
       </li>
       <!-- Reservar Clase para usuario normal -->
       <li class="nav-item" *ngIf="!isSpecialAdmin">
-        <a class="nav-link" routerLink="reservar-clase" (click)="closeOffcanvas()">Reservar Clase</a>
+        <a class="nav-link" (click)="navigate('/admin/reservar-clase')">Reservar Clase</a>
       </li>
       <li class="nav-item" *ngIf="!isSpecialAdmin">
-        <a class="nav-link" routerLink="mis-reservas" (click)="closeOffcanvas()">Mis Reservas</a>
+        <a class="nav-link" (click)="navigate('/admin/mis-reservas')">Mis Reservas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="correo" (click)="closeOffcanvas()">Correo</a>
+        <a class="nav-link" (click)="navigate('/admin/correo')">Correo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="juegos-musicales" (click)="closeOffcanvas()">Juegos Musicales</a>
+        <a class="nav-link" (click)="navigate('/admin/juegos-musicales')">Juegos Musicales</a>
       </li>
 
 
@@ -120,7 +121,7 @@
           <a routerLink="gestion-admin" routerLinkActive="active">📚 Gestión Clases</a>
         </li>
         <li *ngIf="isSpecialAdmin">
-          <a routerLink="reservar-clase" routerLinkActive="active">📅 Mi Calendario</a>
+          <a routerLink="bloqueo-horario" routerLinkActive="active">📅 Mi Calendario</a>
         </li>
         <li *ngIf="isSpecialAdmin">
           <a routerLink="panel-administracion" routerLinkActive="active">⚙️ Panel Administración</a>

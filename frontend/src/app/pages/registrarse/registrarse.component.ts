@@ -48,6 +48,26 @@ export class RegistrarseComponent {
   passwordVisible: boolean = false;
   repetirPasswordVisible: boolean = false;
 
+  ngOnInit() {
+  // Crear formulario
+  this.registerForm = this.fb.group({
+    nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
+    apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
+    email: ['', [Validators.required, Validators.email]],
+    telefono: ['', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]],
+    password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,]).{8,}$/)]],
+    repetirPassword: ['', Validators.required]
+  });
+
+    // 🔹 Autocompletar si existen datos temporales
+    const datosTemporales = localStorage.getItem('registroTemporal');
+    if (datosTemporales) {
+      const { nombre, apellido, email, telefono } = JSON.parse(datosTemporales);
+      this.registerForm.patchValue({ nombre, apellido, email, telefono });
+      localStorage.removeItem('registroTemporal'); // Limpiar para la próxima vez
+    }
+  }
+
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
 

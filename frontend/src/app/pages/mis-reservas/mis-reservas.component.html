@@ -12,9 +12,12 @@
       <div *ngFor="let r of reservasPendientes" class="card">
         <div class="card-header">{{ r.asignatura }} - <span class="alumno-email">{{ r.alumno }}</span></div>
         <div class="card-body">
-          <p>Horario: {{ r.horario }}</p>
+          <p>Fecha: {{ r.fechaReserva | date:'dd/MM/yyyy' }}</p>
+          <p>Horario: {{ r.hora }}</p>
           <p>Nivel: {{ r.nivel }}</p>
           <p>Modalidad: {{ r.modalidad }}</p>
+          <div>Profesor: Kenneth Jensen</div>
+          <div *ngIf="r.bono">Bono: {{ r.bono }}</div>
           <span class="badge">Pendiente</span>
         </div>
       </div>
@@ -31,18 +34,21 @@
 
     <div class="cards">
       <div *ngFor="let r of reservasConfirmadas" class="card confirmed">
-        <div class="card-header">{{ r.asignatura }} - <span class="alumno-email">{{ r.alumno }}</span></div>
+        <div class="card-header">{{ r.asignatura }} - <span class="alumno-email">{{ r.alumno }} </span></div>
         <div class="card-body">
-          <p>Horario: {{ r.horario }}</p>
+          <p>Fecha: {{ r.fechaReserva | date:'dd/MM/yyyy' }}</p>
+          <p>Hora: {{ r.hora }}</p>
           <p>Nivel: {{ r.nivel }}</p>
           <p>Modalidad: {{ r.modalidad }}</p>
+          <div *ngIf="r.bono">Bono: {{ r.bono }}</div>
+          <div>
+            Profesor: Kenneth Jensen
+          </div>
           <span class="badge confirmed">Confirmada</span>
           <span *ngIf="!r.pagado" class="badge pendiente-pago">Pendiente de pagar</span>
           <span *ngIf="r.pagado" class="badge pagado">Pagado</span>
         </div>
-        <div class="card-actions">
-          <button class="btn-secondary" (click)="mostrarOpcionesPago(r)">💳 Pago</button>
-        </div>
+
         <div *ngIf="r.mensajePago" class="card" style="background:#fff; border-left:6px solid #17a2b8;">
           <div class="card-body">
             {{ r.mensajePago }}

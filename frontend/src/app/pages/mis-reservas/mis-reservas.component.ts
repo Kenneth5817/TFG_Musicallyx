@@ -27,24 +27,21 @@ export class MisReservasComponent implements OnInit {
   ngOnInit() {
     const email = localStorage.getItem('email') || '';
 
-    // Obtener reservas del localStorage
-    const todas: Reserva[] = JSON.parse(localStorage.getItem(`reservas-${email}`) || '[]');
+    this.http.get<Reserva[]>(`http://localhost:8080/v1/api/reservas/usuario/${email}`)
+      .subscribe(reservas => {
 
-    // Asegurarse de que todas tengan el campo 'alumno' y 'hora'
-    const reservasNormalizadas: Reserva[] = todas.map(r => ({
-      ...r,
-      alumno: r.alumno || r.email || email,
-      hora: r.hora || r.horario || 'Desconocida',
-      pagado: r.pagado ?? false, // <-- Aseguramos que exista la propiedad
+        const reservasNormalizadas = reservas.map(r => ({
+          ...r,
+          alumno: r.alumno || r.email,
+          fechaReserva: new Date(r.fechaReserva),
+          pagado: r.pagado ?? false,
+          bono: r.bono || '',
+          clase: r.clase ?? undefined
+        }));
 
-    }));
-
-    // Guardar de nuevo en localStorage por si faltaban campos
-    localStorage.setItem(`reservas-${email}`, JSON.stringify(reservasNormalizadas));
-
-    // Separar pendientes y confirmadas
-    this.reservasPendientes = reservasNormalizadas.filter(r => r.estado === 'Pendiente');
-    this.reservasConfirmadas = reservasNormalizadas.filter(r => r.estado === 'Confirmada');
+        this.reservasPendientes = reservasNormalizadas.filter(r => r.estado === 'Pendiente');
+        this.reservasConfirmadas = reservasNormalizadas.filter(r => r.estado === 'Confirmada');
+      });
   }
 
   filtrarConfirmadas() {

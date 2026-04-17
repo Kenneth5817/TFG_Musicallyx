@@ -1,8 +1,9 @@
 <div class="dashboard-layout">
 
+
   <!-- Cabecera -->
   <header class="dashboard-header">
-    <h1>📊 Panel de Administración</h1>
+    <h1>Panel de Administración</h1>
 
     <div class="filters">
       <label>
@@ -13,8 +14,8 @@
           <option value="profesores">Profesores</option>
           <!--<option value="clases">Clases</option>-->
         </select>
-
       </label>
+
     </div>
   </header>
 
@@ -28,7 +29,7 @@
     <table *ngIf="datos.length > 0">
       <thead>
       <tr>
-        <th *ngFor="let col of columnasVisibles">{{ col }}</th>
+        <th *ngFor="let col of columnasVisibles">{{ columnasBonitas[col] || col }}</th>
       </tr>
       </thead>
       <tbody>
@@ -61,6 +62,36 @@
     <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas - 1">▶︎</button>
   </div>
 
+
+
+  <div class="estadisticas-container">
+    <h1 class="dashboard-title">📊 Estadísticas de visitas 📊</h1>
+    <div class="cards">
+      <div class="card semana">
+        <h3>Última Semana</h3>
+        <p class="numero">{{ estadisticas.semana }}</p>
+        <span class="descripcion">personas han visitado tu web</span>
+      </div>
+
+      <div class="card mes">
+        <h3>Último Mes</h3>
+        <p class="numero">{{ estadisticas.mes }}</p>
+        <span class="descripcion">personas han visitado tu web</span>
+      </div>
+
+      <div class="card ano">
+        <h3>Último Año</h3>
+        <p class="numero">{{ estadisticas.ano }}</p>
+        <span class="descripcion">personas han visitado tu web</span>
+      </div>
+
+      <div class="card total">
+        <h3>Total visitas</h3>
+        <p class="numero">{{ estadisticas.visitas }}</p>
+        <span class="descripcion">personas han visitado la web</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 

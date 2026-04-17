@@ -33,8 +33,7 @@ public class Clase {
 
     @ManyToOne
     @JoinColumn(name = "id_profesor")
-    @JsonBackReference
-    @JsonIgnore
+    @JsonIgnoreProperties("setClases")
     private Profesor profesor;
 
     @OneToMany(mappedBy = "clase")

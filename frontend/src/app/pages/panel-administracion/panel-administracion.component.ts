@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
+import { UsuarioEstadoService } from '../../services/usuarioEstadoService';
+import {Usuario} from '../../usuario.model';
 
 @Component({
   selector: 'app-panel-administracion',
@@ -15,10 +17,19 @@ export class PanelAdministracionComponent implements OnInit {
   categoriaSeleccionada: string = "usuarios";
   busqueda: string = "";
 
+  estadisticas = {
+    semana: 0,
+    mes: 0,
+    ano: 0,
+    visitas: 0
+  };
+
   datos: any[] = [];
   datosOriginales: any[] = [];
 
   columnasVisibles: string[] = [];
+
+  usuario: Usuario = { idUsuario:0, nombre:'', email:'', rol:'USER' };
 
   columnasOcultasPorCategoria: Record<string, string[]> = {
     usuarios: ["resetToken", "resetTokenExpiry", "tokenExpiration"],
@@ -26,6 +37,22 @@ export class PanelAdministracionComponent implements OnInit {
     profesores: ["usuario", "setClases", "setHorarios"],
     clases: []
   };
+
+  columnasBonitas: Record<string, string> = {
+    idUsuario: 'ID',
+    idProfesor: 'ID',
+    nombre: 'Nombre',
+    apellidos: 'Apellidos',
+    email: 'Email',
+    telefono: 'Teléfono',
+    rol: 'Rol',
+    biografia: 'Biografía',
+    nivelMusical: 'Nivel Musical',
+    gustosMusicales: 'Gustos Musicales',
+    especialidad: 'Especialidades',
+    // agrega más según tus columnas
+  };
+
   paginaActual = 0;
   totalPaginas = 1;
 
@@ -33,10 +60,29 @@ export class PanelAdministracionComponent implements OnInit {
   modalVisible = false;
   itemSeleccionado: any = null;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private usuarioEstado: UsuarioEstadoService) {}
 
   ngOnInit() {
+
+    // 👤 Usuario actual
+    this.usuarioEstado.usuario$.subscribe(user => {
+      this.usuario = user;
+    });
+    this.cargarEstadisticas();
+
+    // 📊 Cargar datos del panel
     this.cargarDatos();
+  }
+
+  cargarEstadisticas() {
+    this.adminService.getEstadisticasWeb().subscribe(resp => {
+      this.estadisticas = {
+        semana: resp.visitasDiarias,
+        mes: resp.visitasMensuales,
+        ano: resp.visitasAnuales,
+        visitas: resp.visitasTotales
+      };
+    });
   }
 
   cargarDatos() {
@@ -163,7 +209,6 @@ export class PanelAdministracionComponent implements OnInit {
 
     this.cargarDatos();
   }
-
 
 }
 

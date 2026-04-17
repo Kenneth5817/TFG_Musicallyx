@@ -29,6 +29,10 @@ export class HeaderComponent {
   public isActive(path: string): boolean {
     return this.router.url === path;
   }
+  isClasesActive(): boolean {
+    return this.router.url.includes('/clases') ||
+      this.router.url.includes('/reserva-clases');
+  }
 
 
   tieneSesion() {

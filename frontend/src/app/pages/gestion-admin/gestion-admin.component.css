@@ -290,9 +290,9 @@ section h2::after {
 }
 
 
-.alumno-email {
+.alumno-nombre {
   display: block;       /* hace que empiece en nueva línea */
-  font-size: 0.85rem;   /* más pequeño */
+  font-size: 1.1rem;   /* más pequeño */
   color: #6c757d;       /* gris suave */
   word-break: break-all; /* evita que el correo largo se salga */
   margin-top: 2px;       /* un poco de espacio sobre la línea */

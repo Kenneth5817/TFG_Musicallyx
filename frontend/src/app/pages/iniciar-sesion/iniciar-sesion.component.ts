@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {Observable} from 'rxjs';
 
 
 interface Alumno {
@@ -46,6 +47,7 @@ export class IniciarSesionComponent implements OnInit {
     });
   }
 
+
   get email(): AbstractControl {
     return this.loginForm.get('email')!;
   }
@@ -58,15 +60,6 @@ export class IniciarSesionComponent implements OnInit {
 
     this.loginForm.get('email')!.valueChanges.subscribe(value => this.updateEmailCriteria(value || ''));
     this.loginForm.get('password')!.valueChanges.subscribe(value => this.updatePasswordCriteria(value || ''));
-
-    error: (err: any) => {
-      if (err.status === 401) {
-        this.showErrorNotification(err.error?.message || 'Usuario o contraseña incorrectos');
-      } else {
-        this.showErrorNotification('Error desconocido');
-      }
-      this.loginForm.enable();
-    }
   }
 
   togglePasswordVisibility() {

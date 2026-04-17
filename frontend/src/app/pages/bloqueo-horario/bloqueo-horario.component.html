@@ -1,0 +1,50 @@
+<div class="reserva-container">
+
+  <h1>Gestión de mis clases</h1>
+
+  <div class="semana-container">
+    <div class="semana-label">
+      {{ obtenerLabelSemanaActual() }}
+    </div>
+  </div>
+
+  <div class="paginador-semana">
+    <button (click)="anteriorSemana()">← Semana anterior</button>
+    <button (click)="siguienteSemana()">Semana siguiente →</button>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div class="calendario desktop">
+
+    <div class="fila header">
+      <div class="celda hora-label">Hora</div>
+      <div class="celda dia-label" *ngFor="let d of dias">{{ d }}</div>
+    </div>
+
+    <div class="fila" *ngFor="let fila of calendario; let i = index">
+
+      <div class="celda hora-label">
+        {{ horas[i] }}
+      </div>
+
+      <div class="celda"
+           *ngFor="let celda of fila"
+           [ngClass]="celda.estado"
+           (click)="onCeldaClick(celda, $event)"
+           (dblclick)="onCeldaDobleClick(celda, $event)">
+
+        <!-- SIN ICONOS EXTRA -->
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="boton-reservar">
+    <button (click)="guardarCambios()" [disabled]="guardando">
+      {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
+    </button>
+  </div>
+
+</div>

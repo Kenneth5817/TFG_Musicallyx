@@ -1,14 +1,11 @@
 package org.iesvdm.musicallyx.controller;
-
 import jakarta.mail.internet.MimeMessage;
 import org.iesvdm.musicallyx.domain.Chat;
+import org.iesvdm.musicallyx.domain.Reserva;
 import org.iesvdm.musicallyx.domain.Usuario;
 import org.iesvdm.musicallyx.dto.EmailDTO;
 import org.iesvdm.musicallyx.dto.ReservaDTO;
-import org.iesvdm.musicallyx.service.ChatService;
-import org.iesvdm.musicallyx.service.EmailService;
-import org.iesvdm.musicallyx.service.SuscriptorService;
-import org.iesvdm.musicallyx.service.UsuarioService;
+import org.iesvdm.musicallyx.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,6 +25,10 @@ public class EmailController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private ReservaService reservaService;
+
 
     @Autowired
     private EmailService emailService;
@@ -44,23 +46,81 @@ public class EmailController {
     // Endpoint para enviar correo de confirmación de clase
     @PostMapping("/confirmacion")
     public String enviarCorreoConfirmacion(@RequestBody ReservaDTO reserva) {
-        System.out.println("Hora recibida: " + reserva.getHora());
 
         String logoUrl = "https://drive.google.com/uc?export=view&id=1fJxSMYFN-OtjE6gwq3itFUVLUJn9W0oL";
-        String fondoUrl = "https://drive.google.com/uc?export=view&id=13ocsFezXTqwUBQ5ILVFQNiEQcNgN59Vq";
 
-        emailService.enviarCorreoConfirmacion(
-                reserva.getEmail(),
-                reserva.getAlumno(),
-                reserva.getAsignatura(),
-                reserva.getFecha(),
-                reserva.getHora(),
-                logoUrl,
-                fondoUrl
-        );
-        return "Correo enviado a " + reserva.getEmail();
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom("musicallyxofficial5817@gmail.com");
+            helper.setTo(reserva.getEmail());
+            helper.setSubject("🎵 Tu clase ha sido confirmada - MusicallyX");
+
+            String htmlMsg =
+                    "<!DOCTYPE html>" +
+                            "<html lang='es'>" +
+                            "<head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'></head>" +
+                            "<body style='margin:0;padding:0;font-family:Poppins,sans-serif;background:#ffffff;color:#333;'>" +
+
+                            // Rayitas arriba
+                            "<div style='width:100%;height:8px;background:#000;'></div>" +
+                            "<div style='width:100%;height:8px;background:#CE2127;'></div>" +
+
+                            // Logo centrado
+                            "<div style='text-align:center;padding:10px 0;'>" +
+                            "<img src='" + logoUrl + "' alt='MusicallyX' style='max-width:180px;height:auto;'/>" +
+                            "</div>" +
+
+                            // Contenedor principal
+                            "<div style='max-width:600px;margin:0 auto;padding:25px;border-radius:20px;background:#f5f5f5;" +
+                            "border:1px solid #ddd;box-shadow:0 6px 15px rgba(0,0,0,0.1);'>" +
+
+                            "<div style='text-align:center;padding-bottom:15px;'>" +
+                            "<h2 style='margin:0;color:#CE2127;'>Tu clase ha sido confirmada</h2>" +
+                            "<p style='color:#333;font-size:1.1rem;margin-top:10px;'>Aquí están los detalles de tu reserva:</p>" +
+                            "</div>" +
+
+                            "<div style='padding:20px;border-radius:15px;background:#ffffff;margin-top:15px;line-height:1.6;'>" +
+                            "<p>🎶 <strong>Asignatura:</strong> " + reserva.getAsignatura() + "</p>" +
+                            "<p>📅 <strong>Día:</strong> " + reserva.getFechaClase() + "</p>" +
+                            "<p>⏰ <strong>Hora:</strong> " + reserva.getHora() + "</p>" +
+                            "<p>🎹 <strong>Modalidad:</strong> " + reserva.getModalidad() + "</p>" +
+                            "<p>📚 <strong>Nivel:</strong> " + reserva.getNivel() + "</p>" +
+                            "<p>💳 <strong>Bono:</strong> " + reserva.getBono() + "</p>" +
+                            "</div>" +
+
+                            // Mensaje de seguimiento
+                            "<div style='font-size:0.95rem;color:#555;text-align:center;margin-top:25px;line-height:1.6;'>" +
+                            "<p>Sigue Musicallyx en Instagram para no perderte nada:</p>" +
+                            "<p style='font-size:1rem;color:#CE2127;font-weight:700;'>@musicallyx_official</p>" +
+                            "</div>" +
+
+                            // Botón de Instagram
+                            "<div style='text-align:center;margin:25px 0;'>" +
+                            "<a href='https://www.instagram.com/musicallyx_official/' target='_blank' " +
+                            "style='display:inline-block;padding:14px 28px;background:#CE2127;color:#fff;font-weight:700;" +
+                            "border-radius:12px;text-decoration:none;font-size:1rem;'>Síguenos en Instagram</a>" +
+                            "</div>" +
+
+                            "</div>" +
+
+                            // Rayitas abajo
+                            "<div style='width:100%;height:8px;background:#000;margin-top:30px;'></div>" +
+                            "<div style='width:100%;height:8px;background:#CE2127;margin-bottom:15px;'></div>" +
+
+                            "</body></html>";
+
+            helper.setText(htmlMsg, true);
+            mailSender.send(message);
+
+            return "Correo de confirmación enviado a " + reserva.getEmail();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error enviando correo: " + e.getMessage();
+        }
     }
-
 
     @PostMapping("/reset-password")
     public String enviarCorreoRecuperacion(@RequestBody Map<String, String> body) {
@@ -70,7 +130,7 @@ public class EmailController {
             return "Email inválido";
         }
 
-        String asunto = "Recuperación de contraseña - MusicallyX";
+        String asunto = "Recuperación de contraseña - Musicallyx";
         String mensaje = "Hola,\n\n" +
                 "Recibimos una solicitud para restablecer tu contraseña.\n" +
                 "Haz clic en el siguiente enlace para cambiarla:\n\n" +
@@ -246,4 +306,62 @@ public class EmailController {
         return ResponseEntity.ok("¡Suscripción exitosa! Te hemos enviado un correo de confirmación.");
     }
 
+
+    @PostMapping("/solicitud-reserva")
+    public ResponseEntity<String> enviarSolicitudReserva(@RequestBody ReservaDTO reservaDTO) {
+
+        if (reservaDTO.getEmail() == null || reservaDTO.getEmail().isEmpty()) {
+            return ResponseEntity.badRequest().body("Email inválido");
+        }
+
+        // 1️⃣ Guardar reserva
+        Reserva reserva = new Reserva();
+        reserva.setNombre(reservaDTO.getNombre());
+        reserva.setApellidos(reservaDTO.getApellidos());
+        reserva.setTelefono(reservaDTO.getTelefono());
+        reserva.setEmail(reservaDTO.getEmail());
+        reserva.setAsignatura(reservaDTO.getAsignatura());
+        reserva.setBono(reservaDTO.getBono());
+        reserva.setNivel(reservaDTO.getNivel());
+        reserva.setModalidad(reservaDTO.getModalidad());
+        reserva.setFechaClase(reservaDTO.getFechaClase());
+        reserva.setHora(reservaDTO.getHora());
+        reserva.setEstado("Pendiente");
+        reserva.setFechaReserva(new Date());
+        reserva.setCorreoEnviado(false);
+
+        Reserva reservaGuardada = reservaService.save(reserva);
+
+        String nombreCompleto = reservaDTO.getNombre() + " " + reservaDTO.getApellidos();
+
+        try {
+            // 2️⃣ Enviar correo HTML al usuario
+            reservaService.enviarCorreoReservaHtml(reservaDTO.getEmail(), reservaDTO);
+            // 3️⃣ Enviar correo simple al admin
+            String asuntoAdmin = "🔔 Nueva reserva MusicallyX";
+            String mensajeAdmin =
+                    "Nueva reserva recibida:\n\n" +
+                            "Nombre: " + nombreCompleto + "\n" +
+                            "Email: " + reservaDTO.getEmail() + "\n" +
+                            "Teléfono: " + reservaDTO.getTelefono() + "\n" +
+                            "Asignatura: " + reservaDTO.getAsignatura() + "\n" +
+                            "Bono: " + reservaDTO.getBono() + "\n" +
+                            "Nivel: " + reservaDTO.getNivel() + "\n" +
+                            "Modalidad: " + reservaDTO.getModalidad() + "\n" +
+                            "Fecha clase: " + reservaDTO.getFechaClase() + "\n" +
+                            "Hora: " + reservaDTO.getHora();
+
+            emailService.sendSimpleEmail("musicallyxofficial5817@gmail.com", asuntoAdmin, mensajeAdmin);
+
+            // 4️⃣ Marcar correoEnviado = true
+            reservaService.marcarCorreoEnviado(reservaGuardada.getIdReserva());
+
+            return ResponseEntity.ok("Correo de solicitud enviado y reserva guardada correctamente");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error enviando correo, pero reserva guardada");
+        }
+    }
 }

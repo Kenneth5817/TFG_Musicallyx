@@ -6,8 +6,9 @@
     <p class="hero-subtitle">De los primeros acordes a descubrir una pasión que me acompaña siempre.</p>
   </section>
 
+
   <!-- TIMELINE -->
-  <section class="timeline">
+  <!--<section class="timeline">
     <h2 class="section-title">Mi historia</h2>
     <div class="timeline-items">
       <div class="timeline-item" *ngFor="let item of timeline">
@@ -19,29 +20,32 @@
       </div>
     </div>
   </section>
+-->
+<div class="story-grid">
 
+  <div class="story-slide"
+       *ngFor="let slide of slides; let i = index">
 
-  <section class="qualities-section">
-  <h2 class="section-title">Lo que me define</h2>
-  <div class="qualities-container">
-    <div class="quality-card" *ngFor="let q of qualities" [style.background]="q.color">
-      <h3 class="quality-title">{{ q.title }}</h3>
-      <p>{{ q.text }}</p>
+    <div class="story-img">
+      <img [src]="slide.img" alt="Historia musical">
     </div>
+
+    <div class="story-content" [ngStyle]="{'background': slide.bg}">
+      <h1 class="story-year">{{slide.year}}</h1>
+      <p class="story-text">{{slide.text}}</p>
+    </div>
+
   </div>
-</section>
 
-
-
-
+</div>
 
 
   <!-- Gallery -->
-  <section class="gallery">
+ <!-- <section class="gallery">
     <div class="images-grid">
       <img *ngFor="let img of galleryImages" [src]="img" alt="Imagen musical" class="animate-fade-in">
     </div>
-  </section>
+  </section>-->
 
   <!-- Agradecimientos -->
   <section class="thanks">
@@ -50,61 +54,113 @@
 
 
 </div>
+<section class="artist-section container-fluid py-5">
 
+  <div class="artist-wrapper">
 
+    <!-- IMÁGENES (tipo portada artista) -->
+    <div class="artist-visual">
+
+      <div class="artist-visual-inner">
+
+        <img src="/assets/img/tituloOficial.jpeg" class="artist-img img-1" alt="Título profesional 1">
+
+        <img src="/assets/img/titulo.jpeg" class="artist-img img-2" alt="Título profesional 2">
+
+      </div>
+
+    </div>
+
+    <!-- INFO ARTISTA -->
+    <div class="artist-info">
+
+      <span class="artist-tag">MÚSICO · EDUCACIÓN</span>
+
+      <h1 class="artist-name">Título Profesional en Música</h1>
+
+      <p class="artist-bio">
+        Tras años de estudio, esfuerzo y pasión por la música,
+        he obtenido mi titulación profesional. Este logro marca una etapa clave en mi camino
+        como músico, compositor y profesor.
+      </p>
+
+      <div class="artist-stats">
+        <div><span>🎹</span> Piano</div>
+        <div><span>🎼</span> Conservatorio</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 <!-- 🎥 GALERÍA DE CLIPS -->
-<!--<section class="video-gallery container-fluid py-5 mt-5">
-  <div class="row g-4">
-    <div class="text-center mb-5">
+<section class="video-gallery container-fluid py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="text-center mb-5 w-100">
       <h2 class="fw-bold display-5 text-uppercase">
         <span class="text-danger">Momentos </span>
         <span class="text-white">que inspiran</span>
       </h2>
-      <p class="lead text-light">Pequeños fragmentos de música, pasión y creatividad.</p>
+      <p class="lead text-light">Tocar, reír y crear juntos: la música es mejor con amigos.</p>
     </div>
-  <div class="col-md-4" *ngFor="let clip of videoClips">
-    
-    <div class="clip-box shadow-lg rounded-4 overflow-hidden position-relative">
 
-      <video #videoElem
-             [src]="clip"
-             class="w-100 h-100 object-fit-cover"
-             playsinline
-             preload="metadata">
-      </video>
+    <!-- columna central -->
+    <div class="col-md-9">
 
-      <div class="overlay-text d-flex align-items-center justify-content-center"
-           (click)="toggleClip(videoElem)">
-        <i class="fas fa-play-circle fa-3x text-white"></i>
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-4 col-md-6 col-12" *ngFor="let clip of videoClips">
+
+          <div class="clip-box shadow-lg rounded-4 overflow-hidden position-relative"
+     (click)="toggleClip($event)">
+            <img class="mobile-only" [src]="clip.replace('.mp4', '.jpg')" alt="preview">
+  <video
+    class="w-100 h-100 object-fit-cover"
+    [src]="clip"
+    playsinline
+    preload="metadata">
+  </video>
+
+  <div class="overlay-text d-flex align-items-center justify-content-center">
+    <i class="fas fa-play-circle fa-3x text-white"></i>
+  </div>
+
+</div>
+
+        </div>
+
       </div>
 
     </div>
+
   </div>
-</div>
 
+</section>
 
-</section>-->
 
 
 <!-- ¿QUÉ ES? -->
 <div class="container mt-5">
   <div class="row align-items-center g-4">
     <div class="col-md-4 text-center">
-      <img src="/assets/img/multimedia2.png" alt="Foto 1" class="img-fluid rounded w-80">
+      <img src="/assets/img/multimedia2.png" class="img-fluid rounded custom-side-img" alt="Foto 1" class="img-fluid rounded w-80">
     </div>
     <div class="col-md-4">
       <h2>¿Cómo surgió Musicallyx?</h2>
       <p>
         Musicallyx es una plataforma educativa que surgió con el objetivo de ofrecer clases
-        de música personalizadas, tanto presenciales como en línea, para 
-        estudiantes de todas las edades y niveles, con el objetivo de inspirar 
+        de música personalizadas, tanto presenciales como en línea, para
+        estudiantes de todas las edades y niveles, con el objetivo de inspirar
         y guiar a cada alumno en su viaje musical.
       </p>
     </div>
     <div class="col-md-4 text-center">
-      <img src="/assets/img/multimedia1.png" alt="Piano Clases" class="img-fluid rounded w-80">
+      <img src="/assets/img/multimedia1.png" class="img-fluid rounded custom-side-img" alt="Piano Clases" class="img-fluid rounded w-80">
     </div>
   </div>
 </div>

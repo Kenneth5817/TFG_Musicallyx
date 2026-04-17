@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.offcanvas-backdrop {
+  display: none !important;
+}
+
+body.offcanvas-open {
+  overflow: auto !important;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}

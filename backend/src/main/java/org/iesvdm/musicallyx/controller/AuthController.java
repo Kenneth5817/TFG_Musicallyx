@@ -133,9 +133,6 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
 
-
-
-
     // DTO para recibir login
     public static class LoginRequest {
         private String email;

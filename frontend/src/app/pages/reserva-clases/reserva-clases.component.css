@@ -16,6 +16,24 @@ h1 {
   font-weight: 700;
   letter-spacing: 1px;
 }
+.info-precio {
+  margin-top: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: #f6f8ff;
+  border-left: 4px solid #4a6cf7;
+  border-radius: 6px;
+  color: #333;
+}
+
+.info-precio ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+
+.info-precio li {
+  margin-bottom: 2px;
+}
 
 /* ====== SELECTORES ====== */
 .selector-row {
@@ -306,12 +324,6 @@ h1 {
   100% { opacity: 1; transform: translateY(0); }
 }
 
-.celda.no-disponible,
-.hora-bloque.no-disponible {
-  background: linear-gradient(135deg, #e63946, #b71c1c);
-  color: #fff;
-  cursor: not-allowed;
-}
 
 
 /* 🔒 Modal pantalla completa */
@@ -454,14 +466,14 @@ h1 {
 
 .celda.pasado,
 .hora-bloque.pasado {
-  background-color: #e0e0e0; /* gris suave */
+  background-color: #353333; /* gris suave */
   color: transparent;        /* sin texto */
   cursor: not-allowed;
 }
 
 .celda.pasado:hover,
 .hora-bloque.pasado:hover {
-  background-color: #d5d5d5;
+  background-color: #827d7d;
   transform: none;
 }
 
@@ -480,4 +492,288 @@ h1 {
   background-color: #c32c2c; /* rojo más oscuro al pasar el mouse */
   border-color: #c32c2c;
   transform: translateY(-1px);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.mensaje-registro {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.mensaje-registro ul {
+  padding-left: 18px;
+  margin: 5px 0;
+}
+
+/* modal reserva */
+.modal-reserva {
+  max-width: 520px;
+}
+
+/* grid de inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* inputs */
+.form-grid input {
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+/* texto recomendación */
+.mensaje-registro {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.mensaje-registro ul {
+  margin: 5px 0 0;
+  padding-left: 18px;
+}
+/* contenedor botones */
+.botones-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* fila superior */
+.fila-botones {
+  display: flex;
+  gap: 10px;
+}
+
+/* ambos botones ocupan mismo espacio */
+.fila-botones button {
+  flex: 1;
+}
+
+/* botón reservar */
+.btn-reservar {
+  background: linear-gradient(135deg,#e63946,#c32c2c);
+  color: white;
+}
+
+/* botón registrar */
+.btn-registro {
+  background: linear-gradient(135deg,#2a9d8f,#3fb497);
+  color: white;
+}
+
+/* cancelar ocupa toda la fila */
+.btn-cancelar {
+  width: 100%;
+  background: #ccc;
+  color: #111;
+}
+
+.btn-cancelar:hover {
+  background: #bbb;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17,17,17,0.85);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  z-index: 1000;
+}
+
+/* MODAL DE ERROR POR ENCIMA */
+.modal-overlay.error-layer {
+  z-index: 2000;
+}
+
+.no-disponible-dia {
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  color: #888;
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Todas las celdas no disponibles o pasadas */
+.celda.no-disponible,
+.celda.pasado {
+  background-color: #e0e0e0; /* gris neutro */
+  color: transparent;        /* sin texto */
+  cursor: not-allowed;
+}
+
+.celda.no-disponible:hover,
+.celda.pasado:hover {
+  background-color: #d5d5d5;
+  transform: none;
+}
+
+.celda.no-disponible,
+.celda.pasado,
+.hora-bloque.no-disponible,
+.hora-bloque.pasado {
+  background-color: #e0e0e0 !important; /* gris */
+  color: transparent !important;        /* sin texto */
+  cursor: not-allowed !important;
+}
+
+.celda.no-disponible:hover,
+.celda.pasado:hover,
+.hora-bloque.no-disponible:hover,
+.hora-bloque.pasado:hover {
+  background-color: #d5d5d5 !important;
+  transform: none;
+}
+
+.celda.reservado {
+  background-color: #e63946; /* rojo solo para reservas confirmadas */
+  color: #fff;
+}
+
+.celda.no-disponible,
+.celda.pasado,
+.hora-bloque.no-disponible,
+.hora-bloque.pasado {
+  background-color: #e0e0e0 !important; /* gris neutro */
+  color: transparent !important;
+  cursor: not-allowed !important;
+}
+
+.celda.no-disponible:hover,
+.celda.pasado:hover,
+.hora-bloque.no-disponible:hover,
+.hora-bloque.pasado:hover {
+  background-color: #d5d5d5 !important;
+  transform: none;
+}
+
+
+/* Celdas no disponibles o pasadas → siempre gris */
+.celda.no-disponible,
+.celda.pasado,
+.hora-bloque.no-disponible,
+.hora-bloque.pasado {
+  background-color: #919191 !important; /* gris neutro */
+  color: transparent !important;        /* texto oculto */
+  cursor: not-allowed !important;
+}
+
+.celda.no-disponible:hover,
+.celda.pasado:hover,
+.hora-bloque.no-disponible:hover,
+.hora-bloque.pasado:hover {
+  background-color: #d5d5d5 !important; /* gris ligeramente más oscuro al hover */
+  transform: none !important;
+}
+
+/* Reservado → rojo solo para confirmadas y pendientes del usuario/admin */
+.celda.reservado,
+.hora-bloque.reservado {
+  background: linear-gradient(135deg, #e63946, #b71c1c);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+/* Seleccionado → verde */
+.celda.seleccionado,
+.hora-bloque.seleccionado {
+  background: linear-gradient(135deg, #2a9d8f, #3fb497);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(42, 157, 143, 0.4);
+}
+
+.bloqueado {
+  background-color: #2b2b2b !important;
+  color: white;
+  cursor: not-allowed;
+}
+
+.disponible {
+  cursor: pointer;
+}
+
+/* Escritorio */
+.celda.seleccionado {
+  background: linear-gradient(135deg, #2a9d8f, #3fb497);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(42, 157, 143, 0.4);
+}
+
+/* Móvil */
+.hora-bloque.seleccionado {
+  background: linear-gradient(135deg, #2a9d8f, #3fb497);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, 0.4);
+}
+.hora-bloque.no-disponible,
+.hora-bloque.pasado {
+  display: none;
+}
+
+.selector-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* responsive tablet */
+@media (max-width: 1024px) {
+  .selector-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* móvil */
+@media (max-width: 600px) {
+  .selector-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-bono {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border-left: 4px solid #4a90e2;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
 }

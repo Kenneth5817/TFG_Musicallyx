@@ -1,0 +1,153 @@
+.reserva-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #e63946;
+  margin-bottom: 20px;
+}
+
+.celda.seleccionado {
+  background: #ffe066 !important;
+  color: black;
+}
+.calendario.desktop {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.fila {
+  display: contents;
+}
+
+.celda {
+  border: 1px solid #ddd;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.celda {
+  transition: all 0.2s ease;
+}
+
+.celda:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+.celda.disponible {
+  background: #f8f9fa;
+}
+
+.celda.disponible:hover {
+  background: #e9ecef;
+}
+
+.celda.no-disponible {
+  background: #2b2b2b;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.celda.reservado {
+  background: #e63946;
+  color: white;
+  font-weight: bold;
+}
+
+/* estados */
+.celda.disponible {
+  background: white;
+}
+
+
+.celda.reservado {
+  background: #e63946;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* headers */
+.hora-label, .dia-label {
+  background: #111;
+  color: white;
+  font-weight: bold;
+}
+
+.boton-reservar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.boton-reservar button {
+  padding: 10px 20px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Contenedor semana centrado */
+.semana-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* Caja de semana */
+.semana-label {
+  background: #111;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: capitalize;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Botones semana */
+.paginador-semana {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.paginador-semana button {
+  padding: 10px 18px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.paginador-semana button:hover {
+  background: #c92f3a;
+}
+
+.celda {
+  user-select: none;
+}
+
+/* estados visuales */
+.celda.seleccionado {
+  background: #ffe066;
+  color: black;
+  font-weight: bold;
+}

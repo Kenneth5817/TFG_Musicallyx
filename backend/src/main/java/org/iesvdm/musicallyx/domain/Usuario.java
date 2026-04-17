@@ -56,7 +56,8 @@ public class Usuario {
     private String resetToken;
     private LocalDateTime tokenExpiration;
 
-    private String nivel;
-    private String gustos;
+    private String nivelMusical;
+    private String gustosMusicales;
+
 
 }

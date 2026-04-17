@@ -89,7 +89,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/api/usuarios/email/a@admin.com",
+							"raw": "http://localhost:8080/v1/api/usuarios/email/musicallyxofficial5817@admin.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -100,7 +100,7 @@
 								"api",
 								"usuarios",
 								"email",
-								"a@admin.com"
+								"musicallyxofficial@gmail.com"
 							]
 						}
 					},
@@ -980,7 +980,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mensajes/recibidos?usuario=a@admin.com",
+							"raw": "http://localhost:8080/api/mensajes/recibidos?usuario=musicallyxofficial5817@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -994,7 +994,7 @@
 							"query": [
 								{
 									"key": "usuario",
-									"value": "a@admin.com"
+									"value": "musicallyxofficial5817@gmail.com"
 								}
 							]
 						}
@@ -1008,7 +1008,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"texto\": \"Hola, ¿cómo estás?\",\r\n  \"asunto\": \"Saludo\",\r\n  \"emisor\": \"kennethjensenquero@gmail.com\",\r\n  \"receptor\": \"a@admin.com\"\r\n}\r\n",
+							"raw": "{\r\n  \"texto\": \"Hola, ¿cómo estás?\",\r\n  \"asunto\": \"Saludo\",\r\n  \"emisor\": \"kennethjensenquero@gmail.com\",\r\n  \"receptor\": \"musicallyxofficial@gmail.com\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1049,7 +1049,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/mensajes/chat?usuario1Email=a@admin.com&usuario2Email=kennethjensenquero@gmail.com",
+							"raw": "http://localhost:8080/api/mensajes/chat?usuario1Email=musicallyxofficial@gmail.com&usuario2Email=kennethjensenquero@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1063,7 +1063,7 @@
 							"query": [
 								{
 									"key": "usuario1Email",
-									"value": "a@admin.com"
+									"value": "musicallyxofficial5817@gmail.com"
 								},
 								{
 									"key": "usuario2Email",
@@ -1306,7 +1306,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"emisor\": \"a@admin.com\",\r\n  \"receptor\": \"kennethjensenquero@gmail.com\",\r\n  \"asunto\": \"Prueba de correo\",\r\n  \"texto\": \"Hola! Este es un correo de prueba\"\r\n}",
+							"raw": "{\r\n  \"emisor\": \"musicallyxofficial@gmail.com\",\r\n  \"receptor\": \"kennethjensenquero@gmail.com\",\r\n  \"asunto\": \"Prueba de correo\",\r\n  \"texto\": \"Hola! Este es un correo de prueba\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

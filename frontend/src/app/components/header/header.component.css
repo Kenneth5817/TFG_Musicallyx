@@ -7,9 +7,9 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   position: sticky;
   top: 0;
-  z-index: 1030;
   background-color: #fff;
   flex-wrap: nowrap;
+  z-index: 9999;
 }
 
 .navbar-brand {
@@ -127,29 +127,82 @@
 .navbar-search-icons a:hover { color: #dc3545; transform: translateY(-2px); }
 
 /* ---------------- Responsive ---------------- */
-@media (max-width: 1200px) {
+@media (max-width: 991.99px) {
   .navbar { padding: 0 1rem; justify-content: space-between; flex-wrap: wrap; }
   .navbar-brand img { max-width: 60%; }
-  .navbar-search-icons { display: none; }
   .navbar-nav { flex-direction: column; text-align: center; gap: 1rem; }
 
+  .navbar {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ICONOS PRIMERO */
+  .navbar-search-icons {
+    order: 2;
+    margin-right:20px;
+  }
+
+  /* LOGO EN MEDIO */
+  .navbar-brand {
+    order: 1;
+  }
+
+  /* HAMBURGUESA AL FINAL */
+  .navbar-toggler {
+    order: 3;
+  }
 }
-
-
+@media (max-width: 1400px) {
+  .navbar-search-icons {
+    display: none;
+  }
+}
+.navbar-brand {
+  flex: 1 1 auto;   /* puede crecer y encoger, pero de forma controlada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px; /* evita que desaparezca */
+}
+.navbar {
+  align-items: center;
+}
+.navbar-nav {
+  flex-wrap: nowrap;
+}
+.navbar-search-icons {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+@media (max-width: 1400px) {
+  .navbar-search-icons input,
+  .navbar-search-icons button,
+  .navbar-search-icons .list-group {
+    display: none;
+  }
+}
+.navbar-search-icons a {
+  display: flex; /* se mantienen visibles */
+}
+.navbar-brand img {
+   height:auto;
+   width: auto;
+   max-width: 200px; /* límite sano */
+   object-fit: contain;
+   flex-shrink: 0;
+ }
 
 /* ---------------- Offcanvas para móviles pequeños ---------------- */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .offcanvas-fullscreen {
-    display: flex;
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0; left: 0;
     background-color: #fff;
     z-index: 1050;
-    transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.6s cubic-bezier(0.77,0,0.175,1);
     overflow: hidden;
     flex-direction: column;
     justify-content: center;
@@ -165,14 +218,12 @@
     cursor: pointer;
     font-size: 2rem;
     color: #000;
-    transition: color 0.3s ease;
   }
   .offcanvas-close:hover { color: #dc3545; }
 
   .offcanvas-fullscreen .nav-link {
     opacity: 0;
     transform: translateY(50px) scale(0.95);
-    transition: transform 0.6s cubic-bezier(0.68,-0.55,0.265,1.55), opacity 0.6s ease;
     font-size: 1.8rem; font-weight: bold;
     width: 100%; text-align: center; padding: 0.8rem 0;
     box-sizing: border-box; white-space: nowrap;
@@ -198,23 +249,17 @@
   width: 100%;
 }
 
-@media (min-width: 1200px) {
-  .navbar-nav {
-    gap: 2.5rem !important;   /* aumenta la separación entre enlaces */
-  }}
-
-
 
 @media (min-width: 1200px) {
   .navbar-nav {
     display: flex;
-    justify-content: center; /* centra los items */
-    gap: 0; /* quitamos gap horizontal, lo haremos con ancho fijo */
+    justify-content: center;
+    gap: 2.5rem !important;
   }
 
   .navbar-nav .nav-item {
-    flex: 1; /* cada item ocupa el mismo ancho */
-    text-align: center; /* texto centrado dentro de su bloque */
+    flex: 1;
+    text-align: center;
   }
 
   .navbar-nav .nav-link {
@@ -233,24 +278,21 @@
 }
 
 /* ---------------- Navbar escritorio ---------------- */
+
 @media (min-width: 1200px) {
+  .nav-item.dropdown .dropdown-menu {
+    text-align: left;
+    min-width: 200px;
+  }
+
+  .nav-item.dropdown .dropdown-item {
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
 
   /* Separar "Iniciar sesión" del buscador */
   .navbar-search-icons {
     margin-left: 3rem; /* ajusta según necesites */
-  }
-}
-
-
-@media (min-width: 1200px) {
-  .nav-item.dropdown .dropdown-menu {
-    text-align: left; /* alinea los items a la izquierda */
-    min-width: 200px; /* opcional: ancho mínimo para que no se vea comprimido */
-  }
-
-  .nav-item.dropdown .dropdown-item {
-    text-align: left; /* asegura que cada link quede alineado a la izquierda */
-    padding: 0.5rem 1rem; /* mantiene el padding existente */
   }
 }
 
@@ -261,3 +303,329 @@
   border-radius: 0.375rem;
 }
 
+.navbar-nav .nav-link {
+  white-space: nowrap;
+}
+
+.offcanvas-close {
+  display: none;
+}
+.offcanvas.show .offcanvas-close {
+  display: block;
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+
+  /* 🔥 OFFCANVAS MÁS “MÓVIL STYLE” EN TABLET */
+  .offcanvas-fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 🔥 TEXTO GRANDE COMO MÓVIL */
+  .offcanvas-fullscreen .nav-link {
+    font-size: 1.8rem !important;
+    font-weight: bold;
+    padding: 1rem 0 !important;
+  }
+
+  /* 🔥 X MÁS GRANDE Y BONITA */
+  .offcanvas-close {
+    font-size: 2.5rem !important;
+    top: 25px;
+    right: 25px;
+  }
+
+  .offcanvas-close i {
+    font-size: 2.5rem;
+  }
+
+  .offcanvas-fullscreen {
+    width: 320px !important;   /* 👈 clave: no ocupa toda la pantalla */
+    height: 100% !important;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    align-items: center;
+  }
+
+  .offcanvas-fullscreen .nav-link {
+    font-size: 1.4rem !important;  /* un poco más pequeño que móvil */
+    padding: 0.8rem 0 !important;
+  }
+}
+
+.offcanvas-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.offcanvas-close:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Por defecto: NO se muestra el header */
+.offcanvas-header-custom{
+  display: none;
+}
+
+/* SOLO cuando el offcanvas está abierto */
+.offcanvas.show .offcanvas-header-custom{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 25px;
+}
+
+/* Por defecto: no se muestra */
+.offcanvas-header-custom{
+  display: none;
+}
+
+/* SOLO móvil */
+@media (max-width: 767.98px){
+  .offcanvas.show .offcanvas-header-custom{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 25px;
+  }
+
+  .offcanvas.show .offcanvas-header-custom{
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 25px;
+  }
+
+  .offcanvas-logo{
+    height: 48px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .offcanvas-close{
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #000;
+    padding: 0;
+  }
+
+  .offcanvas-close:hover{
+    color: #dc3545;
+  }
+
+  .offcanvas-spacer{
+    width: 32px;
+  }
+
+  .offcanvas-fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .offcanvas.show .offcanvas-header-custom {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .offcanvas-logo {
+    height: 55px;
+    margin: 0 auto;
+  }
+
+  .offcanvas-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    color: black;
+  }
+}
+/* NUNCA visible por defecto */
+.offcanvas-header-custom{
+  display: none;
+}
+
+/* SOLO cuando el menú está abierto (pantalla completa activa) */
+.offcanvas.show .offcanvas-header-custom{
+  display: flex;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+  .offcanvas-fullscreen {
+    width: 320px !important;
+    height: 100% !important;
+    transform: none !important;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 4rem;
+  }
+
+  .offcanvas-logo {
+    display: none !important;
+  }
+
+  .offcanvas-close {
+    display: block !important;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.2rem;
+    background: none;
+    border: none;
+    color: #000;
+  }
+
+  .offcanvas.show {
+    box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+  }
+
+  .offcanvas .nav-link {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.25s ease;
+  }
+
+  .offcanvas.show .nav-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .offcanvas.show .nav-item:nth-child(1) .nav-link { transition-delay: 0.05s; }
+  .offcanvas.show .nav-item:nth-child(2) .nav-link { transition-delay: 0.10s; }
+  .offcanvas.show .nav-item:nth-child(3) .nav-link { transition-delay: 0.15s; }
+}
+
+
+@media (min-width: 300px) and (max-width: 992px) {
+
+  .offcanvas-fullscreen .nav-link {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem !important;
+    border-radius: 8px;
+  }
+
+  .offcanvas-fullscreen .nav-link:hover,
+  .offcanvas-fullscreen .nav-link.active,
+  .offcanvas-fullscreen .nav-link.active-link {
+    background-color: #dc3545;
+    color: #fff !important;
+  }
+}
+
+.offcanvas {
+  transition: transform 0.3s ease !important;
+}
+
+@media (min-width: 992px) {
+
+  .navbar-nav .nav-link {
+    padding: 0.4rem 0.68rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active,
+  .navbar-nav .nav-link.active-link {
+    background-color: #dc3545;
+    color: #fff !important;
+  }
+}
+
+.nav-item.dropdown {
+  position: relative;
+}
+
+.nav-item.dropdown .dropdown-menu {
+  margin-top: 0;
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-item.dropdown:hover .dropdown-menu,
+.nav-item.dropdown .dropdown-menu:hover {
+  display: block;
+}
+
+.active-parent > .nav-link {
+  background-color: #dc3545;
+  color: #fff !important;
+  border-radius: 6px;
+}
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0;
+  width: 100%;
+  z-index: 999999 !important;
+}
+
+:root {
+  --navbar-height: 90px; /* ajustas una sola vez */
+}
+
+.navbar {
+  height: var(--navbar-height);
+}
+
+body {
+  padding-top: 900px;
+}
+.main-content {
+  margin-top: 900px;
+}
+
+
+:host {
+  display: block;
+  margin-top: 90px;
+}
+
+@media (max-width: 500px) {
+  .navbar-search-icons a {
+    display: none !important;
+  }
+}

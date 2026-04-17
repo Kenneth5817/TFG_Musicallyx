@@ -23,7 +23,7 @@ export class GestionAdminComponent implements OnInit {
   buscarPor: 'alumno' | 'asignatura' = 'alumno';
   filtro: string = '';
 
-  private baseUrl = 'http://localhost:8080/api/reservas';
+  private baseUrl = 'http://localhost:8080/v1/api/reservas';
 
   constructor(
     private emailService: EmailService,
@@ -59,6 +59,7 @@ export class GestionAdminComponent implements OnInit {
         return of(confirmadas);
       })
     ).subscribe(reservas => {
+      console.log("📦 CONFIRMADAS RAW BACKEND:", reservas);
       if (reservas) {
         this.reservasConfirmadas = reservas.map((r:Reserva) => ({...r, fechaReserva: new Date(r.fechaReserva)}));
       }
@@ -67,117 +68,101 @@ export class GestionAdminComponent implements OnInit {
   }
 
   confirmarReserva(reserva: Reserva) {
-    this.http.post<Reserva>(`${this.baseUrl}/confirmar`, reserva).pipe(
-      catchError(() => {
-        // 1️⃣ Quitar de pendientes del admin y añadir a confirmadas
-        this.reservasPendientes = this.reservasPendientes.filter(r => r !== reserva);
-        const confirmada = { ...reserva, estado: 'Confirmada' };
-        this.reservasConfirmadas.push(confirmada);
+    this.http.put<Reserva>(`${this.baseUrl}/confirmar/${reserva.idReserva}`, reserva)
+      .subscribe({
+        next: (res:any) => {
+          console.log("🔥 RESPUESTA BACKEND:", res);
 
-        // 2️⃣ Guardar en localStorage global
-        localStorage.setItem('reservas-pendientes', JSON.stringify(this.reservasPendientes));
-        localStorage.setItem('reservas-confirmadas', JSON.stringify(this.reservasConfirmadas));
+          // 🔄 Recargar datos reales desde backend
+          this.cargarReservasPendientes();
+          this.cargarReservasConfirmadas();
 
-        // 3️⃣ Actualizar reservas del usuario
-        const email = reserva.email;
-        const reservasUsuario: any[] = JSON.parse(localStorage.getItem(`reservas-${email}`) || '[]');
-        reservasUsuario.forEach(r => {
-          if (r.hora === reserva.hora) {
-            r.estado = 'Confirmada';
-          }
-        });
-        localStorage.setItem(`reservas-${email}`, JSON.stringify(reservasUsuario));
+          // 📧 Enviar email
+          const reservaDTO = {
+            alumno: (res.nombre ?? res.nombreAlumno ?? '') + " " + (res.apellidos ?? ''),
+            email: res.email,
+            asignatura: res.asignatura,
+            fecha: res.fechaClase
+              ? new Date(res.fechaClase).toISOString().split('T')[0]
+              : new Date(res.fechaReserva).toISOString().split('T')[0],
+            hora: res.hora
+          };
 
-        return of(confirmada);
-      })
-    ).subscribe(res => {
-      // 4️⃣ Recargar listas del admin
-      this.cargarReservasPendientes();
-      this.cargarReservasConfirmadas();
+          this.emailService.enviarCorreoConfirmacion(reservaDTO).subscribe({
+            next: () => console.log("📧 Email de confirmación enviado"),
+            error: err => console.error("❌ Error enviando email", err)
+          });
 
-      // 5️⃣ Preparar DTO explícito para enviar al backend
-      const reservaDTO = {
-        alumno: res.alumno,
-        email: res.email,
-        asignatura: res.asignatura,
-        fecha: res.fechaReserva.toISOString(), // formato que el backend entiende
-        hora: res.hora || res.horario // ⚡ aquí aseguramos que la hora correcta se envíe
-      };
-
-      // 6️⃣ Enviar correo al usuario confirmando la reserva
-      this.emailService.enviarCorreoConfirmacion(reservaDTO).subscribe({
-        next: () => console.log('Correo enviado correctamente'),
-        error: err => console.error('Error enviando correo', err)
+        },
+        error: err => {
+          console.error('❌ Error confirmando reserva', err);
+        }
       });
-    });
   }
 
-
-
-
   rechazarReserva(reserva: Reserva) {
-    this.http.post(`${this.baseUrl}/rechazar`, reserva).pipe(
+    const url = `${this.baseUrl}/${reserva.idReserva}`; // asumimos que cada reserva tiene un id único
+    this.http.delete(url).pipe(
       catchError(err => {
+        console.warn('Backend no disponible, eliminando localmente', err);
+
+        // Quitar de pendientes del admin
         this.reservasPendientes = this.reservasPendientes.filter(r => r !== reserva);
         localStorage.setItem('reservas-pendientes', JSON.stringify(this.reservasPendientes));
 
+        // Quitar del usuario
         const email = reserva.email;
         const reservasUsuario = JSON.parse(localStorage.getItem(`reservas-${email}`) || '[]');
-        const nuevas = reservasUsuario.filter((r:any) => r.hora !== reserva.hora);
+        const nuevas = reservasUsuario.filter((r: any) => r.id !== reserva.idReserva);
         localStorage.setItem(`reservas-${email}`, JSON.stringify(nuevas));
 
         return of(null);
       })
-    ).subscribe(() => this.cargarReservasPendientes());
+    ).subscribe(() => {
+      // Refrescar vista de pendientes
+      this.cargarReservasPendientes();
+    });
   }
 
 
   devolverAPendientes(reserva: Reserva) {
-    // 1️⃣ Quitar de confirmadas del admin y añadir a pendientes
-    this.reservasConfirmadas = this.reservasConfirmadas.filter(r => r !== reserva);
-    const pendiente = { ...reserva, estado: 'Pendiente' };
-    this.reservasPendientes.push(pendiente);
+    this.http.put<Reserva>(`${this.baseUrl}/pendiente/${reserva.idReserva}`, reserva)
+      .subscribe(res => {
+        // Quitar de confirmadas
+        this.reservasConfirmadas = this.reservasConfirmadas.filter(r => r.idReserva !== reserva.idReserva);
 
-    // 2️⃣ Guardar en localStorage global
-    localStorage.setItem('reservas-confirmadas', JSON.stringify(this.reservasConfirmadas));
-    localStorage.setItem('reservas-pendientes', JSON.stringify(this.reservasPendientes));
+        // Añadir a pendientes
+        this.reservasPendientes.push(res);
 
-    // 3️⃣ Actualizar reservas del usuario
-    const email = reserva.email;
-    const reservasUsuario: any[] = JSON.parse(localStorage.getItem(`reservas-${email}`) || '[]');
-    reservasUsuario.forEach(r => {
-      if (r.horario === reserva.horario) {
-        r.estado = 'Pendiente';
-      }
-    });
-    localStorage.setItem(`reservas-${email}`, JSON.stringify(reservasUsuario));
-
-    // 4️⃣ Recargar listas del admin
-    this.cargarReservasPendientes();
-    this.cargarReservasConfirmadas();
-  }
-
-
-
-  eliminarConfirmada(reserva: Reserva) {
-    this.http.delete(`${this.baseUrl}/confirmadas/${reserva.email}/${reserva.asignatura}/${reserva.hora}`).pipe(
-      catchError(err => {
-        // Quitar de confirmadas del admin
-        this.reservasConfirmadas = this.reservasConfirmadas.filter(r => r !== reserva);
+        // Actualizar localStorage (opcional)
+        localStorage.setItem('reservas-pendientes', JSON.stringify(this.reservasPendientes));
         localStorage.setItem('reservas-confirmadas', JSON.stringify(this.reservasConfirmadas));
 
-        const email = reserva.email;
-        const reservasUsuario = JSON.parse(localStorage.getItem(`reservas-${email}`) || '[]');
-        const nuevas = reservasUsuario.filter((r:any) => r.hora !== reserva.hora);
-        localStorage.setItem(`reservas-${email}`, JSON.stringify(nuevas));
+        // Refrescar listas filtradas
+        this.filtrarConfirmadas();
+      }, err => {
+        console.error('Error devolviendo reserva a pendientes', err);
+      });
+  }
 
-        const bloqueosSemana = JSON.parse(localStorage.getItem(reserva.semana) || '{}');
-        delete bloqueosSemana[reserva.hora];
-        localStorage.setItem(reserva.semana, JSON.stringify(bloqueosSemana));
+  eliminarConfirmada(reserva: Reserva) {
+    this.http.delete(`${this.baseUrl}/${reserva.idReserva}`).pipe(
+      catchError(err => {
+        console.warn('Backend no disponible', err);
+
+        this.reservasConfirmadas =
+          this.reservasConfirmadas.filter(r => r.idReserva !== reserva.idReserva);
+
+        localStorage.setItem('reservas-confirmadas', JSON.stringify(this.reservasConfirmadas));
 
         return of(null);
       })
-    ).subscribe(() => this.cargarReservasConfirmadas());
+    ).subscribe(() => {
+      this.reservasConfirmadas =
+        this.reservasConfirmadas.filter(r => r.idReserva !== reserva.idReserva);
+
+      this.filtrarConfirmadas(); // 👈 IMPORTANTE
+    });
   }
 
 

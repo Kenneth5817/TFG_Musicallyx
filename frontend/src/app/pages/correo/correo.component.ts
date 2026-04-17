@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserService, Usuario } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
+import { Usuario } from '../../usuario.model';
 import { AuthService } from '../../services/auth.service';
 import { Reserva } from '../../models/reserva.model';
 
@@ -99,29 +100,30 @@ export class CorreoComponent implements OnInit {
 
         // Modal éxito
         this.modalTipo = 'exito';
-        this.modalMensaje = '✅ Mensaje enviado correctamente';
+        this.modalMensaje = 'Mensaje enviado correctamente';
         this.mostrarModal = true;
       },
       error: (_err: HttpErrorResponse) => {
         this.modalTipo = 'error';
-        this.modalMensaje = '❌ Error al enviar mensaje';
+        this.modalMensaje = 'Error al enviar mensaje';
         this.mostrarModal = true;
       }
     });
   }
-
   cargarUsuarios() {
     this.userService.getUsuarios().subscribe({
       next: (users: Usuario[]) => {
-        if (this.usuarioActual === 'a@admin.com') {
-          // Admin puede ver todos
+        if (this.usuarioActual === 'musicallyxofficial5817@gmail.com') {
+          // Admin → todos menos él mismo
           this.usuarios = users.filter(u => u.email !== this.usuarioActual);
         } else {
-          // Usuario normal solo ve al admin
-          this.usuarios = users.filter(u => u.email === 'a@admin.com');
-          // Preseleccionamos al admin para no dejar vacío
-          this.receptor = this.usuarios.length ? this.usuarios[0].email : '';
+          // Alumno → solo el profe
+          const profe = users.find(u => u.email === 'musicallyxofficial5817@gmail.com');
+          this.usuarios = profe ? [profe] : [];
         }
+
+        // Preselecciona automáticamente
+        this.receptor = this.usuarios.length ? this.usuarios[0].email : '';
       },
       error: () => {
         this.modalTipo = 'error';
@@ -130,7 +132,6 @@ export class CorreoComponent implements OnInit {
       }
     });
   }
-
 
   cargarRecibidos() {
     this.mostrandoEnviados = false;

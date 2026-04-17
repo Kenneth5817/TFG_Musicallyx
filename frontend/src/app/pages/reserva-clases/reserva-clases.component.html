@@ -1,21 +1,27 @@
 <div class="reserva-container">
+  <!-- Título según tipo de usuario -->
   <h1>{{ isAdmin ? 'Mi disponibilidad' : 'Reserva tu clase' }}</h1>
 
-  <!-- Selector de semana y campos (admin vs usuario) -->
+  <!-- Selector de semana y campos -->
   <div class="selector-row">
+    <!-- Asignatura -->
     <div class="selector">
       <label>Asignatura</label>
-      <select [(ngModel)]="asignaturaSeleccionada" [disabled]="isAdmin">
+      <select [(ngModel)]="asignaturaSeleccionada">
         <option value="">-- Elige una asignatura --</option>
         <option value="Piano">Piano</option>
+        <option value="Impro">Improvisación al piano</option>
         <option value="Composición">Composición</option>
         <option value="Lenguaje Musical">Lenguaje Musical</option>
-        <option value="Producción Musical">Producción Musical</option>
-        <option value="Improvisación">Improvisación</option>
+        <option value="Producción Musical">Análisis</option>
+        <option value="Informatica">Informática musical</option>
         <option value="Canto">Canto</option>
+        <option value="Armonía">Armonía</option>
+
       </select>
     </div>
 
+    <!-- Semana -->
     <div class="selector">
       <label>Semana</label>
       <select [(ngModel)]="semanaSeleccionada" (change)="cambiarSemana()">
@@ -23,22 +29,70 @@
       </select>
     </div>
 
-    <div class="selector">
-      <label>Modalidad</label>
-      <select [(ngModel)]="modalidadSeleccionada" [disabled]="isAdmin">
-        <option value="">-- Elige modalidad --</option>
-        <option value="Presencial">Presencial</option>
-        <option value="Online">Online</option>
-      </select>
-    </div>
-
+    <!-- Nivel -->
     <div class="selector">
       <label>Nivel</label>
-      <select [(ngModel)]="nivelSeleccionado" [disabled]="isAdmin">
+      <select [(ngModel)]="nivelSeleccionado">
         <option value="">-- Elige tu nivel --</option>
         <option value="Principiante">Principiante</option>
         <option value="Normal">Con conocimientos previos</option>
-        <option value="Avanzado">Avanzado</option>
+      </select>
+    </div>
+
+
+    <!-- Modalidad -->
+    <div class="selector">
+      <label>Modalidad</label>
+      <select [(ngModel)]="modalidadSeleccionada">
+        <option value="">-- Elige modalidad --</option>
+        <option value="Presencial">Presencial*</option>
+        <option value="Online">Online</option>
+      </select>
+
+      <div class="info-precio" *ngIf="modalidadSeleccionada === 'Presencial'">
+        <p>
+          <strong>* El precio indicado del bono corresponde a clase online o en domicilio del profesor. (Las Lagunas de Mijas, Málaga, 29651, España)</strong>
+        </p>
+
+        <p>
+          En caso de clases en domicilio del alumno, se aplicará suplemento por desplazamiento:
+        </p>
+
+        <ul>
+          <li>Hasta 5 km: +5€</li>
+          <li>Hasta 10 km: +8€</li>
+          <li>Hasta 15 km: +12€</li>
+          <li>(Distancias superiores bajo consulta)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bono -->
+    <div class="selector">
+      <label>Bono</label>
+      <select [(ngModel)]="bonoSeleccionado">
+        <option value="">-- Elige bono --</option>
+        <option value="Clase 1h (22€)">Clase 1h (22€)</option>
+        <option value="Clase 30 mins (15€)">Clase 30 mins (15€)</option>
+        <option value="4 clases 1h (80€)">4 clases 1h (80€)*</option>
+      </select>
+      <div *ngIf="bonoSeleccionado === '4 clases 1h (80€)'"
+           class="info-bono">
+        <p>
+          Selecciona la fecha de tu primera clase. El resto de sesiones se acordarán contigo posteriormente.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Método de pago -->
+    <div class="selector">
+      <label>Método de pago</label>
+      <select [(ngModel)]="metodoPago">
+        <option value="">-- Elige método de pago --</option>
+        <option value="Tarjeta">Tarjeta</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Bizum">Bizum</option>
       </select>
     </div>
   </div>
@@ -58,12 +112,12 @@
 
     <div class="fila" *ngFor="let fila of calendario; let i = index">
       <div class="celda hora-label">{{ horas[i] }}</div>
+      <!-- Para escritorio -->
       <div class="celda"
            *ngFor="let celda of fila"
            [ngClass]="celda.estado"
-           [style.background-color]="celda.color"
-           (click)="toggleCeldaSafe(celda)">
-        {{ celda.texto }}
+           (click)="isAdmin ? toggleCeldaAdmin(celda) : toggleCeldaUsuario(celda)">
+        {{ (celda.estado === 'disponible' || celda.estado === 'seleccionado') ? celda.texto : '' }}
       </div>
     </div>
   </div>
@@ -75,17 +129,24 @@
         <h3>{{ dia }}</h3>
         <span class="arrow" [class.open]="diaAbierto === d">▼</span>
       </div>
+
       <div class="dia-content" [class.show]="diaAbierto === d">
-        <div class="hora-bloque"
-             *ngFor="let hora of horas; let h = index"
-             [ngClass]="calendario[h]?.[d]?.estado"
-             (click)="calendario[h]?.[d] && toggleCelda(calendario[h][d])">
-          <span class="hora">{{ hora }}</span>
-          <span class="estado">
-            {{ calendario[h]?.[d]?.estado === 'reservado' ? 'Ocupado' :
-            calendario[h]?.[d]?.estado === 'seleccionado' ? '✔ Seleccionado' :
-              calendario[h]?.[d]?.estado === 'no-disponible' ? 'No disponible' : '' }}
-          </span>
+        <!-- Miércoles a viernes: mostrar horas -->
+
+        <div *ngFor="let hora of horas; let h = index">
+          <ng-container *ngIf="calendario[h]?.[d]">
+            <!-- Mostrar solo horarios disponibles o seleccionados -->
+            <div class="hora-bloque"
+                 [ngClass]="calendario[h][d].estado"
+                 (click)="isAdmin ? toggleCeldaAdmin(calendario[h][d]) : toggleCeldaUsuario(calendario[h][d])">
+              <span class="hora">{{ hora }}</span>
+              <span class="estado">{{ calendario[h][d].texto }}</span>
+            </div>
+          </ng-container>
+        </div>
+
+        <div *ngIf="!tieneClasesDisponibles(d)" class="no-disponible-dia">
+          No hay clases disponibles
         </div>
       </div>
     </div>
@@ -98,13 +159,67 @@
     </button>
   </div>
 
-  <!-- Modales -->
-  <div class="modal-overlay" *ngIf="showGenericModal" (click)="showGenericModal = false">
+  <!-- Modal genérico -->
+  <div class="modal-overlay error-layer" *ngIf="showGenericModal" (click)="showGenericModal = false">
     <div class="modal-content" (click)="$event.stopPropagation()" [ngClass]="modalClass">
       <h2>{{ modalTitle }}</h2>
       <p>{{ genericModalMessage }}</p>
       <button *ngIf="showLoginButton" (click)="goToLogin()">Iniciar sesión</button>
-      <button class="btn-cerrar" (click)="showGenericModal = false">Cerrar</button>
+      <button class="btn-cerrar" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal formulario reserva -->
+  <div class="modal-overlay" *ngIf="showFormularioReserva">
+    <div class="modal-content modal-reserva">
+      <h2>Reserva rápida</h2>
+      <p class="subtexto">Introduce tus datos para reservar la clase.</p>
+      <div class="form-grid">
+        <input type="text" placeholder="Nombre" [(ngModel)]="nombreInvitado">
+        <input type="text" placeholder="Apellido" [(ngModel)]="apellidoInvitado">
+        <input type="email" placeholder="Correo electrónico" [(ngModel)]="emailInvitado">
+        <input type="tel" placeholder="Número de teléfono" [(ngModel)]="telefonoInvitado">
+      </div>
+      <div class="botones-modal">
+        <div class="fila-botones">
+          <button class="btn-reservar" (click)="confirmarReservaInvitado()">Reservar clase</button>
+          <button class="btn-cancelar" (click)="showFormularioReserva=false">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal post reserva -->
+  <!-- Modal post reserva -->
+  <div class="modal-overlay" *ngIf="showPostReservaModal">
+    <div class="modal-content">
+      <h2>¡Perfecto! 🎉</h2>
+      <p>Nos pondremos en contacto contigo para confirmar la clase.<br><br>Gracias por elegirnos 🙌</p>
+
+      <!-- Solo mostrar sección de registro si es invitado -->
+      <div *ngIf="!isUsuarioLogueado">
+        <div class="mensaje-registro">
+          <p><strong>¿Deseas registrarte?</strong></p>
+          <p>Así podrás:</p>
+          <ul>
+            <li>Ver el estado de tus clases</li>
+            <li>Chatear con tu profesor</li>
+            <li>Modificar o cancelar reservas</li>
+          </ul>
+        </div>
+
+        <div class="fila-botones">
+          <button class="btn-registro" (click)="irARegistro()">Sí, registrarme ahora</button>
+          <button class="btn-cancelar" (click)="cerrarPostReserva()">Cerrar</button>
+        </div>
+      </div>
+
+      <!-- Para usuarios registrados -->
+      <div *ngIf="isUsuarioLogueado">
+        <div class="fila-botones">
+          <button class="btn-cerrar" (click)="cerrarPostReserva()">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

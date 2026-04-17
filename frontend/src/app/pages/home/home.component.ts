@@ -1,8 +1,9 @@
 import { CommonModule, NgIf, NgFor, NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AdminService} from '../../services/admin.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit{
   // --- Datos principales ---
   title = 'Kenneth Jensen';
   subtitle = 'Productor, compositor y profesor de música';
@@ -28,7 +29,10 @@ export class HomeComponent {
       setTimeout(() => (this.enviado = false), 4000);
     }
   }
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private adminService: AdminService
+  ) {
     setInterval(() => this.next(), 3000);
   }
 
@@ -61,6 +65,7 @@ export class HomeComponent {
   clasesDuplicadas: any[] = [];
 
   ngOnInit() {
+    this.adminService.registrarVisita().subscribe();
     this.clasesDuplicadas = [...this.clases, ...this.clases];
     const sliderWidth = this.clases.length * (160 + 30);
     const animate = () => {
@@ -101,6 +106,20 @@ export class HomeComponent {
         }
       });
     }
-
 }
+  ngAfterViewInit(): void {
+    const elements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    elements.forEach(el => observer.observe(el));
+  }
 }

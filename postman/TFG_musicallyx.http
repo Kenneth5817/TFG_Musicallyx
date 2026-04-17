@@ -20,7 +20,7 @@ GET http://localhost:8080/v1/api/usuarios?
 ###
 # group: Usuario
 # @name get_by_email
-GET http://localhost:8080/v1/api/usuarios/email/a@admin.com
+GET http://localhost:8080/v1/api/usuarios/email/musicallyxofficial@gmail.com
 
 ###
 # group: Usuario
@@ -310,7 +310,7 @@ DELETE http://localhost:8080/v1/api/reservas/11
 # group: Chat
 # @name get_mensaje_by_email
 GET http://localhost:8080/api/mensajes/recibidos?
-    usuario=a@admin.com
+    usuario=musicallyxofficial@gmail.com
 
 ###
 # group: Chat
@@ -322,7 +322,7 @@ Content-Type: application/json
   "texto": "Hola, ¿cómo estás?",
   "asunto": "Saludo",
   "emisor": "kennethjensenquero@gmail.com",
-  "receptor": "a@admin.com"
+  "receptor": "musicallyxofficial@gmail.com"
 }
 
 
@@ -330,7 +330,7 @@ Content-Type: application/json
 # group: Chat
 # @name get_mensaje_entre_2_users
 GET http://localhost:8080/api/mensajes/chat?
-    usuario1Email=a@admin.com&
+    usuario1Email=musicallyxofficial@gmail.com &
     usuario2Email=kennethjensenquero@gmail.com
 
 ###
@@ -413,7 +413,7 @@ POST http://localhost:8080/api/email/enviar
 Content-Type: application/json
 
 {
-  "emisor": "a@admin.com",
+  "emisor": "musicallyxofficial@gmail.com",
   "receptor": "kennethjensenquero@gmail.com",
   "asunto": "Prueba de correo",
   "texto": "Hola! Este es un correo de prueba"

@@ -1,24 +1,57 @@
 <div class="juego-container">
-  <h1 class="neon-title">JUEGO SIMON PRO</h1>
+
+  <h1 class="neon-title">JUEGO SIMON 🎹</h1>
 
   <p class="message">{{ message }}</p>
-  <p class="score" *ngIf="gameStarted">Aciertos: {{ score }}</p>
 
+  <p class="score" [class.good]="score > 0">
+    Aciertos: {{ score }}
+  </p>
+
+  <!-- VIDAS -->
+  <div class="lives" *ngIf="gameStarted">
+    <span *ngFor="let i of [1,2,3]">
+      {{ i <= lives ? '❤️' : '🤍' }}
+    </span>
+  </div>
+
+  <!-- REPLAY -->
+  <button
+    *ngIf="gameStarted"
+    class="btn-replay"
+    [disabled]="isPlaying || lives <= 0"
+    (click)="replay()">
+
+    🔊 Repetir (-1 vida)
+  </button>
+
+  <!-- TABLERO -->
   <div *ngIf="gameStarted" class="game-board">
     <button
-      *ngFor="let color of colors"
-      class="game-btn {{color}}"
-      (click)="pulsar(color)">
-      {{ color.toUpperCase() }}
+      *ngFor="let note of colors"
+      class="game-btn {{note}}"
+      (click)="press(note)">
+      {{ note }}
     </button>
   </div>
 
-  <div *ngIf="!gameStarted && sequence.length > 0" class="game-over-buttons">
-    <button class="btn-reiniciar" (click)="reiniciarJuego()">Reiniciar Juego</button>
-    <button class="btn-todos-juegos" (click)="irATodosLosJuegos()">Todos los Juegos</button>
+
+  <!-- START -->
+  <!-- START -->
+  <div class="row">
+
+    <button class="btn-todos-juegos" (click)="goBack()">
+      Volver a todos los juegos
+    </button>
+
+    <!-- SOLO SE MUESTRA SI NO ESTÁ JUGANDO -->
+    <button
+      *ngIf="!gameStarted"
+      class="btn-iniciar"
+      (click)="iniciarJuego()">
+      Jugar
+    </button>
+
   </div>
 
-  <div *ngIf="!gameStarted && sequence.length === 0">
-    <button class="btn-iniciar" (click)="iniciarJuego()">Iniciar Juego</button>
-  </div>
 </div>

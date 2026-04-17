@@ -92,11 +92,20 @@
       <button class="back" (click)="volver()">← Volver</button>
 
       <h2>Nuevo mensaje</h2>
-
       <label for="receptor">Para:</label>
-      <select id="receptor" [(ngModel)]="receptor">
-        <option *ngFor="let u of usuarios" [value]="u.email">{{ u.nombre }} {{ u.apellido }} - ({{ u.email }})</option>
-      </select>
+      <input
+        type="text"
+        id="receptor"
+        [(ngModel)]="receptor"
+        list="usuarios-list"
+        placeholder="Escribe un nombre o email"
+      />
+
+      <datalist id="usuarios-list">
+        <option *ngFor="let u of usuarios" [value]="u.email">
+          {{ u.nombre }} {{ u.apellido }}
+        </option>
+      </datalist>
 
       <label>Asunto:</label>
       <input [(ngModel)]="asunto" />

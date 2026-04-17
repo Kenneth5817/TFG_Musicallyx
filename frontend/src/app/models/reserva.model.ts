@@ -8,11 +8,24 @@ export interface Reserva {
   modalidad?: string;
   nivel?: string;
   estado?: string;          // porque lo modificas en admin
-  precio: number;
+  precio?: number;
   mensajePago?: string;
-
+  bono?: string;
   pagado?: boolean;
   hrefPago?: string;
-  orderId?: string;
+  idReserva?: number;
   semana: string;
+
+  clase?: ClaseDTO;
+}
+
+
+export interface ClaseDTO {
+  nombreClase: string;
+  profesor?: ProfesorDTO;
+}
+
+export interface ProfesorDTO {
+  nombre: string;
+  apellidos: string;
 }

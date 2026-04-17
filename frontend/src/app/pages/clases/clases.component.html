@@ -1,4 +1,118 @@
-<div class="content-inner mt-4">
+<div class="content-inner">
+  <div class="container my-5">
+ <div class="row justify-content-center g-4 mb-5">
+
+  <!-- Clase 30 min -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card">
+      <div class="card-header rounded-top-4 py-3 header-verde">
+        Clase 30 min
+      </div>
+      <div class="card-body">
+        <p class="fs-2 fw-bold mb-2">12€</p>
+        <p class="text-muted mb-3">30 minutos</p>
+        <a [routerLink]="['/reserva-clases']"href="#" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan mensual central -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card featured-card">
+      <div class="card-header rounded-top-4 py-3 header-rojo">
+       ⭐ Plan mensual ⭐
+      </div>
+      <div class="card-body">
+        <p class="fs-2 fw-bold mb-2">80€</p>
+        <p class="mb-3">4 clases al mes <br>(1h cada una)</p>
+        <a [routerLink]="['/reserva-clases']" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clase 1h -->
+  <div class="col-md-4">
+    <div class="card text-center rounded-4 shadow-lg position-relative modern-card">
+      <div class="card-header rounded-top-4 py-3 header-azul">
+        Clase 1h
+      </div>
+      <div class="card-body">
+        <p class="fs-2 fw-bold mb-2">22€</p>
+        <p class="text-muted mb-3">1 hora</p>
+        <a [routerLink]="['/reserva-clases']" class="btn btn-modern btn-dark px-5">Reservar</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* Card moderno */
+.modern-card {
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: none;
+}
+
+.modern-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Headers con colores de tus áreas */
+.header-rojo {
+  background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%); /* rojo similar a Composición */
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.header-verde {
+ background: yellowgreen; /* verde similar a Producción Musical */
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.header-azul {
+  background: lightseagreen;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Botones modernos */
+.btn-modern {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #343a40, #495057);
+  color: white;
+  border: none;
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+}
+
+
+/* Featured card efecto extra */
+.featured-card {
+  transform: scale(1.05);
+}
+
+.featured-card:hover {
+  transform: translateY(-15px) scale(1.08);
+}
+</style>
+
   <h3 class="fw-bold text-center mb-4">🎹🎵 CLASES DISPONIBLES 🎵🎹</h3>
 
   <div class="row g-3">
@@ -11,14 +125,31 @@
                style="width: 140px;" alt="Piano">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">PIANO</h5>
+              <h5 class="fw-bold mb-0 pe-2">PIANO</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
+
+    <!-- IMPROVISACIÓN AL PIANO -->
+    <div class="col-12 col-lg-6">
+      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
+        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
+             style="background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);">
+          <img src="assets/img/improv.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Producción Musical">
+          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <h5 class="fw-bold mb-0 pe-2">IMPROVISACIÓN AL PIANO</h5>
+              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
 
     <!-- LENGUAJE MUSICAL -->
     <div class="col-12 col-lg-6">
@@ -29,64 +160,9 @@
                style="width: 140px;" alt="Lenguaje Musical">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">LENGUAJE MUSICAL</h5>
+              <h5 class="fw-bold mb-0 pe-2">LENGUAJE MUSICAL</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- COMPOSICIÓN -->
-    <div class="col-12 col-lg-6">
-      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
-        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #0dcaf0 0%, #087990 100%);">
-          <img src="assets/img/composicion..jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Composición">
-          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">COMPOSICIÓN</h5>
-              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
-            </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- ANÁLISIS -->
-    <div class="col-12 col-lg-6">
-      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
-        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #FF6B35 0%, #E94B3C 100%);">
-          <img src="assets/img/analisis.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Análisis">
-          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">ANÁLISIS</h5>
-              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
-            </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- PRODUCCIÓN -->
-    <div class="col-12 col-lg-6">
-      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
-        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);">
-          <img src="assets/img/produccionMusical.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Producción Musical">
-          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">PRODUCCIÓN MUSICAL</h5>
-              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
-            </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
           </div>
         </div>
       </a>
@@ -101,31 +177,83 @@
                style="width: 140px;" alt="Canto">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">CANTO</h5>
+              <h5 class="fw-bold mb-0 pe-2">CANTO</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- LETRISTA -->
-    <div class="col-12 col-lg-6 mb-3">
+    <!-- ANÁLISIS -->
+    <div class="col-12 col-lg-6">
       <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
         <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
-             style="background: linear-gradient(135deg, #198754 0%, #0f5132 100%);">
-          <img src="assets/img/letrista.jpg" class="img-fluid object-cover slide-img"
-               style="width: 140px;" alt="Letrista">
+             style="background: linear-gradient(135deg, #FF6B35 0%, #E94B3C 100%);">
+          <img src="assets/img/analisis.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Análisis">
           <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <h5 class="fw-bold mb-0 text-truncate pe-2">LETRISTA</h5>
+              <h5 class="fw-bold mb-0 pe-2">ANÁLISIS</h5>
               <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
             </div>
-            <p class="mb-0 fs-4 fw-bold">14€ <small class="fs-5 opacity-75">/hora</small></p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- COMPOSICIÓN -->
+    <div class="col-12 col-lg-6">
+      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
+        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
+             style="background: #2596be">
+          <img src="assets/img/composicion..jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Composición">
+          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <h5 class="fw-bold mb-0 pe-2">COMPOSICIÓN</h5>
+              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- INFORMÁTICA MUSICAL -->
+    <div class="col-12 col-lg-6">
+      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
+        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
+             style="background: #212529">
+          <img src="assets/img/informatica-musical.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Informática Musical">
+          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <h5 class="fw-bold mb-0 pe-2">INFORMÁTICA MUSICAL</h5>
+              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ARMONÍA -->
+    <div class="col-12 col-lg-6">
+      <a [routerLink]="['/reserva-clases']" class="text-decoration-none">
+        <div class="music-card-pro d-flex rounded-4 overflow-hidden h-100"
+          style="background: linear-gradient(135deg, #198754 0%, #0f5132 100%);">
+
+          <img src="assets/img/armonia.jpg" class="img-fluid object-cover slide-img"
+               style="width: 140px;" alt="Armonía">
+          <div class="d-flex flex-column justify-content-center p-3 text-white flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <h5 class="fw-bold mb-0 pe-2">ARMONÍA</h5>
+              <span class="badge bg-white text-dark rounded-pill fw-semibold fs-3">ONLINE • PRESENCIAL</span>
+            </div>
           </div>
         </div>
       </a>
     </div>
   </div>
+</div>
 </div>

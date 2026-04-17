@@ -60,32 +60,17 @@ Al finalizar, podrás tocar piezas completas con confianza y estilo.`,
       descCorta: 'Mejora tu técnica y domina el piano.'
     },
     {
-      nombre: 'Producción Musical',
-      color: '#ff0033',
-      ruta: '/reserva-clases',
-      icono: '🎛️',
-      descripcion:
-        `Aprende a crear música profesional usando software de producción.
-Estudia mezcla, mastering y diseño de sonido desde cero.
-Explora técnicas de grabación y edición para instrumentos y voces.
-Desarrolla tu oído para balancear frecuencias y lograr mezclas limpias.
-Aprenderás a organizar tu flujo de trabajo y mejorar tu productividad.
-Al final del curso, tendrás pistas listas para distribuir profesionalmente.`,
-      descCorta: 'Crea música con calidad profesional.'
-    },
-    {
-      nombre: 'Letrista',
+      nombre: 'Armonía',
       color: '#00c981',
       ruta: '/reserva-clases',
       icono: '✍️',
       descripcion:
-        `Aprende a escribir letras que conecten con emociones y experiencias.
-Explora estructuras de canciones y cómo contar historias efectivas.
-Estudia métrica, rima y recursos poéticos aplicados a la música.
-Analizarás letras de referencia para inspirarte y aprender técnicas.
-Recibirás retroalimentación profesional sobre tus creaciones.
-Al finalizar, podrás escribir letras completas para canciones con impacto.`,
-      descCorta: 'Aprende a escribir letras impactantes.'
+        `Comprende cómo se construye y organiza la música a nivel vertical.
+Estudiarás acordes, tonalidades, funciones armónicas y progresiones.
+Aprenderás a analizar obras musicales desde su estructura armónica.
+Desarrollarás la capacidad de escribir y reconocer secuencias armónicas correctamente.
+Al finalizar, entenderás el lenguaje armónico y podrás aplicarlo en tus interpretaciones y composiciones.`,
+      descCorta: 'Entiende cómo se construyen los acordes y la música.'
     },
     {
       nombre: 'Lenguaje Musical',
@@ -125,6 +110,33 @@ Explora géneros como jazz, blues, pop y clásico.
 Recibirás ejercicios prácticos para superar bloqueos creativos.
 Al finalizar, podrás crear piezas originales en tiempo real con seguridad.`,
       descCorta: 'Improvisa con fluidez y estilo propio.'
+    },
+
+    {
+      nombre: 'Informática Musical',
+      color: '#3c3c3c',
+      ruta: '/reserva-clases',
+      icono: '💻',
+      descripcion:
+        `Aprende a utilizar herramientas digitales para apoyar tu formación musical.
+Trabajarás con software de grabación de audio para registrar y revisar tus interpretaciones.
+Explorarás la edición básica de partituras y el uso de programas de notación musical.
+Desarrollarás habilidades para organizar, escribir y mejorar tus ideas musicales en formato digital.
+Al finalizar, serás capaz de utilizar la informática como apoyo práctico en tu estudio musical diario.`,
+      descCorta: 'Graba, edita partituras y mejora tu estudio musical.'
+    },
+
+    {
+      nombre: 'Canto',
+      color: '#ff3b6b',
+      ruta: '/reserva-clases',
+      icono: '🎤',
+      descripcion:
+        `Desarrolla tu voz como instrumento musical a través de técnica y expresión.
+Trabajarás la respiración, afinación, proyección y control vocal.
+Aprenderás a interpretar canciones con seguridad y emoción.
+Al finalizar, habrás mejorado tu técnica vocal y tu capacidad interpretativa.`,
+      descCorta: 'Mejora tu técnica vocal e interpretación.'
     }
   ];
 }

@@ -4,7 +4,7 @@
   <form (ngSubmit)="guardarCambios()">
     <div class="fields-grid">
       <div class="field-card" style="--line-color:#F59E0B">
-        <label>Nombre</label>
+        <label>Nombre y Apellidos</label>
         <input [(ngModel)]="usuario.nombre" name="nombre" type="text" placeholder="Tu nombre">
       </div>
 
@@ -20,12 +20,12 @@
 
       <div class="field-card" style="--line-color:#8B5CF6">
         <label>Nivel musical</label>
-        <input [(ngModel)]="usuario.nivel" name="nivel" type="text" placeholder="Tu nivel musical">
+        <input [(ngModel)]="usuario.nivelMusical" name="nivel" type="text" placeholder="Tu nivel musical">
       </div>
 
       <div class="field-card" style="--line-color:#EC4899">
         <label>Gustos musicales</label>
-        <input [(ngModel)]="usuario.gustos" name="gustos" type="text" placeholder="Tus gustos musicales">
+        <input [(ngModel)]="usuario.gustosMusicales" name="gustos" type="text" placeholder="Tus gustos musicales">
       </div>
 
       <div class="field-card" style="--line-color:#F43F5E">
@@ -38,6 +38,22 @@
   </form>
 </div>
 
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-box">
+
+    <!-- CHECK -->
+    <div *ngIf="modalTipo === 'exito'" class="check-icon">
+      ✓
+    </div>
+
+    <!-- CROSS -->
+    <div *ngIf="modalTipo === 'error'" class="error-icon">
+      ✕
+    </div>
+
+    <p>{{ modalMensaje }}</p>
+  </div>
+</div>
 
 
 

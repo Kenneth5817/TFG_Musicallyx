@@ -21,6 +21,7 @@ export const routes: Routes = [
   { path: 'memorizar-instrumento', loadComponent: () => import('./pages/memorizar-instrumento/memorizar-instrumento.component').then(m => m.MemorizarInstrumentoComponent) },
   { path: 'mis-reservas', loadComponent: () => import('./pages/mis-reservas/mis-reservas.component').then(m => m.MisReservasComponent) },
   { path: 'clases-usuario', loadComponent: () => import('./pages/clases-usuario/clases-usuario.component').then(m => m.ClasesUsuarioComponent) },
+  { path: 'bloqueo-horario', loadComponent: () => import('./pages/bloqueo-horario/bloqueo-horario.component').then(m => m.BloqueoHorarioComponent) },
 
 
   // Admin con layout independiente
@@ -67,6 +68,10 @@ export const routes: Routes = [
        { path: 'gestion-admin',
         loadComponent: () => import('./pages/gestion-admin/gestion-admin.component').then(m => m.GestionAdminComponent)
 },
+      { path: 'bloqueo-horario',
+        loadComponent: () => import('./pages/bloqueo-horario/bloqueo-horario.component').then(m => m.BloqueoHorarioComponent)
+      },
+
       {
         path: 'mi-perfil',
         loadComponent: () => import('./pages/mi-perfil/mi-perfil.component').then(m => m.MiPerfilComponent),

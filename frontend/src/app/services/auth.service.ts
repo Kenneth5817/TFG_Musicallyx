@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, tap} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 export interface Usuario {
   idUsuario: number;
@@ -21,10 +22,31 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8080/v1/api/auth';
 
-  constructor(private http: HttpClient) {
-    // Inicializar estado de login según localStorage
-    const usuario = localStorage.getItem('usuario');
-    this.loggedIn.next(!!usuario);
+  constructor(private http: HttpClient, private router: Router) {
+    const storedUser = localStorage.getItem('usuario');
+
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+      this.loggedIn.next(true);
+    }
+  }
+
+  redirectByRole(user: Usuario) {
+    this.router.navigate([
+      user.rol === 'ADMIN'
+        ? '/admin/panel-administracion'
+        : '/admin/clases-usuario'
+    ]);
+  }
+
+  getUser(): Usuario | null {
+    if (this.user) return this.user;
+
+    const stored = localStorage.getItem('usuario');
+    if (!stored) return null;
+
+    this.user = JSON.parse(stored);
+    return this.user;
   }
 
   // 🔹 Nuevo método
@@ -57,6 +79,12 @@ export class AuthService {
       .pipe(
         tap((usuario: Usuario) => {
           this.setUser(usuario);
+
+          if (usuario.rol === 'ADMIN') {
+            this.router.navigate(['/admin/panel-administracion']);
+          } else {
+            this.router.navigate(['/admin/clases-usuario']);
+          }
         })
       );
   }
@@ -84,4 +112,5 @@ export class AuthService {
       { responseType: 'text', withCredentials: true }
     );
   }
+
 }

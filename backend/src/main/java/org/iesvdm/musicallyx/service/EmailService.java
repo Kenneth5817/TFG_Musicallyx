@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +36,7 @@ public class EmailService {
             helper.setTo(destinatario);
             helper.setSubject("✅ Tu clase en Musicallyx está confirmada!");
 
-            ZonedDateTime fechaDate = ZonedDateTime.parse(fechaISO);
+            LocalDate fechaDate = LocalDate.parse(fechaISO, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String fechaFormateada = fechaDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             String htmlMsg = "<!DOCTYPE html>" +

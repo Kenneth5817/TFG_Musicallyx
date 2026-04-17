@@ -12,7 +12,7 @@
       <label>
         Ordenar por:
         <select [(ngModel)]="ordenarPor">
-          <option value="alumno">Alumno</option>
+          <option value="nombre">Alumno</option>
           <option value="fecha">Fecha</option>
           <option value="asignatura">Asignatura</option>
         </select>
@@ -25,13 +25,14 @@
 
     <div class="cards">
       <div *ngFor="let reserva of reservasPendientes | ordenar:ordenarPor" class="card">
-        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-email">{{ reserva.alumno }}</span></div>
+        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-nombre">{{ reserva.nombre }} {{reserva.apellidos}}</span></div>
 
         <div class="card-body">
-          <p>Fecha: {{ reserva.fecha | date:'dd/MM/yyyy - HH:mm' }}</p>
-          <p>Hora: {{ reserva.horario }}</p>
-          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <p>Fecha: {{ reserva.fechaClase ? (reserva.fechaClase | date:'dd/MM/yyyy') : 'Sin fecha' }}</p>          <p>Hora: {{ reserva.hora }}</p>
           <p *ngIf="reserva.nivel">Nivel: {{ reserva.nivel }}</p>
+          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <div>Profesor: Kenneth Jensen</div>
+          <p *ngIf="reserva.bono">Bono: {{ reserva.bono }}</p>
           <span class="badge">Pendiente</span>
         </div>
 
@@ -73,13 +74,17 @@
 
     <div class="cards">
       <div *ngFor="let reserva of reservasFiltradas | ordenar:ordenarPor" class="card confirmed">
-        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-email">{{ reserva.alumno }}</span></div>
+        <div class="card-header">{{ reserva.asignatura }} - <span class="alumno-nombre">{{ reserva.nombre}} {{reserva.apellidos}}</span></div>
 
         <div class="card-body">
-          <p>Fecha: {{ reserva.fecha | date:'dd/MM/yyyy - HH:mm' }}</p>
-          <p>Hora: {{ reserva.horario }}</p>
-          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <p>Fecha: {{ reserva.fechaClase | date:'dd/MM/yyyy' }}</p>
+          <p>Hora: {{ reserva.hora }}</p>
           <p *ngIf="reserva.nivel">Nivel: {{ reserva.nivel }}</p>
+          <p *ngIf="reserva.modalidad">Modalidad: {{ reserva.modalidad }}</p>
+          <div>
+            Profesor: Kenneth Jensen
+          </div>
+          <p *ngIf="reserva.bono">Bono: {{ reserva.bono }}</p>
           <span class="badge confirmed">Confirmada</span>
           <span *ngIf="!reserva.pagado" class="badge pendiente-pago">Pendiente de pagar</span>
           <span *ngIf="reserva.pagado" class="badge pagado">Pagado</span>

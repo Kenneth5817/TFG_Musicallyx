@@ -5,6 +5,9 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {UsuarioEstadoService} from '../../services/usuarioEstadoService';
+import {Usuario} from '../../usuario.model';
+import {tap} from 'rxjs';
 declare var bootstrap: any;
 
 @Component({
@@ -28,67 +31,98 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   constructor(
     public authService: AuthService,
+    private usuarioEstado: UsuarioEstadoService,
     public router: Router,
     private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    // Inicializa el menú inmediatamente según el usuario
-    if (this.authService.user) {
-      this.userName = this.authService.user.nombre;
-      this.profileImg = '';
-      this.isSpecialAdmin = this.authService.user.rol === 'ADMIN';
+
+    // 🔥 USUARIO INICIAL (RESTAURADO DESDE LOCALSTORAGE)
+    const user = this.authService.getUser?.();
+
+    if (user) {
+      this.userName = user.nombre;
+      this.isSpecialAdmin = user.rol === 'ADMIN';
     }
+
+    // 🔥 REDIRECCIÓN AUTOMÁTICA INICIAL
+    setTimeout(() => {
+      if (this.isSpecialAdmin) {
+        this.router.navigate(['/admin/gestion-admin']);
+      } else {
+        this.router.navigate(['/admin/clases-usuario']);
+      }
+    });
+
+    // Escucha cambios en tiempo real
+    this.usuarioEstado.usuario$.subscribe(usuario => {
+      if (usuario) {
+        this.userName = usuario.nombre;
+        this.cd.detectChanges();
+      }
+    });
 
     // Suscripción para cambios de login
     this.authService.isLoggedIn$.subscribe(loggedIn => {
-      if (loggedIn && this.authService.user) {
-        this.userName = this.authService.user.nombre;
-        this.isSpecialAdmin = this.authService.user.rol === 'ADMIN';
+
+      const user = this.authService.getUser?.();
+
+      if (loggedIn && user) {
+        this.userName = user.nombre;
+        this.isSpecialAdmin = user.rol === 'ADMIN';
       } else {
         this.userName = 'Usuario';
         this.isSpecialAdmin = false;
       }
     });
+
   }
 
   ngAfterViewInit() {
-    // Inicializa Offcanvas
     this.offcanvasEl = document.getElementById('offcanvasAdminMenu');
-    this.offcanvasInstance = new bootstrap.Offcanvas(this.offcanvasEl);
 
-    // Cambios que afectan la vista
+    if (this.offcanvasEl) {
+      this.offcanvasInstance =
+        bootstrap.Offcanvas.getOrCreateInstance(this.offcanvasEl);
+    }
+
     this.mostrarPanel = false;
     this.cd.detectChanges();
   }
 
+
   navigate(route: string) {
-    const offcanvasEl = document.getElementById('offcanvasAdminMenu');
-    if (!offcanvasEl) {
-      this.router.navigate([route]); // fallback si no hay offcanvas
+    const el = document.getElementById('offcanvasAdminMenu');
+    const instance = bootstrap.Offcanvas.getInstance(el);
+
+    const go = () => {
+      this.router.navigate([route]);
+      this.cleanupOffcanvas();
+    };
+
+    if (!instance) {
+      go();
       return;
     }
 
-    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-    if (bsOffcanvas) {
-      offcanvasEl.addEventListener(
-        'hidden.bs.offcanvas',
-        () => this.router.navigate([route]),
-        { once: true } // se ejecuta solo una vez
-      );
-      bsOffcanvas.hide();
-    } else {
-      this.router.navigate([route]);
-    }
+    el?.addEventListener('hidden.bs.offcanvas', go, { once: true });
+    instance.hide();
   }
-
-
-
+  cleanupOffcanvas() {
+    document.querySelectorAll('.offcanvas-backdrop').forEach(el => el.remove());
+    document.body.classList.remove('offcanvas-open');
+    document.body.style.overflow = '';
+  }
   openOffcanvas() {
-    if (this.authService.user) {
-      this.userName = this.authService.user.nombre;
-      this.isSpecialAdmin = this.authService.user.rol === 'ADMIN';
+
+    const user = this.authService.getUser?.();
+
+    if (user) {
+      this.userName = user.nombre;
+      this.isSpecialAdmin = user.rol === 'ADMIN';
     }
+
     this.offcanvasInstance.show();
   }
 
@@ -98,17 +132,12 @@ export class AdminComponent implements OnInit, AfterViewInit {
     if (bsOffcanvas) bsOffcanvas.hide();
   }
 
-
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
 
   onRouteSelected() {
     this.hasSelectedRoute = true;
-  }
-
-  cambiarFoto(nuevaImg: string) {
-    this.profileImg = nuevaImg;
   }
 
   logout() {
@@ -145,14 +174,12 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   saveProfile() {
     if (this.selectedFile) {
-      // Lógica para subir imagen al backend
       console.log('Archivo seleccionado:', this.selectedFile);
       this.profileImg = URL.createObjectURL(this.selectedFile);
     }
 
-    // Guardar color en localStorage o backend
     localStorage.setItem('avatarBg', this.bgColor);
 
-    this.showProfileCard = false; // cerrar card
+    this.showProfileCard = false;
   }
 }

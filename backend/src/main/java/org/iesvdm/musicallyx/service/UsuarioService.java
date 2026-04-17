@@ -1,6 +1,7 @@
 package org.iesvdm.musicallyx.service;
 
 import org.iesvdm.musicallyx.domain.Usuario;
+import org.iesvdm.musicallyx.dto.UsuarioPerfilDTO;
 import org.iesvdm.musicallyx.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public Page<Usuario> findAll(Pageable pageable) {
         return usuarioRepository.findAllBy(pageable);
@@ -41,9 +43,39 @@ public class UsuarioService {
         return usuarioRepository.existsById(id);
     }
 
+    public Usuario actualizarPerfil(Long idUsuario, UsuarioPerfilDTO dto) {
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow(
+                () -> new RuntimeException("Usuario no encontrado")
+        );
+
+
+        usuario.setNombre(dto.getNombre());
+        usuario.setEmail(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
+        usuario.setNivelMusical(dto.getNivelMusical());
+        usuario.setGustosMusicales
+                (dto.getGustosMusicales());
+
+        // No tocamos rol, password, resetToken, etc.
+        return usuarioRepository.save(usuario);
+    }
+
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+    public Usuario actualizarPerfilPorEmail(String email, UsuarioPerfilDTO dto) {
+
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setNombre(dto.getNombre());
+        usuario.setEmail(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
+        usuario.setNivelMusical(dto.getNivelMusical());
+        usuario.setGustosMusicales(dto.getGustosMusicales());
+
+        return usuarioRepository.save(usuario);
     }
 
     public void saveResetToken(Long idUsuario, String token, LocalDateTime expiration) {
@@ -65,6 +97,7 @@ public class UsuarioService {
     }
 
 
+
     public void updatePassword(Long idUsuario, String nuevaPassword) {
         Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow();
         usuario.setPassword(passwordEncoder.encode(nuevaPassword));
@@ -77,6 +110,4 @@ public class UsuarioService {
         usuario.setTokenExpiration(null);
         usuarioRepository.save(usuario);
     }
-
-
 }
