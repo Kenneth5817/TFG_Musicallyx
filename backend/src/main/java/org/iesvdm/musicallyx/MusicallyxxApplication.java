@@ -34,7 +34,11 @@ public class MusicallyxxApplication implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-
+         System.out.println("=== ENV TEST ===");
+    System.out.println("URL: " + System.getenv("SPRING_DATASOURCE_URL"));
+    System.out.println("USER: " + System.getenv("SPRING_DATASOURCE_USERNAME"));
+    System.out.println("PASS: " + System.getenv("SPRING_DATASOURCE_PASSWORD"));
+    
     }
     //  Crear todos los objetos lo suyo seria todo en los tests
 }
