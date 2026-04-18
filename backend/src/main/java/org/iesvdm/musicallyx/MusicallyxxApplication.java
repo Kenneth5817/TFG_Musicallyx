@@ -1,5 +1,6 @@
 package org.iesvdm.musicallyx;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,5 +41,10 @@ public class MusicallyxxApplication implements CommandLineRunner {
     System.out.println("PASS: " + System.getenv("SPRING_DATASOURCE_PASSWORD"));
     
     }
+
+    @PostConstruct
+        public void testDB() {
+            System.out.println("DB URL: " + System.getenv("SPRING_DATASOURCE_URL"));
+        }
     //  Crear todos los objetos lo suyo seria todo en los tests
 }

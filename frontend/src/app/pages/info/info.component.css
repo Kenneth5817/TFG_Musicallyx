@@ -789,7 +789,7 @@
 
 /* IMÁGENES */
 .artist-img{
-  width: 360px;
+  width: 400px;
   border-radius: 18px;
   position: absolute;
   box-shadow: 0 25px 70px rgba(0,0,0,0.75);
@@ -879,7 +879,7 @@
   }
 
   .artist-img{
-    width: 300px;
+    width: 350px;
   }
 
   .img-2{
@@ -912,7 +912,7 @@
 
   .artist-img{
     position: relative;
-    width: 85%;
+    width: 100%;
     max-width: 280px;
     transform: none !important;
   }
@@ -931,4 +931,17 @@
   .artist-bio{
     font-size: 0.95rem;
   }
+}
+.artist-visual-inner.single {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* IMPORTANTE: desactiva absolute SOLO en single */
+.artist-visual-inner.single .artist-img {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none !important;
 }
