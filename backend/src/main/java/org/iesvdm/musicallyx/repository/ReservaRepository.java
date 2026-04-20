@@ -30,8 +30,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             "LEFT JOIN c.profesor p")
     Page<ReservaTablaDTO> findAllReservaTabla(Pageable pageable);
     List<Reserva> findByEmail(String email);
-    @Query("SELECT r FROM Reserva r WHERE str_to_date(r.fechaClase, '%Y-%m-%d') BETWEEN :start AND :end")
-    List<Reserva> findByFechaClaseBetween(@Param("start") LocalDate start, @Param("end") LocalDate end);
+    List<Reserva> findByFechaClaseBetween(LocalDate start, LocalDate end);
     List<Reserva> findByEstado(String estado);
 
 }
