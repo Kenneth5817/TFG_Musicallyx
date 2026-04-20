@@ -13,7 +13,7 @@ export class UserService {
    * Devuelve todos los usuarios registrados, extrayendo el array 'content'
    * de la respuesta paginada del backend.
    */
-  private apiUrl = 'http://tfg-musicallyx.onrender.com/v1/api/usuarios';
+  private apiUrl = 'https://tfg-musicallyx.onrender.com/v1/api/usuarios';
 
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<any>(this.apiUrl).pipe(

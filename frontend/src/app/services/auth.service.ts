@@ -11,7 +11,6 @@ export interface Usuario {
   rol?: 'ADMIN' | 'USER';
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
