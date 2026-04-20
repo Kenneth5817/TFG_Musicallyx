@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "https://musicallyxx.netlify.app")
 @RequestMapping("/v1/api/alumnos")
 public class AlumnoController {
 

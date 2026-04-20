@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://musicallyxx.netlify.app")
 @RestController
 @RequestMapping("/api/mensajes")
 public class ChatController {

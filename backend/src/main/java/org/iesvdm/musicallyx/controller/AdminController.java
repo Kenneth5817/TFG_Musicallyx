@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "https://musicallyxx.netlify.app")
 public class AdminController {
 
     @Autowired
