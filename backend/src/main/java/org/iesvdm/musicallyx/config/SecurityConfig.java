@@ -28,12 +28,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/**").permitAll()
-                )
+                        .requestMatchers(
+                                "/v1/api/ping",
+                                "/v1/api/health",
+                                "/v1/api/auth/login",
+                                "/v1/api/auth/registro"
+                        ).permitAll()                )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .httpBasic(Customizer.withDefaults()); // Añade esto si usas autenticación básica
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
