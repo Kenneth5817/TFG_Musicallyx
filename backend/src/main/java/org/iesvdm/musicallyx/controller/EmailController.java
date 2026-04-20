@@ -216,7 +216,7 @@ public class EmailController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://musicallyxx.netlify.app")
     @PostMapping("/reset-password-request")
     public ResponseEntity<String> resetPasswordRequest(@RequestBody Map<String, String> body) {
         String email = body.get("email");
@@ -235,7 +235,7 @@ public class EmailController {
         usuarioService.saveResetToken(Long.valueOf(usuario.getIdUsuario()), token, LocalDateTime.now().plusHours(1));
 
         // Construir link con token
-        String resetUrl = "http://localhost:4200/reset-password?token=" + token;
+        String resetUrl = "http://musicallyxx.netlify.app/reset-password?token=" + token;
 
         // Enviar correo
         String asunto = "Restablece tu contraseña - Musicallyx";
