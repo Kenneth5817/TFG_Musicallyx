@@ -27,17 +27,23 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        // Endpoints PÚBLICOS (no requieren autenticación)
                         .requestMatchers(
                                 "/v1/api/ping",
                                 "/v1/api/health",
                                 "/v1/api/auth/login",
-                                "/v1/api/auth/registro"
-                        ).permitAll()                )
+                                "/v1/api/auth/registro",
+                                "/v1/api/auth/forgot-password",      // ← Añade este
+                                "/v1/api/auth/validate-reset-token", // ← Añade este
+                                "/v1/api/auth/reset-password"        // ← Añade este
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        // El resto requiere autenticación
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .httpBasic(Customizer.withDefaults());
+                );
 
         return http.build();
     }
