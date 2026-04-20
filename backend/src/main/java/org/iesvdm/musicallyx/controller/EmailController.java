@@ -235,7 +235,7 @@ public class EmailController {
         usuarioService.saveResetToken(Long.valueOf(usuario.getIdUsuario()), token, LocalDateTime.now().plusHours(1));
 
         // Construir link con token
-        String resetUrl = "https://musicallyxx.netlify.app/restablecerpassword?token=" + token;
+        String resetUrl = "https://musicallyxx.netlify.app/restablecer-password?token=" + token;
 
         // Enviar correo
         String asunto = "Restablece tu contraseña - Musicallyx";

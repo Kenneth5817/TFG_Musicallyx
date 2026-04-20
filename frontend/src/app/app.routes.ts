@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'mis-reservas', loadComponent: () => import('./pages/mis-reservas/mis-reservas.component').then(m => m.MisReservasComponent) },
   { path: 'clases-usuario', loadComponent: () => import('./pages/clases-usuario/clases-usuario.component').then(m => m.ClasesUsuarioComponent) },
   { path: 'bloqueo-horario', loadComponent: () => import('./pages/bloqueo-horario/bloqueo-horario.component').then(m => m.BloqueoHorarioComponent) },
-
+  { path: 'reset-password', loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
 
   // Admin con layout independiente
   // Rutas del panel admin
