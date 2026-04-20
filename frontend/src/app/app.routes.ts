@@ -23,6 +23,9 @@ export const routes: Routes = [
   { path: 'clases-usuario', loadComponent: () => import('./pages/clases-usuario/clases-usuario.component').then(m => m.ClasesUsuarioComponent) },
   { path: 'bloqueo-horario', loadComponent: () => import('./pages/bloqueo-horario/bloqueo-horario.component').then(m => m.BloqueoHorarioComponent) },
   { path: 'reset-password', loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
+  { path: 'ruleta-musical', loadComponent: () => import('./pages/ruleta-musical/ruleta-musical.component').then(m => m.RuletaMusicalComponent) },
+  { path: 'ahorcado-musical', loadComponent: () => import('./pages/ahorcado-musical/ahorcado-musical.component').then(m => m.AhorcadoMusicalComponent) },
+  { path: 'mayor-o-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorOMenorComponent) },
 
   // Admin con layout independiente
   // Rutas del panel admin
@@ -78,6 +81,9 @@ export const routes: Routes = [
         canActivate: [AuthGuard] // Solo usuarios logueados
       },
 
+      { path: 'ruleta-musical', loadComponent: () => import('./pages/ruleta-musical/ruleta-musical.component').then(m => m.RuletaMusicalComponent) },
+      { path: 'ahorcado-musical', loadComponent: () => import('./pages/ahorcado-musical/ahorcado-musical.component').then(m => m.AhorcadoMusicalComponent) },
+      { path: 'mayor-o-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorOMenorComponent) },
 
       { path: 'clases-usuario', loadComponent: () => import('./pages/clases-usuario/clases-usuario.component').then(m => m.ClasesUsuarioComponent) },
 

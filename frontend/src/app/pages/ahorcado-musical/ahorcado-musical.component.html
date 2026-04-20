@@ -1,0 +1,53 @@
+<!-- ahorcado-musical.component.html -->
+<div class="game-container">
+  <div class="game-card shadow-lg">
+    <div class="d-flex justify-content-between">
+      <h2>🪢 Ahorcado Musical</h2>
+      <button class="btn-exit" [routerLink]="['/juegos-musicales']">✖ Salir</button>
+    </div>
+
+    <div class="ahorcado-visual">
+      <pre class="monitor">
+        ________
+        |      |
+        |      {{ getPartesAhorcado().includes('cabeza') ? 'O' : ' ' }}
+        |     {{ getPartesAhorcado().includes('brazo_izq') ? '/' : ' ' }}{{ getPartesAhorcado().includes('cuerpo') ? '|' : ' ' }}{{ getPartesAhorcado().includes('brazo_der') ? '\\' : ' ' }}
+        |     {{ getPartesAhorcado().includes('pierna_izq') ? '/' : ' ' }} {{ getPartesAhorcado().includes('pierna_der') ? '\\' : ' ' }}
+        |
+        =========
+      </pre>
+    </div>
+
+    <div class="palabra-oculta">
+      <span *ngFor="let letra of palabraOculta" class="letra-casilla">{{ letra }}</span>
+    </div>
+
+    <div class="info-juego">
+      <div class="intentos">💀 Intentos restantes: <strong>{{ intentosRestantes }}</strong></div>
+      <div class="pistas">💡 Pistas disponibles: <strong>{{ pistasDisponibles - pistasUsadas }}</strong></div>
+      <div class="letras-falladas" *ngIf="letrasFalladas.length">
+        ❌ Letras falladas: {{ letrasFalladas.join(', ') }}
+      </div>
+    </div>
+
+    <div class="input-area" *ngIf="!juegoTerminado">
+      <input type="text"
+             maxlength="1"
+             [(ngModel)]="letraInput"
+             placeholder="Ingresa una letra"
+             (keyup.enter)="adivinarLetra()"
+             class="letra-input">
+      <button (click)="adivinarLetra()" class="btn-adivinar">Adivinar</button>
+      <button (click)="pedirPista()" class="btn-pista" [disabled]="pistasUsadas >= pistasDisponibles">💡 Pedir pista</button>
+    </div>
+
+    <div class="mensaje" [ngClass]="{'text-success': juegoGanado, 'text-danger': juegoTerminado && !juegoGanado}">
+      {{ mensaje }}
+    </div>
+
+    <div *ngIf="juegoTerminado" class="resultado-final">
+      <button class="btn-reiniciar" (click)="reiniciar()">🔄 Jugar de nuevo</button>
+      <a [routerLink]="['/juegos-musicales']" class="btn-volver">🔙 Volver a juegos</a>
+    </div>
+  </div>
+</div>

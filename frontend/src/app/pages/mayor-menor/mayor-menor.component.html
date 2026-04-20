@@ -1,0 +1,34 @@
+<!-- mayor-o-menor.component.html -->
+<div class="game-container">
+  <div class="game-card shadow-lg">
+    <h2>🎵 Mayor o Menor</h2>
+    <p class="subtitulo">¿La canción es en tonalidad Mayor o Menor?</p>
+
+    <div class="puntuacion-vidas">
+      <div class="puntos">🎯 Puntuación: <strong>{{ puntuacion }}</strong></div>
+      <div class="vidas">❤️ Vidas: <span class="vidas-count">{{ '❤️'.repeat(vidas) }}{{ '🖤'.repeat(3-vidas) }}</span></div>
+    </div>
+
+    <div class="cancion-actual" *ngIf="juegoActivo && !juegoTerminado">
+      <div class="icono-musica">🎵</div>
+      <div class="nombre-cancion">{{ cancionActual?.nombre }}</div>
+      <button class="btn-play" (click)="playAudio()">▶ Reproducir</button>
+
+      <div class="opciones-tonalidad">
+        <button class="btn-mayor" (click)="verificar('Mayor')">🎼 MAYOR</button>
+        <button class="btn-menor" (click)="verificar('Menor')">🎧 MENOR</button>
+      </div>
+    </div>
+
+    <div class="mensaje" [ngClass]="{'text-success': mensaje.includes('Correcto'), 'text-danger': mensaje.includes('Fallaste')}">
+      {{ mensaje }}
+    </div>
+
+    <div *ngIf="juegoTerminado" class="resultado-final">
+      <h3>{{ puntuacion >= 100 ? '🎉 ¡CAMPEÓN! 🎉' : '💀 GAME OVER 💀' }}</h3>
+      <p>Puntuación final: <strong>{{ puntuacion }}</strong></p>
+      <button class="btn-reiniciar" (click)="reiniciar()">🔄 Jugar de nuevo</button>
+      <a [routerLink]="['/juegos-musicales']" class="btn-volver">🔙 Volver a juegos</a>
+    </div>
+  </div>
+</div>

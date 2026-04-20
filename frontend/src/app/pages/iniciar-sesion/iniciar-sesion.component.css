@@ -300,3 +300,141 @@
 .volver-inicio:hover {
   text-decoration: underline; /* opcional, efecto al pasar el ratón */
 }
+
+/* ==================== */
+/* 📱 RESPONSIVE MÓVIL */
+/* ==================== */
+
+@media (max-width: 768px) {
+  .login-container {
+    width: 95%;
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .login-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-header p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Ajustar altura de inputs */
+  .input-group {
+    height: 50px;
+  }
+
+  /* Ajustar padding izquierdo para los iconos */
+  .input-group input {
+    padding: 0 3rem 0 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Iconos más pequeños en móvil */
+  .input-group i.fa-lock,
+  .input-group i.fa-envelope {
+    font-size: 1rem;
+    left: 0.8rem;
+  }
+
+  /* Ojo (toggle password) más pequeño */
+  .toggle-eye {
+    font-size: 1rem;
+    right: 0.8rem;
+  }
+
+  /* Checklist más compacta */
+  .validation-checklist {
+    font-size: 0.7rem;
+    padding-left: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .validation-checklist li {
+    margin-bottom: 0.2rem;
+  }
+
+  /* Opciones (recordar/olvidé) */
+  .options {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .options .remember-me,
+  .options .forgot-password {
+    width: 100%;
+  }
+
+  .volver-inicio {
+    padding-left: 0;
+  }
+
+  /* Botón */
+  .login-btn {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  /* Registro */
+  .register-link {
+    font-size: 0.85rem;
+  }
+
+  /* Notificación */
+  .notification-content {
+    padding: 1.5rem 2rem;
+    width: 85%;
+  }
+
+  .notification-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .notification-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .input-group {
+    height: 45px;
+  }
+
+  .input-group input {
+    padding: 0 2.5rem 0 2rem;
+    font-size: 0.85rem;
+  }
+
+  .input-group i.fa-lock,
+  .input-group i.fa-envelope {
+    font-size: 0.9rem;
+    left: 0.6rem;
+  }
+
+  .toggle-eye {
+    font-size: 0.9rem;
+    right: 0.6rem;
+  }
+
+  .validation-checklist {
+    font-size: 0.65rem;
+  }
+
+  .login-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .notification-content {
+    padding: 1rem 1.5rem;
+    width: 90%;
+  }
+}

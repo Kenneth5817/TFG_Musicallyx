@@ -53,7 +53,7 @@ export class AdivinarCompasComponent implements AfterViewInit {
     { audio: 'assets/audio/canciones/Camilo.mp3', compas: ['2/4', '4/4'] },
     { audio: 'assets/audio/canciones/weAreTheChampion.mp3', compas: ['6/8','2/4', '4/4'] },
     { audio: 'assets/audio/canciones/animals68.mp3', compas: ['6/8', '2/4', '4/4'] },
-    { audio: 'assets/audio/canciones/sonrisasYLagrimas.mp3', compas: ['3/4'] },
+    { audio: 'assets/audio/canciones/sonrisasYLagrimas.mp3', compas: ['3/4', '6/8'] },
     { audio: 'assets/audio/canciones/danubioAzul.mp3', compas: ['3/4'] },
   ];
 

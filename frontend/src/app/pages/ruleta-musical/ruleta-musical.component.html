@@ -1,0 +1,42 @@
+<!-- ruleta-musical.component.html -->
+<div class="game-container">
+  <div class="game-card shadow-lg">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>🎰 Ruleta Musical</h2>
+      <button class="btn-exit" (click)="salirDelJuego()">✖ Salir</button>
+    </div>
+
+    <div class="puntuacion-info">
+      <div class="puntos">🎯 Puntos: <strong>{{ puntuacion }}</strong></div>
+      <div class="racha">🔥 Racha: <strong>{{ racha }}</strong></div>
+      <div class="multiplicador" [class.activo]="multiplicador > 1">⚡ Multiplicador: x{{ multiplicador }}</div>
+    </div>
+
+    <div class="ruleta-visual" [class.girando]="girando">
+      <div class="letra-actual">{{ letraActual || '?' }}</div>
+      <div class="nota-equivalente">{{ letraActual ? notas[letraActual] : '?' }}</div>
+    </div>
+
+    <div class="tiempo">
+      <div class="tiempo-bar" [style.width.%]="(tiempoRestante / 10) * 100"></div>
+      <span>{{ tiempoRestante }}s</span>
+    </div>
+
+    <div class="opciones" *ngIf="juegoActivo && !juegoTerminado">
+      <button *ngFor="let opcion of opciones"
+              class="btn-opcion"
+              (click)="verificarRespuesta(opcion)">
+        {{ opcion }}
+      </button>
+    </div>
+
+    <div class="mensaje" [ngClass]="mensajeClass">{{ mensaje }}</div>
+
+    <div *ngIf="juegoTerminado" class="resultado-final">
+      <h3>{{ puntuacion >= 300 ? '🎉 ¡VICTORIA! 🎉' : '💀 GAME OVER 💀' }}</h3>
+      <p>Puntuación final: <strong>{{ puntuacion }}</strong></p>
+      <button class="btn-reiniciar" (click)="reiniciarJuego()">🔄 Jugar de nuevo</button>
+      <a [routerLink]="['/juegos-musicales']" class="btn-volver">🔙 Volver a juegos</a>
+    </div>
+  </div>
+</div>
