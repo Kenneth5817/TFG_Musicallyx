@@ -27,7 +27,7 @@ export class MisReservasComponent implements OnInit {
   ngOnInit() {
     const email = localStorage.getItem('email') || '';
 
-    this.http.get<Reserva[]>(`http://localhost:8080/v1/api/reservas/usuario/${email}`)
+    this.http.get<Reserva[]>(`https://tfg-musicallyx.onrender.com/v1/api/reservas/usuario/${email}`)
       .subscribe(reservas => {
 
         const reservasNormalizadas = reservas.map(r => ({
@@ -61,7 +61,7 @@ export class MisReservasComponent implements OnInit {
       description: `Pago clase ${reserva.asignatura}`
     };
 
-    this.http.post<PaypalResponse>('http://localhost:8080/payment/create', request)
+    this.http.post<PaypalResponse>('https://tfg-musicallyx.onrender.com/payment/create', request)
       .subscribe(resp => {
         // Redirige directamente al href de PayPal
         window.location.href = resp.href;

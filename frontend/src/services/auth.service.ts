@@ -11,7 +11,7 @@ export class AuthService {
   public isLoggedIn$ = this._isLoggedIn$.asObservable();
   public user: any = null;
 
-  private baseUrl = 'http://localhost'; // puerto 80 por tu backend
+  private baseUrl = 'https://tfg-musicallyx.onrender.com'; // puerto 80 por tu backend
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('usuario');
@@ -22,10 +22,12 @@ export class AuthService {
   }
 
   loginBackend(email: string, password: string): Observable<any> {
-    return this.http.post(`http://localhost:8080/v1/api/auth/login`, { email, password })
-      .pipe(
-        tap(usuario => this.setUser(usuario))
-      );
+    return this.http.post(
+      `${this.baseUrl}/v1/api/auth/login`,
+      { email, password }
+    ).pipe(
+      tap(usuario => this.setUser(usuario))
+    );
   }
 
   setUser(usuario: any) {

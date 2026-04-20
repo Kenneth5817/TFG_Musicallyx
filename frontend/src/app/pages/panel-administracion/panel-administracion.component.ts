@@ -157,12 +157,6 @@ export class PanelAdministracionComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
   buscar() {
     if (!this.busqueda.trim()) {
       this.datos = [...this.datosOriginales];

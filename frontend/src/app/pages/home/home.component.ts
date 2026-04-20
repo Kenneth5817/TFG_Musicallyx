@@ -91,7 +91,7 @@ export class HomeComponent implements AfterViewInit{
   manejarEnvio() {
     if (this.opinion.trim() !== '') {
       this.http.post(
-        'http://localhost:8080/api/opinion/enviar',
+        'https://tfg-musicallyx.onrender.com/api/opinion/enviar',
         { opinion: this.opinion },
         { responseType: 'text' } // 🔹 importante
       ).subscribe({

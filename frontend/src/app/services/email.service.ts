@@ -5,7 +5,7 @@ import {Reserva} from '../models/reserva.model';
 
 @Injectable({ providedIn: 'root' })
 export class EmailService {
-  private baseUrl = 'http://localhost:8080/api/email';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/api/email';
 
   constructor(private http: HttpClient) {}
 

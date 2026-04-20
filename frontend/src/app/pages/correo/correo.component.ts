@@ -46,7 +46,7 @@ export class CorreoComponent implements OnInit {
 
   vistaActual: 'bandeja' | 'detalle' | 'nuevo' = 'bandeja';
 
-  private baseUrl = 'http://localhost:8080/api/mensajes';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/api/mensajes';
 
   // --- MODAL ---
   mostrarModal = false;

@@ -15,7 +15,7 @@ export interface Mensaje {
 
 @Injectable({ providedIn: 'root' })
 export class MensajeService {
-  private baseUrl = 'http://localhost:8080/api/mensajes';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/api/mensajes';
 
   constructor(private http: HttpClient) {}
 

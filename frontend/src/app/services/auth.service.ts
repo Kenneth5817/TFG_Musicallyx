@@ -20,7 +20,7 @@ export class AuthService {
   user: Usuario | null = null;
   isLoggedIn$ = this.loggedIn.asObservable();
 
-  private baseUrl = 'http://localhost:8080/v1/api/auth';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/v1/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {
     const storedUser = localStorage.getItem('usuario');
@@ -107,7 +107,7 @@ export class AuthService {
   }
 
   sendResetPasswordEmail(email: string): Observable<string> {
-    return this.http.post('http://localhost:8080/api/email/reset-password',
+    return this.http.post('https://tfg-musicallyx.onrender.com/api/email/reset-password',
       { email },
       { responseType: 'text', withCredentials: true }
     );

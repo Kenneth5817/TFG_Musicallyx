@@ -23,7 +23,7 @@ export class GestionAdminComponent implements OnInit {
   buscarPor: 'alumno' | 'asignatura' = 'alumno';
   filtro: string = '';
 
-  private baseUrl = 'http://localhost:8080/v1/api/reservas';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/v1/api/reservas';
 
   constructor(
     private emailService: EmailService,

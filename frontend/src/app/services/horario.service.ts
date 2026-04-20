@@ -12,7 +12,7 @@ export interface HorarioBackend {
 
 @Injectable({ providedIn: 'root' })
 export class HorarioService {
-  private baseUrl = 'http://localhost:8080/v1/api/horarios';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/v1/api/horarios';
 
   constructor(private http: HttpClient) {}
 

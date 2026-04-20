@@ -9,14 +9,14 @@ import {Router} from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AdminService {
 
-  private baseUrl = 'http://localhost:8080/api/admin';
+  private baseUrl = 'https://tfg-musicallyx.onrender.com/api/admin';
 
   constructor(private http: HttpClient) {}
 
   getDatos(tipo: string, page: number, size: number): Observable<any> {
     if (tipo === 'usuarios') {
       // Endpoint específico para usuarios
-      return this.http.get<any>(`http://localhost:8080/v1/api/usuarios?page=${page}&size=${size}`,
+      return this.http.get<any>(`https://tfg-musicallyx.onrender.com/v1/api/usuarios?page=${page}&size=${size}`,
       {withCredentials: true})
     }
     if (tipo === 'profesores') {
@@ -24,7 +24,7 @@ export class AdminService {
     }
     if (tipo === 'reservas') {
       return this.http.get<any>(
-        `http://localhost:8080/v1/api/reservas?page=${page}&size=${size}`,
+        `https://tfg-musicallyx.onrender.com/v1/api/reservas?page=${page}&size=${size}`,
         { withCredentials: true }
       );
     }
@@ -35,24 +35,24 @@ export class AdminService {
   }
 
   getProfesores(page: number = 0, size: number = 10) {
-    return this.http.get<any>(`http://localhost:8080/v1/api/profesores?page=${page}&size=${size}`, {
+    return this.http.get<any>(`https://tfg-musicallyx.onrender.com/v1/api/profesores?page=${page}&size=${size}`, {
       withCredentials: true
     });
   }
 
   getDatosTablaReservas(pagina: number, tamaño: number): Observable<{content: ReservaTablaDTO[], totalPages: number, number: number}> {
     return this.http.get<{content: ReservaTablaDTO[], totalPages: number, number: number}>(
-      `http://localhost:8080/v1/api/reservas/tabla?page=${pagina}&size=${tamaño}`,
+      `https://tfg-musicallyx.onrender.com/v1/api/reservas/tabla?page=${pagina}&size=${tamaño}`,
       { withCredentials: true }
     );
   }
 
   getEstadisticasWeb() {
-    return this.http.get<any>('http://localhost:8080/api/estadisticas-web');
+    return this.http.get<any>('https://tfg-musicallyx.onrender.com/api/estadisticas-web');
   }
 
   registrarVisita() {
-    return this.http.post('http://localhost:8080/api/estadisticas-web/visita', {});
+    return this.http.post('https://tfg-musicallyx.onrender.com/api/estadisticas-web/visita', {});
   }
 
 }

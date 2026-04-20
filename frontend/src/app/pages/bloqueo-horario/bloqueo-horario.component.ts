@@ -96,7 +96,8 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
   }
 
   private toggleSeleccion(celda: Celda) {
-    const k = this.key(celda.fecha!, celda.hora);
+    if (!celda.fecha) return;
+    const k = this.key(celda.fecha, celda.hora);
 
     if (this.seleccionadas.has(k)) {
       this.seleccionadas.delete(k);
@@ -120,7 +121,7 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
 
     // 🔥 llamada backend para borrar
     this.http.delete(
-      `http://localhost:8080/v1/api/reservas`,
+      `https://tfg-musicallyx.onrender.com/v1/api/reservas`,
       {
         body: {
           fechaClase: fecha,
@@ -204,7 +205,8 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
         const fechaStr = fecha.toISOString().split('T')[0];
         const k = this.key(fechaStr, this.horas[i]);
 
-        fila.push(this.calendarioMap.get(k)!);
+        const celda = this.calendarioMap.get(k);
+        if (celda) fila.push(celda);
       }
 
       grid.push(fila);
@@ -216,11 +218,9 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
   // 🔥 CLICK FUNCIONANDO DE VERDAD
   toggleCelda(celda: Celda) {
     if (celda.estado === 'reservado') return;
+    if (!celda.fecha) return;
 
-    const fecha = celda.fecha || this.dias[this.calendario.findIndex(f => f.includes(celda))]; // fallback seguro
-    if (!fecha) return;
-
-    const k = this.key(celda.fecha!, celda.hora);
+    const k = this.key(celda.fecha, celda.hora);
 
     if (this.seleccionadas.has(k)) {
       this.seleccionadas.delete(k);
@@ -236,10 +236,10 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
 
     forkJoin({
       reservas: this.http.get<any[]>(
-        `http://localhost:8080/v1/api/reservas/semana/${this.semanaSeleccionada}`
+        `https://tfg-musicallyx.onrender.com/v1/api/reservas/semana/${this.semanaSeleccionada}`
       ),
       bloqueos: this.http.get<any[]>(
-        `http://localhost:8080/v1/api/bloqueos/semana?start=${start}&end=${end}`
+        `https://tfg-musicallyx.onrender.com/v1/api/bloqueos/semana?start=${start}&end=${end}`
       )
     }).subscribe(({ reservas, bloqueos }) => {
 
@@ -293,7 +293,7 @@ export class BloqueoHorarioComponent implements OnInit, OnDestroy {
       };
     });
 
-    this.http.post('http://localhost:8080/v1/api/bloqueos', bloqueos)
+    this.http.post('https://tfg-musicallyx.onrender.com/v1/api/bloqueos', bloqueos)
       .subscribe({
         next: () => {
           alert('Cambios guardados ✔');

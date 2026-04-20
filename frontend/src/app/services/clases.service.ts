@@ -19,7 +19,7 @@ export interface Clase {
   providedIn: 'root'
 })
 export class ClasesService {
-  private apiUrl = 'http://localhost:8080/v1/api/clases';
+  private apiUrl = 'https://tfg-musicallyx.onrender.com/v1/api/clases';
 
   constructor(private http: HttpClient) { }
 

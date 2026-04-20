@@ -26,11 +26,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/**").permitAll()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -38,6 +38,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
     public org.springframework.web.filter.CorsFilter corsFilter() {
         return new org.springframework.web.filter.CorsFilter(corsConfigurationSource());
@@ -46,15 +47,18 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of(
-                "http://localhost:4200",
-                "http://localhost:3000",
-                "http://localhost:5173"
-        ));
+        //config.setAllowedOriginPatterns(List.of(
+        //        "http://localhost:4200",
+        //        "http://localhost:3000",
+        //        "http://localhost:5173",
+        //        "https://musicallyx.netlify.app"
+        //));
+        //config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowCredentials(false);
+        //config.setAllowedOrigins(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;

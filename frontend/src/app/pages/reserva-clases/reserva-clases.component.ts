@@ -211,7 +211,7 @@ export class ReservaClasesComponent implements OnInit {
     const semana = this.semanaSeleccionada;
 
     this.http.get<any[]>(
-      `http://localhost:8080/v1/api/reservas/semana/${semana}`
+      `https://tfg-musicallyx.onrender.com/v1/api/reservas/semana/${semana}`
     ).subscribe({
       next: (reservasBackend) => {
 
@@ -252,7 +252,7 @@ export class ReservaClasesComponent implements OnInit {
     const [start, end] = this.semanaSeleccionada.split('_to_');
 
     this.http.get<any[]>(
-      `http://localhost:8080/v1/api/bloqueos/semana?start=${start}&end=${end}`
+      `https://tfg-musicallyx.onrender.com/v1/api/bloqueos/semana?start=${start}&end=${end}`
     ).subscribe({
       next: (bloqueos) => {
 
@@ -467,7 +467,7 @@ export class ReservaClasesComponent implements OnInit {
     const headers = { 'Content-Type': 'application/json' };
 
     // ✅ Intentamos guardar en backend
-    this.http.post('http://localhost:8080/v1/api/reservas', reservas[0], { headers })
+    this.http.post('https://tfg-musicallyx.onrender.com/v1/api/reservas', reservas[0], { headers })
       .subscribe({
         next: () => {
           // Actualizamos la celda del usuario y el resto del calendario

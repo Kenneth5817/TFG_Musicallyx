@@ -20,7 +20,7 @@ export class ChatService {
 
   enviarMensaje(emisor: string, receptor: string, texto: string): Observable<Chat> {
     const body = { emisor, receptor, texto };
-    return this.http.post<Chat>(`http://localhost:8080/api/mensajes/enviar`, body);
+    return this.http.post<Chat>(`https://tfg-musicallyx.onrender.com/api/mensajes/enviar`, body);
   }
 
   obtenerChats(usuario1: string, usuario2: string): Observable<Chat[]> {
