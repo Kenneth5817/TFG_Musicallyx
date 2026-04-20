@@ -13,7 +13,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
-
 @Configuration
 public class SecurityConfig {
 
@@ -33,7 +32,8 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                )
+                .httpBasic(Customizer.withDefaults()); // Añade esto si usas autenticación básica
 
         return http.build();
     }
@@ -42,16 +42,39 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
-                "https://musicallyxx.netlify.app"
+        // Especifica explícitamente el origen (no usar *)
+        config.setAllowedOrigins(List.of("https://musicallyxx.netlify.app"));
+
+        // Especifica los métodos permitidos
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        // Especifica los headers permitidos explícitamente (no usar *)
+        config.setAllowedHeaders(List.of(
+                "Origin",
+                "Content-Type",
+                "Accept",
+                "Authorization",
+                "X-Requested-With",
+                "Access-Control-Request-Method",
+                "Access-Control-Request-Headers"
         ));
 
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
+        // Headers expuestos al cliente
+        config.setExposedHeaders(List.of(
+                "Authorization",
+                "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials"
+        ));
+
+        // Permite credenciales
         config.setAllowCredentials(true);
+
+        // Tiempo de cacheo de la preflight request (opcional, pero recomendado)
+        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/v1/api/**", config); // Específico para tu API
 
         return source;
     }
