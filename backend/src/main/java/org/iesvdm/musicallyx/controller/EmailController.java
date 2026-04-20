@@ -68,7 +68,7 @@ public class EmailController {
 
                             // Logo centrado
                             "<div style='text-align:center;padding:10px 0;'>" +
-                            "<img src='" + logoUrl + "' alt='MusicallyX' style='max-width:180px;height:auto;'/>" +
+                            "<img src='" + logoUrl + "' alt='Musicallyx' style='max-width:180px;height:auto;'/>" +
                             "</div>" +
 
                             // Contenedor principal
@@ -171,7 +171,7 @@ public class EmailController {
                             "<div style='width:100%;height:8px;background:#CE2127;'></div>" +
 
                             "<div style='text-align:center;padding:10px 0;'>" +
-                            "<img src='" + logoUrl + "' alt='MusicallyX' style='max-width:180px;height:auto;'/>" +
+                            "<img src='" + logoUrl + "' alt='Musicallyx' style='max-width:180px;height:auto;'/>" +
                             "</div>" +
 
                             "<div style='max-width:600px;margin:0 auto;padding:25px;border-radius:20px;background:#f5f5f5;" +
@@ -238,7 +238,7 @@ public class EmailController {
         String resetUrl = "http://localhost:4200/reset-password?token=" + token;
 
         // Enviar correo
-        String asunto = "Restablece tu contraseña - MusicallyX";
+        String asunto = "Restablece tu contraseña - Musicallyx";
         String mensaje = "Has solicitado restablecer tu contraseña. Haz clic aquí para cambiarla:\n" + resetUrl;
         emailService.sendSimpleEmail(email, asunto, mensaje);
 
@@ -337,7 +337,7 @@ public class EmailController {
             // 2️⃣ Enviar correo HTML al usuario
             reservaService.enviarCorreoReservaHtml(reservaDTO.getEmail(), reservaDTO);
             // 3️⃣ Enviar correo simple al admin
-            String asuntoAdmin = "🔔 Nueva reserva MusicallyX";
+            String asuntoAdmin = "🔔 Nueva reserva Musicallyx";
             String mensajeAdmin =
                     "Nueva reserva recibida:\n\n" +
                             "Nombre: " + nombreCompleto + "\n" +

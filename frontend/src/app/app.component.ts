@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
+import { KeepAliveService } from './services/keep-alive.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthService } from './services/auth.service';
@@ -26,7 +26,7 @@ export class AppComponent {
   loggingOut = false;
   usuarioLogueado: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private usuarioEstado: UsuarioEstadoService) {
+  constructor(private router: Router, private authService: AuthService, private usuarioEstado: UsuarioEstadoService,   private keepAlive: KeepAliveService) {
     // Mostrar/ocultar header/footer según la ruta
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -41,6 +41,10 @@ export class AppComponent {
     this.usuarioEstado.usuario$.subscribe(user => {
       this.usuarioLogueado = !!user; // true si hay usuario
     });
+
+    if (this.keepAlive) {
+      this.keepAlive.start();
+    }
   }
 
   logout() {

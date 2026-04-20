@@ -55,19 +55,4 @@ public class SecurityConfig {
 
         return source;
     }
-
-    @Bean
-    public org.springframework.web.filter.CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowedOrigins(List.of("https://musicallyxx.netlify.app"));
-        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
-        source.registerCorsConfiguration("/**", config);
-
-        return new org.springframework.web.filter.CorsFilter(source);
-    }
 }
