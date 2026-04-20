@@ -47,20 +47,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        //config.setAllowedOriginPatterns(List.of(
-        //        "http://localhost:4200",
-        //        "http://localhost:3000",
-        //        "http://localhost:5173",
-        //        "https://musicallyx.netlify.app"
-        //));
-        //config.setAllowedOriginPatterns(List.of("*"));
+
+        config.setAllowedOrigins(List.of(
+                "https://musicallyxx.netlify.app"
+        ));
+
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowedOriginPatterns(List.of("*"));
-        config.setAllowCredentials(false);
-        //config.setAllowedOrigins(List.of("*"));
+
+        config.setAllowCredentials(true); // 🔥 IMPORTANTE
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
 }
