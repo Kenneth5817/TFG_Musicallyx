@@ -129,7 +129,7 @@ public class EmailService {
     }
 
     public void sendResetPasswordEmail(String destinatario, String token) {
-        String resetUrl = "http://localhost:4200/reset-password?token=" + token;
+        String resetUrl = "https://musicallyxx.netlify.app/reset-password?token=" + token;
         String asunto = "Restablece tu contraseña - Musicallyx";
         String mensaje = "Hola,\n\nHas solicitado restablecer tu contraseña. Haz clic aquí para cambiarla:\n" + resetUrl +
                 "\n\nSi no fuiste tú, ignora este mensaje.\n\nMusicallyx Team";
