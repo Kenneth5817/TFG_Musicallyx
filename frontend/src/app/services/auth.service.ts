@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   sendResetPasswordEmail(email: string): Observable<string> {
-    return this.http.post('https://tfg-musicallyx.onrender.com/api/email/reset-password',
+    return this.http.post('https://tfg-musicallyx.onrender.com/api/email/reset-password-request',
       { email },
       { responseType: 'text', withCredentials: true }
     );

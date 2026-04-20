@@ -48,15 +48,15 @@ public class AuthController {
         String token = java.util.UUID.randomUUID().toString();
         usuario.setResetToken(token);
         usuario.setTokenExpiration(LocalDateTime.now().plusHours(1));
-        usuarioRepository.save(usuario); // 🔹 Guardar cambios primero
+        usuarioRepository.save(usuario);
 
-        // 2️⃣ Construir email y enviarlo
-        String resetLink = "http://musicallyxx.netlify.app:4200/reset-password?token=" + token;
+        // 2️⃣ Construir email y enviarlo ✅ CORREGIDO
+        String resetLink = "https://musicallyxx.netlify.app/reset-password?token=" + token;
         String subject = "Recuperación de contraseña";
         String text = "Haz click aquí para restablecer tu contraseña: " + resetLink;
 
         try {
-            emailService.sendSimpleEmail(email, subject, text); // 🔹 Enviar correo
+            emailService.sendSimpleEmail(email, subject, text);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -144,6 +144,33 @@ public class AuthController {
         public void setPassword(String password) { this.password = password; }
     }
 
+    // 1. Validar token (GET)
+    @GetMapping("/validate-reset-token")
+    public ResponseEntity<?> validateResetToken(@RequestParam String token) {
+        System.out.println("🔍 Validando token: " + token);
+
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByResetToken(token);
+
+        if (usuarioOpt.isEmpty()) {
+            System.out.println("❌ Token no encontrado");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("valid", false, "message", "Token inválido"));
+        }
+
+        Usuario usuario = usuarioOpt.get();
+
+        if (usuario.getTokenExpiration() == null ||
+                usuario.getTokenExpiration().isBefore(LocalDateTime.now())) {
+            System.out.println("❌ Token expirado");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("valid", false, "message", "Token expirado"));
+        }
+
+        System.out.println("✅ Token válido para usuario: " + usuario.getEmail());
+        return ResponseEntity.ok(Map.of("valid", true));
+    }
+
+
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> body) {
         String token = body.get("token");
@@ -170,6 +197,7 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("message", "Contraseña actualizada correctamente"));
     }
+
 
     @GetMapping("/validar-sesion")
     public ResponseEntity<Boolean> validarSesion(HttpSession session) {

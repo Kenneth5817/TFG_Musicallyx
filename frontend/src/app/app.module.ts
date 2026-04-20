@@ -26,7 +26,6 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 
     ]),
     InfoComponent,
-    ResetPasswordConfirmComponent,
     ClasesComponent,
     HomeComponent,
     AppComponent,
