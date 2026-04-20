@@ -51,7 +51,7 @@ public class AuthController {
         usuarioRepository.save(usuario); // 🔹 Guardar cambios primero
 
         // 2️⃣ Construir email y enviarlo
-        String resetLink = "http://localhost:4200/reset-password?token=" + token;
+        String resetLink = "http://musicallyxx.netlify.app:4200/reset-password?token=" + token;
         String subject = "Recuperación de contraseña";
         String text = "Haz click aquí para restablecer tu contraseña: " + resetLink;
 

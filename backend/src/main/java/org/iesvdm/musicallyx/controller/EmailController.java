@@ -133,7 +133,7 @@ public class EmailController {
         String mensaje = "Hola,\n\n" +
                 "Recibimos una solicitud para restablecer tu contraseña.\n" +
                 "Haz clic en el siguiente enlace para cambiarla:\n\n" +
-                "http://localhost:4200/restablecer-password?email=" + email + "\n\n" +
+                "http://musicallyxx.netlify.app/restablecer-password?email=" + email + "\n\n" +
                 "Si no fuiste tú, simplemente ignora este mensaje.\n\n" +
                 "Musicallyx Team";
 
