@@ -90,13 +90,14 @@ galleryImages: string[] = [
   // Clips de la sección "Momentos que inspiran"
   videoClips: string[] = [
     '/assets/video/CancionMusicTeam.mp4',
-    '/assets/video/cancionBetel.mp4',
+    '/assets/video/carolPiano.mp4',
     '/assets/video/6febrero.mp4',
     //'/assets/video/Edelweiss.mp4',
     '/assets/video/coldplay.mp4',
     '/assets/video/cancion2musicteam.mp4',
     '/assets/video/beautifulThings.mp4',
-
+    '/assets/video/cancionBetel.mp4',
+    '/assets/video/pabloPiano.mp4',
   ];
 
   ngOnInit() {

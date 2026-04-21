@@ -25,17 +25,18 @@ export class AdivinarEstiloComponent implements OnInit {
     { audio: './assets/audio/estilosCanciones/noTieneSentido.mp3', estilo: ['urbano', 'regueton'] },
     { audio: './assets/audio/estilosCanciones/odioQueTeQuiero.mp3', estilo: 'pop' },
     { audio: './assets/audio/estilosCanciones/tontipopSiQuieres.mp3', estilo: ['pop', 'tontipop'] },
-    { audio: './assets/audio/estilosCanciones/rompe.mp3', estilo: ['electronica', 'pop'] },
     { audio: './assets/audio/estilosCanciones/techno.mp3', estilo: ['techno', 'electronica'] },
     { audio: './assets/audio/estilosCanciones/shallow.mp3', estilo: 'balada' },
     { audio: './assets/audio/estilosCanciones/perfect.mp3', estilo: 'balada' },
-    { audio: './assets/audio/estilosCanciones/tango.mp3', estilo: 'tango' }
+    { audio: './assets/audio/estilosCanciones/tango.mp3', estilo: 'tango' },
+    { audio: './assets/audio/estilosCanciones/runningToYou.mp3', estilo: 'afrobeat' }
+
   ];
 
   estilosDisponibles: string[] = [
     'pop', 'rock', 'regueton', 'tango', 'techno', 'country',
     'jazz', 'electronica', 'merengue', 'tontipop', 'balada',
-    'salsa', 'cumbia', 'urbano'
+    'salsa', 'cumbia', 'urbano', 'afrobeat'
   ];
 
   preguntasRestantes: Cancion[] = [];

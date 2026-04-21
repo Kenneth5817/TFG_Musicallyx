@@ -22,6 +22,90 @@
       </div>
     </div>
 
+    <!-- Juego 9 - Mayor o Menor -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview9.jpg">
+          <source src="/assets/video/mayor-menor.mp4" type="video/mp4">
+        </video>
+
+        <img src="/assets/img/juego9.jpg" alt="Preview juego 9" class="image-mobile">
+      </div>
+
+      <div class="game-content">
+        <h3>Mayor o Menor</h3>
+        <p>Escucha canciones y decide si están en tonalidad Mayor o Menor.</p>
+        <a [routerLink]="['/mayor-menor']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 4 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview4.jpg">
+        <source src="/assets/video/cantarCoche.mp4" type="video/mp4">
+      </video>
+
+        <img src="/assets/img/juego4.jpg" alt="Preview juego 4" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Adivina el estilo</h3>
+        <p>Identifica a qué estilo pertenecen las canciones.</p>
+        <a [routerLink]="['/adivinar-estilo']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 8 - Ahorcado Musical -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview8.jpg">
+          <source src="/assets/video/ahorcado.mp4" type="video/mp4">
+        </video>
+
+        <img src="/assets/img/juego8.jpg" alt="Preview juego 8" class="image-mobile">
+      </div>
+
+      <div class="game-content">
+        <h3>Adivina la Palabra</h3>
+        <p>Acierta los términos musicales.</p>
+        <a [routerLink]="['/ahorcado-musical']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+
+    <!-- Juego 7 - QUIZ Musical -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview7.jpg">
+          <source src="/assets/video/quiz-musical.mp4" type="video/mp4">
+        </video>
+
+        <img src="/assets/img/juego7.jpg" alt="Preview juego 7" class="image-mobile">
+      </div>
+
+      <div class="game-content">
+        <h3>Quiz Musical</h3>
+        <p>Adivina el cifrado americano. ¡Gana puntos y desbloquea multiplicadores!</p>
+        <a [routerLink]="['/ruleta-musical']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+    <!-- Juego 5 -->
+    <div class="game-card">
+      <div class="game-video-wrapper">
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview5.jpg">
+          <source src="/assets/video/memory.mp4" type="video/mp4">
+        </video>
+        <img src="/assets/img/juego5.jpg" alt="Preview juego 5" class="image-mobile">
+      </div>
+      <div class="game-content">
+        <h3>Memoriza los instrumentos</h3>
+        <p>Encuentra todas las parejas de instrumentos en tiempo récord.</p>
+        <a [routerLink]="['/memorizar-instrumento']" class="play-btn red">Jugar</a>
+      </div>
+    </div>
+
+
     <!-- Juego 2 -->
     <div class="game-card">
       <div class="game-video-wrapper">
@@ -54,76 +138,19 @@
       </div>
     </div>
 
-    <!-- Juego 4 -->
-    <div class="game-card">
-      <div class="game-video-wrapper">
-      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview4.jpg">
-        <source src="/assets/video/cantarCoche.mp4" type="video/mp4">
-      </video>
-
-        <img src="/assets/img/juego4.jpg" alt="Preview juego 4" class="image-mobile">
-      </div>
-      <div class="game-content">
-        <h3>Adivina el estilo</h3>
-        <p>Identifica a qué estilo pertenecen las canciones.</p>
-        <a [routerLink]="['/adivinar-estilo']" class="play-btn red">Jugar</a>
-      </div>
-    </div>
-
-    <!-- Juego 5 -->
-    <div class="game-card">
-      <div class="game-video-wrapper">
-      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview5.jpg">
-        <source src="/assets/video/memory.mp4" type="video/mp4">
-      </video>
-        <img src="/assets/img/juego5.jpg" alt="Preview juego 5" class="image-mobile">
-      </div>
-      <div class="game-content">
-        <h3>Memoriza los instrumentos</h3>
-        <p>Encuentra todas las parejas de instrumentos en tiempo récord.</p>
-        <a [routerLink]="['/memorizar-instrumento']" class="play-btn red">Jugar</a>
-      </div>
-    </div>
 
     <!-- Juego 6 -->
     <div class="game-card">
       <div class="game-video-wrapper">
-      <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview6.jpg">
-        <source src="/assets/video/simon.mp4" type="video/mp4">
-      </video>
+        <video class="game-video video-desktop" autoplay muted loop playsinline poster="assets/img/video-preview6.jpg">
+          <source src="/assets/video/simon.mp4" type="video/mp4">
+        </video>
         <img src="/assets/img/juego6.jpg" alt="Preview juego 6" class="image-mobile">
       </div>
       <div class="game-content">
         <h3>Simón dice...</h3>
         <p>Trabaja la memoria con este juego interactivo.</p>
         <a [routerLink]="['/juego-simon']" class="play-btn red">Jugar</a>
-      </div>
-    </div>
-
-    <!-- Juego 7 - Ruleta Musical -->
-    <div class="game-card">
-      <div class="game-content">
-        <h3>🎰 Ruleta Musical</h3>
-        <p>Adivina el cifrado americano. ¡Gana puntos y desbloquea multiplicadores!</p>
-        <a [routerLink]="['/ruleta-musical']" class="play-btn red">Jugar</a>
-      </div>
-    </div>
-
-    <!-- Juego 8 - Ahorcado Musical -->
-    <div class="game-card">
-      <div class="game-content">
-        <h3>🪢 Ahorcado Musical</h3>
-        <p>Adivina términos musicales antes de que completes el dibujo.</p>
-        <a [routerLink]="['/ahorcado-musical']" class="play-btn red">Jugar</a>
-      </div>
-    </div>
-
-    <!-- Juego 9 - Mayor o Menor -->
-    <div class="game-card">
-      <div class="game-content">
-        <h3>🎵 Mayor o Menor</h3>
-        <p>Escucha canciones y decide si son en tonalidad Mayor o Menor.</p>
-        <a [routerLink]="['/mayor-o-menor']" class="play-btn red">Jugar</a>
       </div>
     </div>
   </div>

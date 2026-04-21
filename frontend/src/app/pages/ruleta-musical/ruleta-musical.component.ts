@@ -1,136 +1,211 @@
-// ruleta-musical.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+interface Ronda {
+  codigo: string;
+  correcta: string;
+}
 
 @Component({
   selector: 'app-ruleta-musical',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './ruleta-musical.component.html',
   styleUrls: ['./ruleta-musical.component.css']
 })
 export class RuletaMusicalComponent implements OnInit, OnDestroy {
-  puntuacion: number = 50;
-  racha: number = 0;
-  multiplicador: number = 1;
-  juegoActivo: boolean = true;
-  juegoTerminado: boolean = false;
-  mensaje: string = '';
-  mensajeClass: string = '';
 
-  letras: string[] = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  notas: { [key: string]: string } = {
-    'C': 'Do', 'D': 'Re', 'E': 'Mi', 'F': 'Fa', 'G': 'Sol', 'A': 'La', 'B': 'Si'
+  // 🎮 GAME STATE
+  puntuacion = 0;
+  racha = 0;
+  multiplicador = 1;
+
+  vidas = 3;
+  juegoActivo = true;
+  juegoTerminado = false;
+
+  mensaje = '';
+  mensajeClass = '';
+
+  // 🎯 CONTROL DE PREGUNTAS
+  maxPreguntas = 15;
+  preguntasHechas = 0;
+
+  codigoActual = '';
+  opciones: string[] = [];
+
+  tiempoRestante = 10;
+  temporizador: any;
+
+  rondas: Ronda[] = [];
+  rondaActual!: Ronda;
+
+  // 🎵 NOTAS
+  notas: any = {
+    C: { mayor: 'Do Mayor', menor: 'Do menor' },
+    D: { mayor: 'Re Mayor', menor: 'Re menor' },
+    E: { mayor: 'Mi Mayor', menor: 'Mi menor' },
+    F: { mayor: 'Fa Mayor', menor: 'Fa menor' },
+    G: { mayor: 'Sol Mayor', menor: 'Sol menor' },
+    A: { mayor: 'La Mayor', menor: 'La menor' },
+    B: { mayor: 'Si Mayor', menor: 'Si menor' }
   };
 
-  letraActual: string = '';
-  opciones: string[] = [];
-  tiempoRestante: number = 10;
-  temporizador: any;
-  girando: boolean = false;
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.nuevaRonda();
+    this.iniciarJuego();
   }
 
   ngOnDestroy() {
-    if (this.temporizador) clearInterval(this.temporizador);
+    clearInterval(this.temporizador);
   }
 
+  // 🚀 INICIO JUEGO
+  iniciarJuego() {
+
+    this.puntuacion = 0;
+    this.racha = 0;
+    this.multiplicador = 1;
+    this.vidas = 3;
+
+    this.preguntasHechas = 0;
+
+    this.juegoActivo = true;
+    this.juegoTerminado = false;
+
+    const keys = Object.keys(this.notas);
+
+    // 🎯 15 preguntas fijas
+    this.rondas = this.shuffle(
+      Array.from({ length: this.maxPreguntas }, () => {
+        const k = keys[Math.floor(Math.random() * keys.length)];
+        return {
+          codigo: Math.random() > 0.5 ? k : k + 'm',
+          correcta: ''
+        };
+      })
+    );
+
+    this.nuevaRonda();
+  }
+
+  // 🎼 PARSE CIFRADO
+  parseCodigo(codigo: string) {
+    const esMenor = codigo.endsWith('m');
+    const nota = esMenor ? codigo.replace('m', '') : codigo;
+
+    const nombre = this.notas[nota][esMenor ? 'menor' : 'mayor'];
+
+    return { nota, esMenor, nombre };
+  }
+
+  // 🎯 NUEVA PREGUNTA
   nuevaRonda() {
-    if (!this.juegoActivo) return;
 
-    // Seleccionar letra aleatoria
-    const indice = Math.floor(Math.random() * this.letras.length);
-    this.letraActual = this.letras[indice];
+    this.preguntasHechas++;
 
-    // Generar opciones (1 correcta + 3 incorrectas aleatorias)
-    const otrasLetras = this.letras.filter(l => l !== this.letraActual);
-    const opcionesInc = [...otrasLetras].sort(() => Math.random() - 0.5).slice(0, 3);
-    this.opciones = [this.letraActual, ...opcionesInc].sort(() => Math.random() - 0.5);
+    if (this.vidas <= 0 || this.preguntasHechas > this.maxPreguntas) {
+      this.terminarJuego();
+      return;
+    }
 
-    // Reiniciar tiempo
+    this.rondaActual = this.rondas.pop()!;
+    const parsed = this.parseCodigo(this.rondaActual.codigo);
+
+    this.codigoActual = this.rondaActual.codigo;
+
+    const correcta = parsed.nombre;
+
+    const todas = Object.values(this.notas)
+      .flatMap((n: any) => [n.mayor, n.menor])
+      .filter((n: string) => n !== correcta);
+
+    this.opciones = this.shuffle([
+      correcta,
+      ...todas.slice(0, 3)
+    ]);
+
     this.tiempoRestante = 10;
-    if (this.temporizador) clearInterval(this.temporizador);
+    clearInterval(this.temporizador);
     this.iniciarTemporizador();
   }
 
+  // ⏱ TIMER
   iniciarTemporizador() {
     this.temporizador = setInterval(() => {
-      if (this.tiempoRestante > 0 && this.juegoActivo) {
+      if (this.tiempoRestante > 0) {
         this.tiempoRestante--;
-      } else if (this.tiempoRestante === 0 && this.juegoActivo) {
-        this.fallo('⏰ ¡Se acabó el tiempo!');
+      } else {
+        this.fallo();
       }
     }, 1000);
   }
 
-  verificarRespuesta(letraElegida: string) {
-    if (!this.juegoActivo) return;
+  // 🎮 RESPUESTA
+  verificarRespuesta(opcion: string) {
 
-    if (letraElegida === this.letraActual) {
-      // ACIERTO
-      const puntosGanados = 10 * this.multiplicador;
-      this.puntuacion += puntosGanados;
+    const parsed = this.parseCodigo(this.codigoActual);
+
+    const normal = (t: string) =>
+      t.toLowerCase().replace(/\s/g, '');
+
+    if (normal(opcion) === normal(parsed.nombre)) {
+
+      this.puntuacion += 10 * this.multiplicador;
       this.racha++;
 
-      if (this.racha >= 3) {
-        this.multiplicador = 2;
-        this.mensaje = `✨ ¡RACHA DE ${this.racha}! Multiplicador x2 ✨`;
-      } else {
-        this.multiplicador = 1;
-        this.mensaje = `✅ ¡Correcto! ${this.letraActual} = ${this.notas[this.letraActual]} +${puntosGanados}`;
-      }
+      this.mensaje = 'Correcto';
       this.mensajeClass = 'text-success';
 
-      // Verificar si ganó
-      if (this.puntuacion >= 300) {
-        this.terminarJuego(true);
-        return;
-      }
+      if (this.racha >= 3) this.multiplicador = 2;
 
-      setTimeout(() => this.nuevaRonda(), 1000);
     } else {
-      // FALLO
-      this.fallo(`❌ Incorrecto. ${letraElegida} = ${this.notas[letraElegida]}. La correcta era ${this.letraActual} = ${this.notas[this.letraActual]}`);
+      this.fallo();
+      return;
     }
+
+    setTimeout(() => this.nuevaRonda(), 700);
   }
 
-  fallo(mensajeError: string) {
-    this.puntuacion -= 5;
+  // 💀 FALLO
+  fallo() {
+
+    this.vidas--;
     this.racha = 0;
     this.multiplicador = 1;
-    this.mensaje = mensajeError;
+
+    this.mensaje = 'Fallo';
     this.mensajeClass = 'text-danger';
 
-    if (this.puntuacion <= 0) {
-      this.terminarJuego(false);
-    } else {
-      setTimeout(() => this.nuevaRonda(), 1500);
+    if (this.vidas <= 0) {
+      this.terminarJuego();
+      return;
     }
+
+    setTimeout(() => this.nuevaRonda(), 900);
   }
 
-  terminarJuego(ganado: boolean) {
+  // 🏁 FINAL
+  terminarJuego() {
     this.juegoActivo = false;
     this.juegoTerminado = true;
-    if (this.temporizador) clearInterval(this.temporizador);
+    clearInterval(this.temporizador);
   }
 
+  // 🔄 REINICIAR
   reiniciarJuego() {
-    this.puntuacion = 50;
-    this.racha = 0;
-    this.multiplicador = 1;
-    this.juegoActivo = true;
-    this.juegoTerminado = false;
-    this.nuevaRonda();
+    this.iniciarJuego();
   }
 
+  // 🚪 SALIR
   salirDelJuego() {
-    if (confirm('¿Seguro que quieres salir? Perderás tu progreso.')) {
-      this.juegoActivo = false;
-      this.juegoTerminado = true;
-    }
+    this.router.navigate(['/juegos-musicales']);
+  }
+
+  // 🔀 SHUFFLE
+  shuffle(arr: any[]) {
+    return arr.sort(() => Math.random() - 0.5);
   }
 }

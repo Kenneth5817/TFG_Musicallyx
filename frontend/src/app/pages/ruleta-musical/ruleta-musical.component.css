@@ -1,0 +1,198 @@
+.game-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+
+  background: radial-gradient(circle at top, #7f5af0, #2cb67d, #16161a);
+}
+
+/* =========================
+   💳 CARD PRINCIPAL
+========================= */
+.game-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 24px;
+  border-radius: 24px;
+
+  background: rgba(10,10,20,0.85);
+  backdrop-filter: blur(18px);
+  color: white;
+
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   LAYOUT (DESKTOP)
+========================= */
+.layout {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.left, .right {
+  flex: 1;
+}
+
+/* =========================
+   🎯 RUEDA
+========================= */
+.ruleta {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #7f5af0, #2cb67d);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: auto;
+
+  box-shadow: 0 0 40px rgba(127,90,240,0.4);
+}
+
+.letra {
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+/* =========================
+   OPCIONES
+========================= */
+.opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+
+  background: rgba(255,255,255,0.12);
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: #7f5af0;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* =========================
+   BOTONES PRINCIPALES
+========================= */
+.btn-exit,
+.btn-reiniciar {
+  background: linear-gradient(135deg, #ff3b3b, #ff1e1e);
+  color: white;
+  border: none;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.btn-exit:hover,
+.btn-reiniciar:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   TIMER
+========================= */
+.timer {
+  width: 220px;
+  height: 10px;
+
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+
+  margin: 12px auto;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: white;
+  transition: width 1s linear;
+}
+
+/* =========================
+   FINAL
+========================= */
+.final {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* =========================
+   📱 RESPONSIVE (IMPORTANTE)
+========================= */
+@media (max-width: 768px) {
+
+  .layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ruleta {
+    width: 180px;
+    height: 180px;
+  }
+
+  .letra {
+    font-size: 3rem;
+  }
+
+  .opciones {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .ruleta {
+    width: 150px;
+    height: 150px;
+  }
+
+  .letra {
+    font-size: 2.5rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}

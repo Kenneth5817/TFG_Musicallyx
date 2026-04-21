@@ -91,7 +91,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: none;  
+  border: none;
   max-width: 90%;                   /* sin borde por defecto */
 }
 
@@ -175,5 +175,18 @@
   .image-mobile {
     display: block;  /* muestra imagen */
     pointer-events: auto;
+  }
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+@media (min-width: 1350px) {
+  .games-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
   }
 }

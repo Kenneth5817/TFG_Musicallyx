@@ -1,53 +1,84 @@
-<!-- ahorcado-musical.component.html -->
-<div class="game-container">
-  <div class="game-card shadow-lg">
-    <div class="d-flex justify-content-between">
-      <h2>🪢 Ahorcado Musical</h2>
-      <button class="btn-exit" [routerLink]="['/juegos-musicales']">✖ Salir</button>
-    </div>
+<div class="game">
 
-    <div class="ahorcado-visual">
-      <pre class="monitor">
-        ________
-        |      |
-        |      {{ getPartesAhorcado().includes('cabeza') ? 'O' : ' ' }}
-        |     {{ getPartesAhorcado().includes('brazo_izq') ? '/' : ' ' }}{{ getPartesAhorcado().includes('cuerpo') ? '|' : ' ' }}{{ getPartesAhorcado().includes('brazo_der') ? '\\' : ' ' }}
-        |     {{ getPartesAhorcado().includes('pierna_izq') ? '/' : ' ' }} {{ getPartesAhorcado().includes('pierna_der') ? '\\' : ' ' }}
-        |
-        =========
-      </pre>
-    </div>
+  <!-- TOP -->
+  <header class="topbar">
+    <div class="title">Ahorcado Musical</div>
 
-    <div class="palabra-oculta">
-      <span *ngFor="let letra of palabraOculta" class="letra-casilla">{{ letra }}</span>
-    </div>
+    <button class="btn-back" routerLink="/juegos">
+      ⬅ Volver
+    </button>
+  </header>
 
-    <div class="info-juego">
-      <div class="intentos">💀 Intentos restantes: <strong>{{ intentosRestantes }}</strong></div>
-      <div class="pistas">💡 Pistas disponibles: <strong>{{ pistasDisponibles - pistasUsadas }}</strong></div>
-      <div class="letras-falladas" *ngIf="letrasFalladas.length">
-        ❌ Letras falladas: {{ letrasFalladas.join(', ') }}
+  <!-- MAIN -->
+  <main class="layout">
+
+    <!-- LEFT -->
+    <aside class="panel">
+
+      <div class="stat">
+        <span>Vidas</span>
+        <b class="danger">❤️ {{ intentosRestantes }}</b>
       </div>
-    </div>
 
-    <div class="input-area" *ngIf="!juegoTerminado">
-      <input type="text"
-             maxlength="1"
-             [(ngModel)]="letraInput"
-             placeholder="Ingresa una letra"
-             (keyup.enter)="adivinarLetra()"
-             class="letra-input">
-      <button (click)="adivinarLetra()" class="btn-adivinar">Adivinar</button>
-      <button (click)="pedirPista()" class="btn-pista" [disabled]="pistasUsadas >= pistasDisponibles">💡 Pedir pista</button>
-    </div>
+      <div class="hang-box">
+        <div class="hang-circle">
+          {{ intentosRestantes }}
+        </div>
+      </div>
 
-    <div class="mensaje" [ngClass]="{'text-success': juegoGanado, 'text-danger': juegoTerminado && !juegoGanado}">
-      {{ mensaje }}
-    </div>
+    </aside>
 
-    <div *ngIf="juegoTerminado" class="resultado-final">
-      <button class="btn-reiniciar" (click)="reiniciar()">🔄 Jugar de nuevo</button>
-      <a [routerLink]="['/juegos-musicales']" class="btn-volver">🔙 Volver a juegos</a>
-    </div>
-  </div>
+    <!-- RIGHT -->
+    <section class="panel game-panel">
+
+      <!-- WORD -->
+      <div class="word">
+        <span *ngFor="let l of palabraOculta"
+              class="letter"
+              [class.filled]="l !== '_'">
+          {{ l === '_' ? '' : l }}
+        </span>
+      </div>
+
+      <!-- FAILS -->
+      <div class="fails" *ngIf="letrasFalladas.length">
+        ❌ {{ letrasFalladas.join(' · ') }}
+      </div>
+
+      <!-- INPUTS -->
+      <div class="inputs">
+
+        <div class="input-box">
+          <input [(ngModel)]="letraInput" maxlength="1" placeholder="Letra">
+          <button (click)="adivinarLetra()">OK</button>
+        </div>
+
+        <div class="input-box">
+          <input [(ngModel)]="palabraInput" placeholder="Palabra completa">
+          <button (click)="adivinarPalabraCompleta()">GO</button>
+        </div>
+
+      </div>
+
+      <!-- MENU FINAL -->
+      <div class="end-menu" *ngIf="mostrarMenuFinal">
+
+        <h2>🎉 ¡Fin de la partida!</h2>
+
+        <p>¿Qué quieres hacer?</p>
+
+        <div class="menu-buttons">
+
+          <button (click)="reiniciar()">🔁 Seguir jugando</button>
+
+          <button routerLink="/juegos">🏠 Volver</button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
 </div>

@@ -6,7 +6,7 @@ import {ClasesUsuarioComponent} from './pages/clases-usuario/clases-usuario.comp
 
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
-
+  { path: 'mayor-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorMenorComponent) },
   { path: 'info', loadComponent: () => import('./pages/info/info.component').then(m => m.InfoComponent) },
   { path: 'clases', loadComponent: () => import('./pages/clases/clases.component').then(m => m.ClasesComponent) },
   { path: 'iniciar-sesion', loadComponent: () => import('./pages/iniciar-sesion/iniciar-sesion.component').then(m => m.IniciarSesionComponent) },
@@ -25,7 +25,6 @@ export const routes: Routes = [
   { path: 'reset-password', loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: 'ruleta-musical', loadComponent: () => import('./pages/ruleta-musical/ruleta-musical.component').then(m => m.RuletaMusicalComponent) },
   { path: 'ahorcado-musical', loadComponent: () => import('./pages/ahorcado-musical/ahorcado-musical.component').then(m => m.AhorcadoMusicalComponent) },
-  { path: 'mayor-o-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorOMenorComponent) },
 
   // Admin con layout independiente
   // Rutas del panel admin
@@ -37,6 +36,7 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('./pages/admin/dashboard/dashboard.component').then(m => m.DashboardComponent)
       },
+      { path: 'mayor-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorMenorComponent) },
       {
         path: 'usuarios',
         loadComponent: () => import('./pages/admin/usuarios/usuarios.component').then(m => m.UsuariosComponent)
@@ -83,7 +83,7 @@ export const routes: Routes = [
 
       { path: 'ruleta-musical', loadComponent: () => import('./pages/ruleta-musical/ruleta-musical.component').then(m => m.RuletaMusicalComponent) },
       { path: 'ahorcado-musical', loadComponent: () => import('./pages/ahorcado-musical/ahorcado-musical.component').then(m => m.AhorcadoMusicalComponent) },
-      { path: 'mayor-o-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorOMenorComponent) },
+      { path: 'mayor-menor', loadComponent: () => import('./pages/mayor-menor/mayor-menor.component').then(m => m.MayorMenorComponent) },
 
       { path: 'clases-usuario', loadComponent: () => import('./pages/clases-usuario/clases-usuario.component').then(m => m.ClasesUsuarioComponent) },
 

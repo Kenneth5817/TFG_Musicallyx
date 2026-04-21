@@ -1,96 +1,136 @@
-// mayor-o-menor.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+
+
+interface Cancion {
+  titulo: string;
+  artista: string;
+  audio: string;
+  tonalidad: 'Mayor' | 'Menor';
+}
+
 
 @Component({
   selector: 'app-mayor-menor',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './mayor-menor.component.html',
   styleUrls: ['./mayor-menor.component.css']
 })
-export class MayorOMenorComponent {
-  canciones = [
-    { nombre: "APT. - ROSÉ & Bruno Mars", tonalidad: "Menor", audio: "assets/audio/canciones/APT.mp3" },
-    { nombre: "We Are The Champions - Queen", tonalidad: "Mayor", audio: "assets/audio/canciones/weAreTheChampion.mp3" },
-    { nombre: "El Danubio Azul - Strauss", tonalidad: "Mayor", audio: "assets/audio/canciones/danubioAzul.mp3" },
-    { nombre: "Animals - Martin Garrix", tonalidad: "Menor", audio: "assets/audio/canciones/animals68.mp3" },
-    { nombre: "Sonrisas y Lágrimas", tonalidad: "Mayor", audio: "assets/audio/canciones/sonrisasYLagrimas.mp3" },
-    { nombre: "Belong Together - Mark Ambor", tonalidad: "Mayor", audio: "assets/audio/canciones/belongTogether.mp3" }
+export class MayorMenorComponent implements OnInit, AfterViewInit {
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
+
+  // ========== VARIABLES DE JUEGO ==========
+  mostrarFinal: boolean = false;
+  preguntaActual!: Cancion;
+  audioReproduciendo: boolean = false;
+  feedbackClass: string = '';
+  feedback: string = '';
+  aciertos: number = 0;
+  errores: number = 0;
+  preguntasRestantes: Cancion[] = [];
+
+
+  // ========== BANCO DE CANCIONES ==========
+  canciones: Cancion[] = [
+    { titulo: 'Die with a Smile', artista: 'Lady Gaga & Bruno Mars', audio: './assets/audio/juegoMayorMenor/dieWithASmile.mp3', tonalidad: 'Mayor' },
+    { titulo: 'Déjame Cuidarte', artista: 'Miriam Rodríguez', audio: './assets/audio/juegoMayorMenor/dejameCuidarte.mp3', tonalidad: 'Menor' },
+    { titulo: 'Creo en Mí', artista: 'Lucía (Operación Triunfo)', audio: './assets/audio/juegoMayorMenor/creoEnMi.mp3', tonalidad: 'Mayor' },
+    { titulo: 'T Amare', artista: 'Lucicallys', audio: './assets/audio/juegoMayorMenor/tAmare.mp3', tonalidad: 'Mayor' },
+    { titulo: 'Someone Like You', artista: 'Adele', audio: './assets/audio/juegoMayorMenor/someoneLikeYou.mp3', tonalidad: 'Menor' },
+    { titulo: '6 de Febrero', artista: 'Aitana', audio: './assets/audio/juegoMayorMenor/6febrero.mp3', tonalidad: 'Menor' },
+    { titulo: 'Dónde Estás', artista: 'Álvaro de Luna', audio: './assets/audio/juegoMayorMenor/dimeDondeEstas.mp3', tonalidad: 'Menor' },
+    { titulo: 'Palabra Prohibida', artista: 'Samuraï', audio: './assets/audio/juegoMayorMenor/palabraProhibida.mp3', tonalidad: 'Menor' },
+    { titulo: 'Puzzle', artista: 'Chiara Oliver', audio: './assets/audio/juegoMayorMenor/puzzle.mp3', tonalidad: 'Menor' },
+    { titulo: 'La Salvación', artista: 'Arde Bogotá', audio: './assets/audio/juegoMayorMenor/salvacion.mp3', tonalidad: 'Menor' },
+    { titulo: 'Es tan fácil', artista: 'Chanel', audio: './assets/audio/juegoMayorMenor/tanFacil.mp3', tonalidad: 'Menor' },
+    { titulo: 'Paracaidas', artista: 'Samurai', audio: './assets/audio/juegoMayorMenor/paracaidas.mp3', tonalidad: 'Menor' },
+    { titulo: 'Happy', artista: 'Pharrell Williams', audio: './assets/audio/juegoMayorMenor/happy.mp3', tonalidad: 'Mayor' },
+    { titulo: 'Uptown Funk', artista: 'Bruno Mars', audio: './assets/audio/juegoMayorMenor/uptownFunk.mp3', tonalidad: 'Mayor' },
+    { titulo: 'Radio Baby', artista: 'Don Diablo', audio: './assets/audio/juegoMayorMenor/radioBaby.mp3', tonalidad: 'Mayor' },
+    { titulo: 'Can’t Stop the Feeling', artista: 'Justin Timberlake', audio: './assets/audio/juegoMayorMenor/cantStopTheFeeling.mp3', tonalidad: 'Mayor' },
   ];
 
-  cancionActual: any = null;
-  puntuacion: number = 0;
-  vidas: number = 3;
-  juegoActivo: boolean = true;
-  juegoTerminado: boolean = false;
-  mensaje: string = '';
-  audioElement: HTMLAudioElement | null = null;
 
-  constructor() {
-    this.nuevaCancion();
+  constructor(private router: Router) {}
+
+
+  ngOnInit(): void {
+    this.iniciarJuego();
   }
 
-  nuevaCancion() {
-    const indice = Math.floor(Math.random() * this.canciones.length);
-    this.cancionActual = this.canciones[indice];
 
-    if (this.audioElement) {
-      this.audioElement.pause();
-    }
-    this.audioElement = new Audio(this.cancionActual.audio);
+  ngAfterViewInit(): void {
+    console.log('Audio player inicializado');
   }
 
-  playAudio() {
-    if (this.audioElement) {
-      this.audioElement.currentTime = 0;
-      this.audioElement.play();
-    }
+
+  iniciarJuego() {
+    this.preguntasRestantes = [...this.canciones];
+    this.aciertos = 0;
+    this.errores = 0;
+    this.mostrarFinal = false;
+    this.feedback = '';
+    this.cargarNuevaPregunta();
   }
 
-  verificar(seleccion: string) {
-    if (!this.juegoActivo) return;
 
-    const esCorrecto = seleccion === this.cancionActual.tonalidad;
+  cargarNuevaPregunta() {
+    this.feedback = '';
+    this.audioReproduciendo = false;
 
-    if (esCorrecto) {
-      this.puntuacion += 10;
-      this.mensaje = `✅ ¡Correcto! "${this.cancionActual.nombre}" es ${this.cancionActual.tonalidad}`;
 
-      if (this.puntuacion >= 100) {
-        this.terminarJuego(true);
-        return;
-      }
-    } else {
-      this.vidas--;
-      this.mensaje = `❌ ¡Fallaste! "${this.cancionActual.nombre}" es ${this.cancionActual.tonalidad}. Te quedan ${this.vidas} vidas`;
-
-      if (this.vidas <= 0) {
-        this.terminarJuego(false);
-        return;
-      }
+    if (this.preguntasRestantes.length === 0) {
+      this.mostrarFinal = true;
+      return;
     }
+
+
+    const index = Math.floor(Math.random() * this.preguntasRestantes.length);
+    this.preguntaActual = this.preguntasRestantes.splice(index, 1)[0];
+
 
     setTimeout(() => {
-      this.nuevaCancion();
-    }, 1500);
+      if (this.audioPlayer?.nativeElement) {
+        this.audioPlayer.nativeElement.load();
+      }
+    }, 100);
   }
 
-  terminarJuego(ganado: boolean) {
-    this.juegoActivo = false;
-    this.juegoTerminado = true;
-    if (this.audioElement) {
-      this.audioElement.pause();
+
+  reproducirAudio() {
+    if (this.audioPlayer?.nativeElement) {
+      this.audioPlayer.nativeElement.play()
+        .then(() => this.audioReproduciendo = true)
+        .catch(err => console.log('Error:', err));
     }
   }
 
-  reiniciar() {
-    this.puntuacion = 0;
-    this.vidas = 3;
-    this.juegoActivo = true;
-    this.juegoTerminado = false;
-    this.mensaje = '';
-    this.nuevaCancion();
+  responder(tonalidad: 'Mayor' | 'Menor') {
+    const esCorrecta = this.preguntaActual.tonalidad === tonalidad;
+
+    this.feedback = esCorrecta ? 'Correcto' : 'Incorrecto';
+    this.feedbackClass = esCorrecta ? 'correcto' : 'incorrecto';
+
+    if (esCorrecta) this.aciertos++;
+    else this.errores++;
+  }
+
+
+  porcentajeExito(): number {
+    const total = this.aciertos + this.errores;
+    return total > 0 ? Math.round((this.aciertos / total) * 100) : 0;
+  }
+
+
+  reiniciarJuego() {
+    this.iniciarJuego();
+  }
+
+
+  irAJuegos() {
+    this.router.navigate(['/juegos-musicales']);
   }
 }
