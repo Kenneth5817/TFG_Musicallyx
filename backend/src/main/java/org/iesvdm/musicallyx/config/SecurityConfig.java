@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()  // ⚠️ TEMPORAL - permite todo
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -41,7 +41,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // Especifica explícitamente el origen (no usar *)
-        config.setAllowedOrigins(List.of("https://musicallyxx.netlify.app"));
+        config.setAllowedOrigins(List.of("https://musicallyxx.netlify.app", "https://musicallyxofficial.com"));
 
         // Especifica los métodos permitidos
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
