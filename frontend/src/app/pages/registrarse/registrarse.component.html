@@ -38,34 +38,36 @@
         </div>
       </div>
 
-      <div class="input-group-wrapper">
-        <div class="input-group"
-             [ngClass]="{'valid': registerForm.get('telefono')?.valid,
-                   'invalid': registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched}">
-          <i class="fas fa-phone"></i>
+      <!-- Telefono e Email -->
+      <div class="row-inputs">
 
-          <input type="text"
-                 formControlName="telefono"
-                 placeholder="Teléfono">
+        <!-- Teléfono -->
+        <div class="input-group-wrapper">
+          <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="text" formControlName="telefono" placeholder="Teléfono">
+          </div>
+
+          <ul class="validation-checklist">
+            <li [class.valid]="registerForm.get('telefono')?.valid">
+              ✅ 9 a 11 números
+            </li>
+          </ul>
         </div>
-
-        <ul class="validation-checklist">
-          <li [class.valid]="registerForm.get('telefono')?.valid">
-            ✅ 9 a 15 números
-          </li>
-        </ul>
 
         <!-- Email -->
         <div class="input-group-wrapper">
-          <div class="input-group" [ngClass]="{'valid': email?.valid, 'invalid': email?.invalid && email?.touched}">
+          <div class="input-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" formControlName="email" placeholder="Correo electrónico" (input)="updateFieldCriteria('email')">
+            <input type="email" formControlName="email" placeholder="Correo electrónico">
           </div>
+
           <ul class="validation-checklist">
             <li [class.valid]="fieldCriteria.email.required">✅ Email requerido</li>
-            <li [class.valid]="fieldCriteria.email.valid">✅ Formato válido: usuario&#64;dominio</li>
+            <li [class.valid]="fieldCriteria.email.valid">✅ Formato válido</li>
           </ul>
         </div>
+
       </div>
 
       <!-- Contraseña / Repetir Contraseña -->
