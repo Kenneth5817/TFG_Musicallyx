@@ -558,47 +558,17 @@ button {
 /* ELIMINACIÓN TOTAL DEL PIANO ANIMADO */
 .piano-top { display: none !important; }
 
-h2.display-6 {
-  color: #CE2127;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: riseFade 0.8s ease-out forwards;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 2px;
 
-}
 
 @keyframes riseFade {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-h2.display-6 {
-  font-family: 'Quicksand', sans-serif; /* nueva fuente moderna y redondeada */
-  color: #CE2127;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 700;
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
-}
+
 
 h2.display-6:hover {
   transform: scale(1.03);
   text-shadow: 0 0 12px rgba(206,33,39,0.6);
-}
-
-h2.display-6 {
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg, #CE2127 0%, #FF5C5C 50%, #CE2127 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeLift 1s ease-out forwards;
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
-  text-align: center;
 }
 
 /* Retraso opcional si hay varios títulos */
@@ -609,14 +579,18 @@ h2.display-6:nth-of-type(1) { animation-delay: 0.2s; }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Hover elegante */
-h2.display-6 {
-  font-family: 'Poppins', sans-serif; /* igual que los roles */
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #CE2127;
+h2.display-6{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#CE2127;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeLift 1s ease-out forwards;
+  transition:transform .3s ease,text-shadow .3s ease;
+  text-align:center;
 }
-
 
 .z-index-fixed {
   z-index: 1030 !important; /* Bootstrap usa 1030 para elementos fijos */
@@ -857,18 +831,6 @@ h2.display-6 {
   gap: 15px;
 }
 
-/* ITEM */
-.contacto-item{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 15px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  text-decoration: none;
-  color: #fff;
-  transition: 0.3s ease;
-}
 
 /* HOVER NEON */
 .neon-hover:hover{
@@ -946,6 +908,8 @@ h2.display-6 {
   color: white;
 
   transition: 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 /* texto */

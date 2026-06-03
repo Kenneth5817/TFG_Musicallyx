@@ -8,7 +8,7 @@ import {AdminService} from '../../services/admin.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, NgIf,HttpClientModule],
+  imports: [RouterModule, CommonModule, FormsModule,HttpClientModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
