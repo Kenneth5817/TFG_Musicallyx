@@ -38,6 +38,24 @@
         </div>
       </div>
 
+      <div class="input-group-wrapper">
+        <div class="input-group"
+             [ngClass]="{'valid': registerForm.get('telefono')?.valid,
+                   'invalid': registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched}">
+          <i class="fas fa-phone"></i>
+
+          <input type="text"
+                 formControlName="telefono"
+                 placeholder="Teléfono">
+        </div>
+
+        <ul class="validation-checklist">
+          <li [class.valid]="registerForm.get('telefono')?.valid">
+            ✅ 9 a 15 números
+          </li>
+        </ul>
+      </div>
+
       <!-- Email -->
       <div class="input-group-wrapper">
         <div class="input-group" [ngClass]="{'valid': email?.valid, 'invalid': email?.invalid && email?.touched}">
