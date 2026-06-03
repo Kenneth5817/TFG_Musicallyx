@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registrarse.component.css']
 })
 export class RegistrarseComponent {
-  registerForm: FormGroup;
+  registerForm!: FormGroup;
   showFullScreenError = false;
   passwordCriteria = {
     hasUpper: false,
