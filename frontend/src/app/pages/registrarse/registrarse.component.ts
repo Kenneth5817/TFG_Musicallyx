@@ -50,7 +50,14 @@ export class RegistrarseComponent {
 
   ngOnInit() {
   // Crear formulario
-
+    this.registerForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
+      apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern(/^\+?\d{9,15}$/)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,]).{8,}$/)]],
+      repetirPassword: ['', Validators.required]
+    });
     // 🔹 Autocompletar si existen datos temporales
     const datosTemporales = localStorage.getItem('registroTemporal');
     if (datosTemporales) {
@@ -75,15 +82,7 @@ export class RegistrarseComponent {
   }
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.registerForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
-      apellido: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.,]).{8,}$/)]],
-      repetirPassword: ['', Validators.required]
-    });
-  }
+
 
 
   get nombre() {
@@ -201,6 +200,10 @@ export class RegistrarseComponent {
     }
   }
 
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   closeFullScreenError() {
     this.showFullScreenError = false;
