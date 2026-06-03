@@ -54,18 +54,18 @@
             ✅ 9 a 15 números
           </li>
         </ul>
-      </div>
 
-      <!-- Email -->
-      <div class="input-group-wrapper">
-        <div class="input-group" [ngClass]="{'valid': email?.valid, 'invalid': email?.invalid && email?.touched}">
-          <i class="fas fa-envelope"></i>
-          <input type="email" formControlName="email" placeholder="Correo electrónico" (input)="updateFieldCriteria('email')">
+        <!-- Email -->
+        <div class="input-group-wrapper">
+          <div class="input-group" [ngClass]="{'valid': email?.valid, 'invalid': email?.invalid && email?.touched}">
+            <i class="fas fa-envelope"></i>
+            <input type="email" formControlName="email" placeholder="Correo electrónico" (input)="updateFieldCriteria('email')">
+          </div>
+          <ul class="validation-checklist">
+            <li [class.valid]="fieldCriteria.email.required">✅ Email requerido</li>
+            <li [class.valid]="fieldCriteria.email.valid">✅ Formato válido: usuario&#64;dominio</li>
+          </ul>
         </div>
-        <ul class="validation-checklist">
-          <li [class.valid]="fieldCriteria.email.required">✅ Email requerido</li>
-          <li [class.valid]="fieldCriteria.email.valid">✅ Formato válido: usuario&#64;dominio</li>
-        </ul>
       </div>
 
       <!-- Contraseña / Repetir Contraseña -->
