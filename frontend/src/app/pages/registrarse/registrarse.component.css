@@ -332,3 +332,15 @@ p{
 .volver-inicio:hover {
   text-decoration: underline; /* efecto al pasar el ratón */
 }
+
+.row-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.input-group-wrapper {
+  width: 100%;
+  min-width: 0;
+}
