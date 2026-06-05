@@ -59,13 +59,21 @@
         <div class="input-group-wrapper">
           <div class="input-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" formControlName="email" placeholder="Correo electrónico"  (input)="updateFieldCriteria('email')">
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Correo electrónico"
+              (input)="registerForm.get('email')?.updateValueAndValidity()"
+            />
           </div>
 
-          <ul class="validation-checklist">
-            <li [class.valid]="fieldCriteria.email.required">✅ Email requerido</li>
-            <li [class.valid]="fieldCriteria.email.valid">✅ Formato válido</li>
-          </ul>
+          <li [class.valid]="email?.dirty && email?.value?.length > 0">
+            ✅ Email requerido
+          </li>
+
+          <li [class.valid]="email?.dirty && !email?.hasError('email')">
+            ✅ Formato válido
+          </li>
         </div>
 
       </div>

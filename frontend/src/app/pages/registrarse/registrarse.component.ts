@@ -110,7 +110,6 @@ export class RegistrarseComponent {
 
     if (field === 'email') {
       this.fieldCriteria.email.required = value.length > 0;
-      this.fieldCriteria.email.valid = this.email?.valid || false;
       this.emailCriteria = {...this.fieldCriteria.email};
     } else {
       const letters = /^[a-zA-ZÀ-ÿ\s]+$/.test(value);
