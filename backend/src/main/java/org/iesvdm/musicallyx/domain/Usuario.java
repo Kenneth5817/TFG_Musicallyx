@@ -37,7 +37,7 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rol", length = 20)
-    private Rol rol;
+    private Rol rol= Rol.USER;
 
     @OneToOne(mappedBy = "usuario")
     @JsonBackReference("alumno-usuario")

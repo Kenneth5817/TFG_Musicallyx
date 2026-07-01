@@ -1,20 +1,22 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, tap} from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 export interface Usuario {
   idUsuario: number;
   nombre: string;
   email: string;
   rol?: 'ADMIN' | 'USER';
+  token?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   private loggedIn = new BehaviorSubject<boolean>(false);
   user: Usuario | null = null;
   isLoggedIn$ = this.loggedIn.asObservable();
@@ -22,23 +24,45 @@ export class AuthService {
   private baseUrl = 'https://tfg-musicallyx.onrender.com/v1/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {
-    const storedUser = localStorage.getItem('usuario');
 
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-      this.loggedIn.next(true);
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+
+        const exp = decoded.exp * 1000;
+        if (Date.now() > exp) {
+          localStorage.removeItem('token');
+        } else {
+          this.loggedIn.next(true);
+        }
+
+      } catch (e) {
+        localStorage.removeItem('token');
+      }
     }
   }
 
-  redirectByRole(user: Usuario) {
-    this.router.navigate([
-      user.rol === 'ADMIN'
-        ? '/admin/panel-administracion'
-        : '/admin/clases-usuario'
-    ]);
+  // 🔐 LOGIN REAL (JWT)
+  loginBackend(email: string, password: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/login`,
+      { email, password }
+    );
+  }
+
+
+  getRoleFromToken(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    const decoded: any = jwtDecode(token);
+
+    return decoded.role || null;
   }
 
   getUser(): Usuario | null {
+
     if (this.user) return this.user;
 
     const stored = localStorage.getItem('usuario');
@@ -48,68 +72,53 @@ export class AuthService {
     return this.user;
   }
 
-  // 🔹 Nuevo método
   isLoggedIn(): boolean {
-    const email = localStorage.getItem('email');
-    return !!email && email.trim() !== '' && email !== 'null' && email !== 'undefined';
-  }
-
-  loginBackend(email: string, password: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.baseUrl}/login`, { email, password }, { withCredentials: true });
-  }
-
-  setUser(usuario: Usuario) {
-    this.user = usuario;
-    this.loggedIn.next(true);
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-    localStorage.setItem('email', usuario.email);
-    localStorage.setItem('rol', usuario.rol || 'USER');
-  }
-
-  register(usuario: { password: any; nombre: any; email: any }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, usuario, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true
-    });
-  }
-
-  login(email: string, password: string) {
-    return this.http.post<Usuario>(`${this.baseUrl}/login`, { email, password })
-      .pipe(
-        tap((usuario: Usuario) => {
-          this.setUser(usuario);
-
-          if (usuario.rol === 'ADMIN') {
-            this.router.navigate(['/admin/panel-administracion']);
-          } else {
-            this.router.navigate(['/admin/clases-usuario']);
-          }
-        })
-      );
-  }
-
-  logout() {
-    this.user = null;
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('email');
-    localStorage.removeItem('rol');
-    this.loggedIn.next(false);
-  }
-  validarSesionBackend(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/validar-sesion`, { withCredentials: true });
+    return !!localStorage.getItem('token');
   }
 
   isAdmin(): boolean {
-    const email = localStorage.getItem('email');
-    const rol = localStorage.getItem('rol');
-    return !!email && rol === 'ADMIN';
+    return this.getRoleFromToken() === 'ADMIN';
+  }
+  logout() {
+    this.user = null;
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+
+    this.loggedIn.next(false);
+    this.router.navigate(['/iniciar-sesion']);
   }
 
+  redirectByRole() {
+    if (this.isAdmin()) {
+      this.router.navigate(['/admin/panel-administracion']);
+    } else {
+      this.router.navigate(['/admin/clases-usuario']);
+    }
+  }
+
+  setUser(response: any) {
+
+    localStorage.setItem('token', response.token);
+
+    const user = {
+      idUsuario: response.idUsuario,
+      nombre: response.nombre,
+      email: response.email
+    };
+
+    localStorage.setItem('usuario', JSON.stringify(user));
+
+    this.user = user;
+    this.loggedIn.next(true);
+  }
+
+  // 📧 RESET PASSWORD (LO DEJAMOS IGUAL)
   sendResetPasswordEmail(email: string): Observable<string> {
-    return this.http.post('https://tfg-musicallyx.onrender.com/api/email/reset-password-request',
+    return this.http.post(
+      'https://tfg-musicallyx.onrender.com/v1/api/email/reset-password-request',
       { email },
-      { responseType: 'text', withCredentials: true }
+      { responseType: 'text' }
     );
   }
-
 }

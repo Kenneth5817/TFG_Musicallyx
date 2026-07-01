@@ -1,6 +1,7 @@
 package org.iesvdm.musicallyx.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.iesvdm.musicallyx.config.JwtService;
 import org.iesvdm.musicallyx.config.SecurityConfig;
 import org.iesvdm.musicallyx.domain.Usuario;
 import org.iesvdm.musicallyx.repository.UsuarioRepository;
@@ -28,6 +29,9 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private EmailService emailService;
@@ -72,7 +76,6 @@ public class AuthController {
     }
 
 
-
     // Endpoint POST /v1/api/auth/login
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
@@ -91,12 +94,21 @@ public class AuthController {
                     .body(Map.of("message", "Contraseña incorrecta"));
         }
 
+        // 🔐 GENERAR JWT
+        org.springframework.security.core.userdetails.UserDetails userDetails =
+                org.springframework.security.core.userdetails.User
+                        .withUsername(usuario.getEmail())
+                        .password(usuario.getPassword())
+                        .roles(usuario.getRol().name())
+                        .build();
 
-        // ✅ rol único (ADMIN o ALUMNO)
+        String token = jwtService.generateToken(userDetails);
+
         String rol = usuario.getRol() != null ? usuario.getRol().name() : "USER";
 
-        // ⚡ Enviar estructura clara al frontend
+        // 📦 respuesta JWT + usuario
         Map<String, Object> response = Map.of(
+                "token", token,
                 "idUsuario", usuario.getIdUsuario(),
                 "nombre", usuario.getNombre(),
                 "email", usuario.getEmail(),
@@ -105,7 +117,6 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
-
 
 
     @PostMapping("/register")

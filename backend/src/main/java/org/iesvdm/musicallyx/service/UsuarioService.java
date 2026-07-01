@@ -1,5 +1,6 @@
 package org.iesvdm.musicallyx.service;
 
+import org.iesvdm.musicallyx.domain.Rol;
 import org.iesvdm.musicallyx.domain.Usuario;
 import org.iesvdm.musicallyx.dto.UsuarioPerfilDTO;
 import org.iesvdm.musicallyx.repository.UsuarioRepository;
@@ -21,7 +22,12 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    public Usuario save(Usuario usuario) {
+        if (usuario.getRol() == null) {
+            usuario.setRol(Rol.USER);
+        }
+        return usuarioRepository.save(usuario);
+    }
 
     public Page<Usuario> findAll(Pageable pageable) {
         return usuarioRepository.findAllBy(pageable);
@@ -29,10 +35,6 @@ public class UsuarioService {
 
     public Optional<Usuario> findById(Long id) {
         return usuarioRepository.findById(id);
-    }
-
-    public Usuario save(Usuario usuario) {
-        return usuarioRepository.save(usuario);
     }
 
     public void deleteById(Long id) {

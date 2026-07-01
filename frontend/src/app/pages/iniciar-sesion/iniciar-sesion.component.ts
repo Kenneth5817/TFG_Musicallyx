@@ -85,33 +85,40 @@ export class IniciarSesionComponent implements OnInit {
   notificationMessage = '';
 
   onSubmit(): void {
+
     if (this.loginForm.valid) {
-      this.authService.loginBackend(this.loginForm.value.email, this.loginForm.value.password)
-        .subscribe({
-          next: (usuario) => {
-            this.authService.setUser(usuario);
 
-            this.notificationType = 'success';
-            this.notificationTitle = '¡Bienvenido!';
-            this.notificationMessage = 'Has iniciado sesión correctamente';
-            this.showFullScreenNotification = true;
+      this.authService.loginBackend(
+        this.loginForm.value.email,
+        this.loginForm.value.password
+      ).subscribe({
+        next: (res: any) => {
 
-            this.loginForm.disable();
+          // 🔐 GUARDAR JWT
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('rol', res.rol);
+          localStorage.setItem('user', JSON.stringify(res));
 
-            // 🔹 Esperar 1.5s antes de redirigir
-            setTimeout(() => {
-              this.router.navigate(['/admin']); // ambos roles al mismo panel
-              this.closeNotification(); // opcional: cerrar notificación
-            }, 1500);
+          this.notificationType = 'success';
+          this.notificationTitle = '¡Bienvenido!';
+          this.notificationMessage = 'Has iniciado sesión correctamente';
+          this.showFullScreenNotification = true;
 
+          this.loginForm.disable();
 
-          },
-          error: (err) => {
-            let mensaje = err.error?.message || err.message || 'Usuario o contraseña incorrectos';
-            this.showErrorNotification(mensaje);
-            this.loginForm.enable();
-          }
-        });
+          setTimeout(() => {
+            this.router.navigate(['/admin']);
+            this.closeNotification();
+          }, 1500);
+
+        },
+        error: (err) => {
+          let mensaje = err.error?.message || 'Usuario o contraseña incorrectos';
+          this.showErrorNotification(mensaje);
+          this.loginForm.enable();
+        }
+      });
+
     } else {
       this.showErrorNotification('Por favor completa todos los campos');
     }

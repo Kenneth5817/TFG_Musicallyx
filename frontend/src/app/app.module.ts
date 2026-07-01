@@ -9,7 +9,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { InfoComponent } from './pages/info/info.component';
 import { ClasesComponent } from './pages/clases/clases.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
   imports: [
     BrowserModule,
@@ -32,7 +33,8 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
     FormsModule,
   ],
   providers: [      // ← agrega esto
-    { provide: LOCALE_ID, useValue: 'es-ES' }
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
 export class AppModule { }
